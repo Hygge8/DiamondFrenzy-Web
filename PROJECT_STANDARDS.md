@@ -18,14 +18,8 @@ diamond-frenzy-web/
 │   │   └── 📄 ci.yml               # 持续集成
 │   ├── 📁 ISSUE_TEMPLATE/          # Issue模板
 │   └── 📁 PULL_REQUEST_TEMPLATE.md # PR模板
-├── 📄 docs/                        # 项目文档
-│   ├── 📄 api.md                   # API文档
-│   ├── 📄 development.md           # 开发指南
-│   ├── 📄 deployment.md            # 部署指南
-│   └── 📄 testing.md               # 测试指南
-├── 📄 src/                         # 源代码目录
-│   ├── 📄 index.html               # 主页面
-│   ├── 📁 assets/                  # 静态资源
+├── 📄 index.html                   # 主页面
+├── 📁 assets/                      # 静态资源
 │   │   ├── 📁 audio/               # 音频文件
 │   │   │   ├── 📁 music/           # 背景音乐
 │   │   │   └── 📁 sfx/             # 音效文件
@@ -35,19 +29,19 @@ diamond-frenzy-web/
 │   │   │   ├── 📁 backgrounds/     # 背景图片
 │   │   │   └── 📁 tiles/           # 瓦片图片
 │   │   └── 📁 fonts/               # 字体文件
-│   ├── 📁 styles/                  # 样式文件
+├── 📁 css/                     # 样式文件
 │   │   ├── 📄 main.css             # 主样式
 │   │   ├── 📄 game.css             # 游戏样式
 │   │   ├── 📄 responsive.css       # 响应式样式
 │   │   └── 📄 components/          # 组件样式
-│   ├── 📁 scripts/                 # JavaScript代码
+├── 📁 js/                      # JavaScript代码
 │   │   ├── 📄 main.js              # 主入口文件
 │   │   ├── 📁 engine/              # 游戏引擎
 │   │   ├── 📁 entities/            # 游戏实体
 │   │   ├── 📁 systems/             # 游戏系统
 │   │   ├── 📁 utils/               # 工具函数
 │   │   └── 📁 config/              # 配置文件
-│   └── 📁 data/                    # 游戏数据
+├── 📁 data/                    # 游戏数据
 │       ├── 📁 levels/              # 关卡数据
 │       ├── 📄 config.json          # 游戏配置
 │       └── 📄 achievements.json    # 成就数据
