@@ -1,313 +1,281 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>钻石狂潮 - Diamond Frenzy</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/game.css">
-    <link rel="stylesheet" href="css/responsive.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/game.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
     <!-- 主菜单界面 -->
     <div id="main-menu" class="screen active">
-        <div class="menu-container">
-            <h1 class="game-title">钻石狂潮</h1>
-            <h2 class="game-subtitle">Diamond Frenzy</h2>
-            <div class="menu-buttons">
-                <button id="start-game" class="menu-btn primary">开始游戏</button>
-                <button id="level-select" class="menu-btn">关卡选择</button>
-                <button id="settings" class="menu-btn">设置</button>
-                <button id="help" class="menu-btn">帮助</button>
-            </div>
-            <div class="game-info">
-                <p>经典冒险解谜游戏</p>
-                <p>探索三大世界，收集钻石，避开敌人！</p>
-            </div>
+      <div class="menu-container">
+        <h1 class="game-title">钻石狂潮</h1>
+        <h2 class="game-subtitle">Diamond Frenzy</h2>
+        <div class="menu-buttons">
+          <button id="start-game" class="menu-btn primary">开始游戏</button>
+          <button id="level-select" class="menu-btn">关卡选择</button>
+          <button id="settings" class="menu-btn">设置</button>
+          <button id="help" class="menu-btn">帮助</button>
         </div>
+        <div class="game-info">
+          <p>经典冒险解谜游戏</p>
+          <p>探索三大世界，收集钻石，避开敌人！</p>
+        </div>
+      </div>
     </div>
 
     <!-- 关卡选择界面 -->
     <div id="level-select-screen" class="screen">
-        <div class="level-select-container">
-            <h2>选择关卡</h2>
-            <div class="worlds-container">
-                <div class="world" data-world="angkor-wat">
-                    <h3>吴哥窟</h3>
-                    <p>Angkor Wat</p>
-                    <div class="world-info">
-                        <span>9个关卡</span>
-                        <span>3个秘密关卡</span>
-                    </div>
-                </div>
-                <div class="world locked" data-world="bavaria">
-                    <h3>巴伐利亚</h3>
-                    <p>Bavaria</p>
-                    <div class="world-info">
-                        <span>9个关卡</span>
-                        <span>3个秘密关卡</span>
-                        <span>1个BOSS关</span>
-                    </div>
-                </div>
-                <div class="world locked" data-world="tibet">
-                    <h3>西藏雪洞</h3>
-                    <p>Tibet</p>
-                    <div class="world-info">
-                        <span>10个关卡</span>
-                        <span>4个秘密关卡</span>
-                        <span>1个BOSS关</span>
-                    </div>
-                </div>
+      <div class="level-select-container">
+        <h2>选择关卡</h2>
+        <div class="worlds-container">
+          <div class="world" data-world="angkor-wat">
+            <h3>吴哥窟</h3>
+            <p>Angkor Wat</p>
+            <div class="world-info">
+              <span>9个关卡</span>
+              <span>3个秘密关卡</span>
             </div>
-            <button id="back-to-menu" class="menu-btn">返回</button>
+          </div>
+          <div class="world locked" data-world="bavaria">
+            <h3>巴伐利亚</h3>
+            <p>Bavaria</p>
+            <div class="world-info">
+              <span>9个关卡</span>
+              <span>3个秘密关卡</span>
+              <span>1个BOSS关</span>
+            </div>
+          </div>
+          <div class="world locked" data-world="tibet">
+            <h3>西藏雪洞</h3>
+            <p>Tibet</p>
+            <div class="world-info">
+              <span>10个关卡</span>
+              <span>4个秘密关卡</span>
+              <span>1个BOSS关</span>
+            </div>
+          </div>
         </div>
+        <button id="back-to-menu" class="menu-btn">返回</button>
+      </div>
     </div>
 
     <!-- 设置界面 -->
     <div id="settings-screen" class="screen">
-        <div class="settings-container">
-            <h2>游戏设置</h2>
-            <div class="setting-group">
-                <label for="music-volume">音乐音量</label>
-                <input type="range" id="music-volume" min="0" max="100" value="50">
-                <span id="music-volume-value">50%</span>
-            </div>
-            <div class="setting-group">
-                <label for="sfx-volume">音效音量</label>
-                <input type="range" id="sfx-volume" min="0" max="100" value="70">
-                <span id="sfx-volume-value">70%</span>
-            </div>
-            <div class="setting-group">
-                <label for="difficulty">难度等级</label>
-                <select id="difficulty">
-                    <option value="easy">简单</option>
-                    <option value="normal" selected>普通</option>
-                    <option value="hard">困难</option>
-                </select>
-            </div>
-            <button id="back-to-menu-settings" class="menu-btn">返回</button>
+      <div class="settings-container">
+        <h2>游戏设置</h2>
+        <div class="setting-group">
+          <label for="music-volume">音乐音量</label>
+          <input type="range" id="music-volume" min="0" max="100" value="50" />
+          <span id="music-volume-value">50%</span>
         </div>
+        <div class="setting-group">
+          <label for="sfx-volume">音效音量</label>
+          <input type="range" id="sfx-volume" min="0" max="100" value="70" />
+          <span id="sfx-volume-value">70%</span>
+        </div>
+        <div class="setting-group">
+          <label for="difficulty">难度等级</label>
+          <select id="difficulty">
+            <option value="easy">简单</option>
+            <option value="normal" selected>普通</option>
+            <option value="hard">困难</option>
+          </select>
+        </div>
+        <button id="back-to-menu-settings" class="menu-btn">返回</button>
+      </div>
     </div>
 
     <!-- 帮助界面 -->
     <div id="help-screen" class="screen">
-        <div class="help-container">
-            <h2>游戏帮助</h2>
-            <div class="help-content">
-                <h3>游戏目标</h3>
-                <p>控制角色在迷宫中移动，收集钻石，避开或击败敌人，到达出口。</p>
-                
-                <h3>操作说明</h3>
-                <div class="controls-info">
-                    <div class="control-item">
-                        <span class="key">WASD</span> 或 <span class="key">方向键</span> - 移动
-                    </div>
-                    <div class="control-item">
-                        <span class="key">空格键</span> - 使用道具/互动
-                    </div>
-                    <div class="control-item">
-                        <span class="key">数字键 1-8</span> - 选择道具
-                    </div>
-                    <div class="control-item">
-                        <span class="key">ESC</span> - 暂停游戏
-                    </div>
-                </div>
+      <div class="help-container">
+        <h2>游戏帮助</h2>
+        <div class="help-content">
+          <h3>游戏目标</h3>
+          <p>控制角色在迷宫中移动，收集钻石，避开或击败敌人，到达出口。</p>
 
-                <h3>敌人介绍</h3>
-                <div class="enemies-info">
-                    <div class="enemy-item">
-                        <strong>雪猿</strong> - 会追踪玩家的敌人
-                    </div>
-                    <div class="enemy-item">
-                        <strong>少林弟子</strong> - 远程攻击，释放飞镖
-                    </div>
-                    <div class="enemy-item">
-                        <strong>红蛇</strong> - 对道具免疫，需要直接击败
-                    </div>
-                    <div class="enemy-item">
-                        <strong>毒蜘蛛</strong> - 可被环境消灭
-                    </div>
-                    <div class="enemy-item">
-                        <strong>萨克斯骑士</strong> - Boss敌人
-                    </div>
-                </div>
-
-                <h3>道具系统</h3>
-                <div class="items-info">
-                    <div class="item-item">
-                        <strong>指南针</strong> - 显示关卡路径提示
-                    </div>
-                    <div class="item-item">
-                        <strong>锤子</strong> - 破坏石块障碍和攻击敌人
-                    </div>
-                    <div class="item-item">
-                        <strong>抓钩</strong> - 远程抓取物品
-                    </div>
-                    <div class="item-item">
-                        <strong>冰冻射线</strong> - 冻结敌人
-                    </div>
-                    <div class="item-item">
-                        <strong>炸药</strong> - 爆炸攻击
-                    </div>
-                    <div class="item-item">
-                        <strong>护盾</strong> - 防护一次伤害
-                    </div>
-                    <div class="item-item">
-                        <strong>速度靴</strong> - 提升移动速度
-                    </div>
-                    <div class="item-item">
-                        <strong>宝石袋</strong> - 得分加成
-                    </div>
-                </div>
+          <h3>操作说明</h3>
+          <div class="controls-info">
+            <div class="control-item">
+              <span class="key">WASD</span> 或 <span class="key">方向键</span> - 移动
             </div>
-            <button id="back-to-menu-help" class="menu-btn">返回</button>
+            <div class="control-item"><span class="key">空格键</span> - 使用道具/互动</div>
+            <div class="control-item"><span class="key">数字键 1-8</span> - 选择道具</div>
+            <div class="control-item"><span class="key">ESC</span> - 暂停游戏</div>
+          </div>
+
+          <h3>敌人介绍</h3>
+          <div class="enemies-info">
+            <div class="enemy-item"><strong>雪猿</strong> - 会追踪玩家的敌人</div>
+            <div class="enemy-item"><strong>少林弟子</strong> - 远程攻击，释放飞镖</div>
+            <div class="enemy-item"><strong>红蛇</strong> - 对道具免疫，需要直接击败</div>
+            <div class="enemy-item"><strong>毒蜘蛛</strong> - 可被环境消灭</div>
+            <div class="enemy-item"><strong>萨克斯骑士</strong> - Boss敌人</div>
+          </div>
+
+          <h3>道具系统</h3>
+          <div class="items-info">
+            <div class="item-item"><strong>指南针</strong> - 显示关卡路径提示</div>
+            <div class="item-item"><strong>锤子</strong> - 破坏石块障碍和攻击敌人</div>
+            <div class="item-item"><strong>抓钩</strong> - 远程抓取物品</div>
+            <div class="item-item"><strong>冰冻射线</strong> - 冻结敌人</div>
+            <div class="item-item"><strong>炸药</strong> - 爆炸攻击</div>
+            <div class="item-item"><strong>护盾</strong> - 防护一次伤害</div>
+            <div class="item-item"><strong>速度靴</strong> - 提升移动速度</div>
+            <div class="item-item"><strong>宝石袋</strong> - 得分加成</div>
+          </div>
         </div>
+        <button id="back-to-menu-help" class="menu-btn">返回</button>
+      </div>
     </div>
 
     <!-- 游戏界面 -->
     <div id="game-screen" class="screen">
-        <canvas id="game-canvas" width="800" height="600"></canvas>
-        
-        <!-- 游戏内HUD -->
-        <div id="game-hud" class="hud">
-            <div class="hud-top">
-                <div class="hud-item">
-                    <span class="hud-label">生命值</span>
-                    <div class="health-bar">
-                        <div class="health-fill" id="health-fill"></div>
-                    </div>
-                    <span class="hud-value" id="health-text">3</span>
-                </div>
-                <div class="hud-item">
-                    <span class="hud-label">得分</span>
-                    <span class="hud-value" id="score-text">0</span>
-                </div>
-                <div class="hud-item">
-                    <span class="hud-label">钻石</span>
-                    <span class="hud-value" id="diamonds-text">0/0</span>
-                </div>
-                <div class="hud-item">
-                    <span class="hud-label">钥匙</span>
-                    <span class="hud-value" id="keys-text">0</span>
-                </div>
+      <canvas id="game-canvas" width="800" height="600"></canvas>
+
+      <!-- 游戏内HUD -->
+      <div id="game-hud" class="hud">
+        <div class="hud-top">
+          <div class="hud-item">
+            <span class="hud-label">生命值</span>
+            <div class="health-bar">
+              <div class="health-fill" id="health-fill"></div>
             </div>
-            
-            <div class="hud-bottom">
-                <div class="compass-container">
-                    <canvas id="compass-canvas" width="60" height="60"></canvas>
-                </div>
-                
-                <div class="player-status">
-                    <div class="player-avatar">
-                        <div class="player-sprite" id="player-sprite"></div>
-                    </div>
-                    <div class="energy-bar">
-                        <div class="energy-fill" id="energy-fill"></div>
-                    </div>
-                </div>
-                
-                <div class="inventory">
-                    <div class="inventory-slots" id="inventory-slots">
-                        <!-- 道具槽将通过JavaScript动态生成 -->
-                    </div>
-                </div>
-                
-                <div class="game-controls">
-                    <button id="pause-btn" class="control-btn">暂停</button>
-                    <button id="restart-btn" class="control-btn">重开</button>
-                </div>
-            </div>
+            <span class="hud-value" id="health-text">3</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">得分</span>
+            <span class="hud-value" id="score-text">0</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">钻石</span>
+            <span class="hud-value" id="diamonds-text">0/0</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">钥匙</span>
+            <span class="hud-value" id="keys-text">0</span>
+          </div>
         </div>
+
+        <div class="hud-bottom">
+          <div class="compass-container">
+            <canvas id="compass-canvas" width="60" height="60"></canvas>
+          </div>
+
+          <div class="player-status">
+            <div class="player-avatar">
+              <div class="player-sprite" id="player-sprite"></div>
+            </div>
+            <div class="energy-bar">
+              <div class="energy-fill" id="energy-fill"></div>
+            </div>
+          </div>
+
+          <div class="inventory">
+            <div class="inventory-slots" id="inventory-slots">
+              <!-- 道具槽将通过JavaScript动态生成 -->
+            </div>
+          </div>
+
+          <div class="game-controls">
+            <button id="pause-btn" class="control-btn">暂停</button>
+            <button id="restart-btn" class="control-btn">重开</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 暂停菜单 -->
     <div id="pause-menu" class="overlay">
-        <div class="pause-content">
-            <h2>游戏暂停</h2>
-            <div class="pause-buttons">
-                <button id="resume-game" class="menu-btn primary">继续游戏</button>
-                <button id="restart-level" class="menu-btn">重新开始</button>
-                <button id="back-to-main-menu" class="menu-btn">主菜单</button>
-            </div>
+      <div class="pause-content">
+        <h2>游戏暂停</h2>
+        <div class="pause-buttons">
+          <button id="resume-game" class="menu-btn primary">继续游戏</button>
+          <button id="restart-level" class="menu-btn">重新开始</button>
+          <button id="back-to-main-menu" class="menu-btn">主菜单</button>
         </div>
+      </div>
     </div>
 
     <!-- 关卡完成界面 -->
     <div id="level-complete" class="overlay">
-        <div class="complete-content">
-            <h2>关卡完成！</h2>
-            <div class="level-stats">
-                <div class="stat-item">
-                    <span class="stat-label">得分</span>
-                    <span class="stat-value" id="final-score">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">收集钻石</span>
-                    <span class="stat-value" id="final-diamonds">0/0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">用时</span>
-                    <span class="stat-value" id="final-time">00:00</span>
-                </div>
-            </div>
-            <div class="complete-buttons">
-                <button id="next-level" class="menu-btn primary">下一关</button>
-                <button id="replay-level" class="menu-btn">重玩</button>
-                <button id="back-to-level-select" class="menu-btn">关卡选择</button>
-            </div>
+      <div class="complete-content">
+        <h2>关卡完成！</h2>
+        <div class="level-stats">
+          <div class="stat-item">
+            <span class="stat-label">得分</span>
+            <span class="stat-value" id="final-score">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">收集钻石</span>
+            <span class="stat-value" id="final-diamonds">0/0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">用时</span>
+            <span class="stat-value" id="final-time">00:00</span>
+          </div>
         </div>
+        <div class="complete-buttons">
+          <button id="next-level" class="menu-btn primary">下一关</button>
+          <button id="replay-level" class="menu-btn">重玩</button>
+          <button id="back-to-level-select" class="menu-btn">关卡选择</button>
+        </div>
+      </div>
     </div>
 
     <!-- 游戏结束界面 -->
     <div id="game-over" class="overlay">
-        <div class="game-over-content">
-            <h2>游戏结束</h2>
-            <p>生命值耗尽！</p>
-            <div class="game-over-buttons">
-                <button id="retry-game" class="menu-btn primary">重新开始</button>
-                <button id="back-to-main-menu-gameover" class="menu-btn">主菜单</button>
-            </div>
+      <div class="game-over-content">
+        <h2>游戏结束</h2>
+        <p>生命值耗尽！</p>
+        <div class="game-over-buttons">
+          <button id="retry-game" class="menu-btn primary">重新开始</button>
+          <button id="back-to-main-menu-gameover" class="menu-btn">主菜单</button>
         </div>
+      </div>
     </div>
 
     <!-- 加载界面 -->
     <div id="loading-screen" class="screen">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p>正在加载游戏资源...</p>
-            <div class="loading-progress">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="loading-progress"></div>
-                </div>
-                <span id="loading-text">0%</span>
-            </div>
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>正在加载游戏资源...</p>
+        <div class="loading-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="loading-progress"></div>
+          </div>
+          <span id="loading-text">0%</span>
         </div>
+      </div>
     </div>
 
     <!-- JavaScript文件 -->
     <script src="js/utils/MathUtils.js"></script>
     <script src="js/utils/StringUtils.js"></script>
     <script src="js/utils/StorageUtils.js"></script>
-    
+
     <script src="js/engine/AssetManager.js"></script>
     <script src="js/engine/AudioManager.js"></script>
     <script src="js/engine/InputManager.js"></script>
     <script src="js/engine/SceneManager.js"></script>
     <script src="js/engine/GameEngine.js"></script>
-    
+
     <script src="js/entities/Entity.js"></script>
     <script src="js/entities/Player.js"></script>
     <script src="js/entities/Diamond.js"></script>
     <script src="js/entities/Obstacle.js"></script>
     <script src="js/entities/Item.js"></script>
-    
+
     <script src="js/entities/enemies/Enemy.js"></script>
     <script src="js/entities/enemies/SnowApe.js"></script>
     <script src="js/entities/enemies/ShaolinMonk.js"></script>
     <script src="js/entities/enemies/RedSnake.js"></script>
     <script src="js/entities/enemies/PoisonSpider.js"></script>
     <script src="js/entities/enemies/SaxKnight.js"></script>
-    
+
     <script src="js/entities/items/Compass.js"></script>
     <script src="js/entities/items/Hammer.js"></script>
     <script src="js/entities/items/GrappleHook.js"></script>
@@ -316,12 +284,12 @@
     <script src="js/entities/items/Shield.js"></script>
     <script src="js/entities/items/SpeedBoots.js"></script>
     <script src="js/entities/items/GemBag.js"></script>
-    
+
     <script src="js/systems/LevelManager.js"></script>
     <script src="js/systems/CollisionManager.js"></script>
     <script src="js/systems/UIManager.js"></script>
     <script src="js/systems/ProgressManager.js"></script>
-    
+
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>

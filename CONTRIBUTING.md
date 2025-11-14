@@ -14,12 +14,12 @@
 
 2. **安装依赖**
    ```bash
-   npm install
+   pnpm install
    ```
 
 3. **启动开发服务器**
    ```bash
-   npm run dev
+   pnpm run dev
    ```
 
 4. **打开浏览器访问**
@@ -129,12 +129,12 @@ class Player extends Entity {
 ### 运行测试
 ```bash
 # 运行所有测试
-npm test
+	pnpm test
 
 # 运行特定测试
-npm run test:unit
-npm run test:integration
-npm run test:e2e
+	pnpm run test:unit
+	pnpm run test:integration
+	pnpm run test:e2e
 ```
 
 ### 编写测试
