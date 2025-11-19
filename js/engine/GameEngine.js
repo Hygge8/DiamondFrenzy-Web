@@ -16,10 +16,9 @@ class GameEngine {
     }
 
     // 引擎组件
-    this.sceneManager = new SceneManager();
-    this.inputManager = new InputManager();
-    this.audioManager = new AudioManager();
     this.assetManager = new AssetManager();
+    this.inputManager = new InputManager();
+    this.sceneManager = new SceneManager();
 
     // 游戏系统管理器
     this.levelManager = new LevelManager();
