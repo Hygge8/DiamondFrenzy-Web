@@ -2,15 +2,15 @@
  * 敌人管理器
  * 统一管理游戏中所有敌人的生成、更新和渲染
  */
-export default class EnemyManager {
+class EnemyManager {
   constructor() {
     this.enemies = [];
     this.enemyFactories = {
-      snowApe: () => import('./enemies/SnowApe.js'),
-      shaolinMonk: () => import('./enemies/ShaolinMonk.js'),
-      redSnake: () => import('./enemies/RedSnake.js'),
-      poisonSpider: () => import('./enemies/PoisonSpider.js'),
-      saxKnight: () => import('./enemies/SaxKnight.js'),
+      snowApe: () => SnowApe,
+      shaolinMonk: () => ShaolinMonk,
+      redSnake: () => RedSnake,
+      poisonSpider: () => PoisonSpider,
+      saxKnight: () => SaxKnight,
     };
 
     // 敌人类型配置
@@ -79,8 +79,8 @@ export default class EnemyManager {
         return null;
       }
 
-      const EnemyClass = await factory();
-      const enemy = new EnemyClass.default(x, y);
+      const EnemyClass = factory();
+      const enemy = new EnemyClass(x, y);
 
       if (this.gameState) {
         enemy.setGameState(this.gameState);
