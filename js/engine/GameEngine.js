@@ -18,7 +18,7 @@ class GameEngine {
     // 引擎组件
     this.assetManager = new AssetManager();
     this.inputManager = new InputManager();
-    this.sceneManager = new SceneManager();
+    // this.sceneManager = new SceneManager(); // 延迟初始化
 
     // 游戏系统管理器
     this.levelManager = new LevelManager();
@@ -390,6 +390,10 @@ class GameEngine {
    * @private
    */
   async _initGameSystems() {
+    // 初始化场景管理器
+    this.sceneManager = null;
+    this.sceneManager.setSceneChangeCallback(this._onSceneChange.bind(this));
+
     // 初始化敌人管理器
     this.enemyManager.init(this.assetManager);
 
