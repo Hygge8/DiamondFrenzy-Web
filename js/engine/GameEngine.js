@@ -93,11 +93,11 @@ class GameEngine {
         await this.assetManager.loadAll();
       }
 
-      // 注册场景
-      this._registerScenes();
-
       // 初始化游戏系统
       await this._initGameSystems();
+
+      // 注册场景
+      this._registerScenes();
 
       // 绑定关卡管理器回调
       this.levelManager.onLevelComplete = this._onLevelComplete.bind(this);
