@@ -391,7 +391,7 @@ class GameEngine {
    */
   async _initGameSystems() {
     // 初始化场景管理器
-    this.sceneManager = null;
+    this.sceneManager = new SceneManager();
     this.sceneManager.setSceneChangeCallback(this._onSceneChange.bind(this));
 
     // 初始化敌人管理器
