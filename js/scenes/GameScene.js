@@ -30,7 +30,13 @@ class GameScene extends Scene {
    * @param {CanvasRenderingContext2D} ctx - 画布上下文
    */
   render(ctx) {
+    // 清除画布
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
     // 游戏渲染由 LevelManager 处理
+    if (this.gameEngine.levelManager) {
+      this.gameEngine.levelManager.render(ctx);
+    }
   }
 
   /**
