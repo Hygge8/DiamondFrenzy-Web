@@ -65,13 +65,13 @@ async function initializeGame() {
  */
 function setupUIEvents() {
   // 主菜单按钮
-  document.getElementById('start-game').addEventListener('click', startGame);
-  document.getElementById('level-select').addEventListener('click', showLevelSelect);
-  document.getElementById('settings').addEventListener('click', showSettings);
-  document.getElementById('help').addEventListener('click', showHelp);
+  document.getElementById('start-game').addEventListener('click', () => startGame());
+  document.getElementById('level-select').addEventListener('click', () => showLevelSelect());
+  document.getElementById('settings').addEventListener('click', () => showSettings());
+  document.getElementById('help').addEventListener('click', () => showHelp());
 
   // 关卡选择
-  document.getElementById('back-to-menu').addEventListener('click', showMainMenu);
+  document.getElementById('back-to-menu').addEventListener('click', () => showMainMenu());
 
   // 设置界面
   document.getElementById('back-to-menu-settings').addEventListener('click', showMainMenu);
@@ -86,17 +86,17 @@ function setupUIEvents() {
 
   // 暂停菜单
   document.getElementById('resume-game').addEventListener('click', resumeGame);
-  document.getElementById('restart-level').addEventListener('click', restartLevel);
-  document.getElementById('back-to-main-menu').addEventListener('click', showMainMenu);
+  document.getElementById('restart-level').addEventListener('click', () => restartLevel());
+  document.getElementById('back-to-main-menu').addEventListener('click', () => showMainMenu());
 
   // 关卡完成
-  document.getElementById('next-level').addEventListener('click', nextLevel);
-  document.getElementById('replay-level').addEventListener('click', replayLevel);
-  document.getElementById('back-to-level-select').addEventListener('click', showLevelSelect);
+  document.getElementById('next-level').addEventListener('click', () => nextLevel());
+  document.getElementById('replay-level').addEventListener('click', () => replayLevel());
+  document.getElementById('back-to-level-select').addEventListener('click', () => showLevelSelect());
 
   // 游戏结束
-  document.getElementById('retry-game').addEventListener('click', retryGame);
-  document.getElementById('back-to-main-menu-gameover').addEventListener('click', showMainMenu);
+  document.getElementById('retry-game').addEventListener('click', () => retryGame());
+  document.getElementById('back-to-main-menu-gameover').addEventListener('click', () => showMainMenu());
 
   // 世界选择
   setupWorldSelection();
@@ -164,9 +164,10 @@ async function startGame() {
   showScreen('loading-screen');
 
   try {
-    // 加载第一个关卡
-    await gameEngine.levelManager.loadLevel(0);
+    // 切换到游戏场景，加载第一个关卡的操作应该在 GameScene 的 init 中完成
+    await gameEngine.sceneManager.changeScene('game');
 
+    // 隐藏所有屏幕，显示游戏屏幕
     hideAllScreens();
     showScreen('game-screen');
 
@@ -184,7 +185,8 @@ async function startGame() {
 /**
  * 显示关卡选择
  */
-function showLevelSelect() {
+async function showLevelSelect() {
+  await gameEngine.sceneManager.changeScene('levelSelect');
   hideAllScreens();
   showScreen('level-select-screen');
 }
@@ -192,7 +194,8 @@ function showLevelSelect() {
 /**
  * 显示设置
  */
-function showSettings() {
+async function showSettings() {
+  await gameEngine.sceneManager.changeScene('settings');
   hideAllScreens();
   showScreen('settings-screen');
 }
@@ -200,7 +203,8 @@ function showSettings() {
 /**
  * 显示帮助
  */
-function showHelp() {
+async function showHelp() {
+  await gameEngine.sceneManager.changeScene('help');
   hideAllScreens();
   showScreen('help-screen');
 }
@@ -208,7 +212,8 @@ function showHelp() {
 /**
  * 显示主菜单
  */
-function showMainMenu() {
+async function showMainMenu() {
+  await gameEngine.sceneManager.goToMainMenu();
   hideAllScreens();
   showScreen('main-menu');
 
