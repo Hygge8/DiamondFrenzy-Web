@@ -165,7 +165,9 @@ async function startGame() {
 
   try {
     // 切换到游戏场景，加载第一个关卡的操作应该在 GameScene 的 init 中完成
+    console.log('尝试切换到游戏场景...');
     await gameEngine.sceneManager.changeScene('game');
+    console.log('场景切换完成，开始显示游戏屏幕。');
 
     // 隐藏所有屏幕，显示游戏屏幕
     hideAllScreens();
@@ -177,6 +179,7 @@ async function startGame() {
     }
   } catch (error) {
     console.error('开始游戏失败:', error);
+    console.error(error.stack); // 确保打印堆栈
     showErrorMessage('开始游戏失败，请重试。');
     showMainMenu();
   }
