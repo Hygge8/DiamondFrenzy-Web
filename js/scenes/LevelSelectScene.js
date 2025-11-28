@@ -1,8 +1,9 @@
 /**
  * 关卡选择场景
  */
-class LevelSelectScene {
+class LevelSelectScene extends Scene {
   constructor(gameEngine) {
+    super();
     this.gameEngine = gameEngine;
     this.name = 'levelSelect';
   }

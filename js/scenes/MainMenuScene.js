@@ -1,8 +1,9 @@
 /**
  * 主菜单场景
  */
-class MainMenuScene {
+class MainMenuScene extends Scene {
   constructor(gameEngine) {
+    super();
     this.gameEngine = gameEngine;
     this.name = 'mainMenu';
   }
