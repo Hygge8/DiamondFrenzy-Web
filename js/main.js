@@ -162,14 +162,15 @@ function setupWorldSelection() {
  * 开始游戏
  */
 async function startGame() {
+  console.log('startGame: 开始执行');
   hideAllScreens();
   showScreen('loading-screen');
 
   try {
     // 切换到游戏场景，加载第一个关卡的操作应该在 GameScene 的 init 中完成
-    console.log('尝试切换到游戏场景...');
+    console.log('startGame: 尝试切换到游戏场景...');
     await gameEngine.sceneManager.changeScene('game');
-    console.log('场景切换完成，开始显示游戏屏幕。');
+    console.log('startGame: 场景切换完成，开始显示游戏屏幕。');
 
     // 隐藏所有屏幕，显示游戏屏幕
     hideAllScreens();
