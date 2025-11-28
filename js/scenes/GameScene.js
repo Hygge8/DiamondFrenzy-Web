@@ -1,8 +1,9 @@
 /**
  * 游戏场景
  */
-class GameScene {
+class GameScene extends Scene {
   constructor(gameEngine) {
+    super();
     this.gameEngine = gameEngine;
     this.name = 'game';
   }

@@ -1,8 +1,9 @@
 /**
  * 帮助场景
  */
-class HelpScene {
+class HelpScene extends Scene {
   constructor(gameEngine) {
+    super();
     this.gameEngine = gameEngine;
     this.name = 'help';
   }

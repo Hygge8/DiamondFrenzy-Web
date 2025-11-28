@@ -1,8 +1,9 @@
 /**
  * 设置场景
  */
-class SettingsScene {
+class SettingsScene extends Scene {
   constructor(gameEngine) {
+    super();
     this.gameEngine = gameEngine;
     this.name = 'settings';
   }
