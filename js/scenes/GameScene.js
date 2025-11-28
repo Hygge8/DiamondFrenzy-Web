@@ -12,7 +12,8 @@ class GameScene {
    */
   async init() {
     console.log('GameScene: 初始化');
-    // 可以在这里加载场景特有的资源
+    // 加载第一个关卡
+    await this.gameEngine.levelManager.loadLevel(0);
   }
 
   /**
