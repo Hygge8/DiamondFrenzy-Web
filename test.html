@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>简化 GrowingIO 测试页面</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!--
+    简化测试页面：保留一个测试按钮并检测/调用 GrowingIO SDK（gdp 或 gio）
+    说明：页面会异步加载 SDK 脚本（gdp-full.js），因此在调用 init/track 前需检测 SDK 是否可用。
+    如果你拥有真实的 projectId / datasourceId，请在下面 init 调用中替换对应值。
+  -->
+  <script type="text/javascript">
+    // 官方异步加载器：定义全局命名函数并注入 SDK 主脚本
+    !(function (e, n, t, s, c) {
+      e[s] =
+        e[s] ||
+        function () {
+          (e[s].q = e[s].q || []).push(arguments);
+        };
+      (e._gio_local_vds = c = c || 'vds'), (e[c] = e[c] || {}), (e[c].namespace = s);
+      var d = n.createElement('script');
+      var i = n.getElementsByTagName('script')[0];
+      (d.async = !0), (d.src = 'https://assets.giocdn.com/sdk/webjs/gdp-full.js');
+      i ? i.parentNode.insertBefore(d, i) : n.head.appendChild(d);
+    })(window, document, 'https://assets.giocdn.com/sdk/webjs/gdp-full.js', 'gdp');
+
+    // 建议：若希望立即初始化，可在此处尝试 init，但应使用 try/catch 以防脚本尚未加载
+    try {
+      gdp('init', '31f76c734b7f90a7', 'a6effb6bb8259475', { debug: true, autoTrack: false });
+    } catch (e) {
+      // SDK 尚未加载，init 会在加载后通过队列执行（gdp.q）
+    }
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
+  <div class="w-full max-w-xl bg-white p-6 rounded-lg shadow">
+    <h1 class="text-2xl font-bold mb-4">简化 GrowingIO 测试</h1>
+
+    <div class="flex items-center gap-4">
+      <div class="flex gap-2">
+        <button id="btn-enable" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">启动</button>
+        <button id="btn-disable" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">关闭</button>
+      </div>
+      <span id="sdk-status" class="text-sm text-gray-600">检测 SDK...</span>
+      <span id="toggle-status" class="ml-4 text-sm text-gray-700">当前：未设置</span>
+    </div>
+
+    <div id="action-log" class="mt-4 text-sm text-gray-700">等待操作...</div>
+  </div>
+
+  <script>
+    // 元素引用
+    const btnEnable = document.getElementById('btn-enable');
+    const btnDisable = document.getElementById('btn-disable');
+    const log = document.getElementById('action-log');
+    const sdkStatus = document.getElementById('sdk-status');
+    const toggleStatus = document.getElementById('toggle-status');
+
+    // detectSDK: 检测页面上是否已加载 gdp（index 中使用）或 gio（SDK v4 全局名）
+    function detectSDK() {
+      if (typeof window.gdp === 'function') return 'gdp';
+      if (typeof window.gio === 'function') return 'gio';
+      return null;
+    }
+
+    // 更新 UI 上的 SDK 状态文字
+    function updateSDKStatus() {
+      const sdk = detectSDK();
+      sdkStatus.textContent = sdk ? `已检测到 SDK: ${sdk}` : '未检测到 SDK';
+    }
+
+    // 页面加载后立即检测一次，稍后再检测以兼容异步加载场景
+    updateSDKStatus();
+    setTimeout(updateSDKStatus, 1500);
+
+    // 公共：记录并显示日志
+    function addLog(message, data = null) {
+      const time = new Date().toLocaleTimeString();
+      const entry = `${time} — ${message}` + (data ? ` ${JSON.stringify(data)}` : '');
+      log.textContent = entry;
+      console.log(entry);
+    }
+
+    // 启动（开）处理
+    btnEnable.addEventListener('click', () => {
+      const t = new Date().toLocaleString();
+      toggleStatus.textContent = '当前：已启动';
+      addLog('已点击 启动', { time: t });
+
+      try {
+        const payload = { action: 'enable', time: t };
+        if (typeof window.gdp === 'function') {
+          window.gdp('track', 'toggle_action', payload);
+        } else if (typeof window.gio === 'function') {
+          window.gio('track', 'toggle_action', payload);
+        }
+      } catch (e) {
+        console.error('发送启用事件出错', e);
+      }
+    });
+
+    // 关闭（关）处理
+    btnDisable.addEventListener('click', () => {
+      const t = new Date().toLocaleString();
+      toggleStatus.textContent = '当前：已关闭';
+      addLog('已点击 关闭', { time: t });
+
+      try {
+        const payload = { action: 'disable', time: t };
+        if (typeof window.gdp === 'function') {
+          window.gdp('track', 'toggle_action', payload);
+        } else if (typeof window.gio === 'function') {
+          window.gio('track', 'toggle_action', payload);
+        }
+      } catch (e) {
+        console.error('发送关闭事件出错', e);
+      }
+    });
+  </script>
+</body>
+</html>

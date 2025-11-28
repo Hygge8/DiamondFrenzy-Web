@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>GrowingIO SDK 按钮式直观测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        body {
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            padding-left: 8px;
+            border-left: 3px solid #666;
+            color: #444;
+        }
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+        }
+        .btn {
+            padding: 12px 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .btn:hover {
+            border-color: #999;
+            background: #f8f8f8;
+        }
+        .btn:active {
+            background: #f0f0f0;
+        }
+        .log-container {
+            margin-top: 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            height: 360px;
+            overflow-y: auto;
+            background: #fafafa;
+        }
+        .log-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .log-item:last-child {
+            border-bottom: none;
+        }
+        .log-time {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+        .log-content {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+        }
+        pre {
+            font-family: monospace;
+            font-size: 12px;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">GrowingIO SDK 核心功能测试（按钮模式）</h1>
+
+        <!-- 第一组：基础配置按钮 -->
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="toggleDebug(true)">开启调试模式</button>
+            <button class="btn btn-danger" onclick="toggleDebug(false)">关闭调试模式</button>
+            <button class="btn btn-success" onclick="toggleDataCollect(true)">开启数据采集</button>
+            <button class="btn btn-danger" onclick="toggleDataCollect(false)">关闭数据采集</button>
+            <button class="btn" onclick="getSDKConfig()">获取SDK配置</button>
+            <button class="btn" onclick="getUserAgent()">获取增强型UA</button>
+        </div>
+
+        <!-- 第二组：用户标识按钮 -->
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="setUserId()">设置登录用户ID</button>
+            <button class="btn btn-danger" onclick="clearUserId()">清除登录用户ID</button>
+            <button class="btn" onclick="getDeviceId()">获取设备ID</button>
+            <button class="btn" onclick="setUserAttributes()">设置用户属性</button>
+        </div>
+
+        <!-- 第三组：埋点事件按钮 -->
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="trackBaseEvent()">触发基础埋点</button>
+            <button class="btn btn-success" onclick="trackAttrEvent()">触发带属性埋点</button>
+            <button class="btn" onclick="setGeneralProps()">设置全局通用属性</button>
+            <button class="btn btn-warning" onclick="clearGeneralProps()">清空全局属性</button>
+        </div>
+
+        <!-- 第四组：事件时长统计按钮 -->
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="startTimer()">启动计时器</button>
+            <button class="btn btn-warning" onclick="pauseTimer()">暂停计时器</button>
+            <button class="btn btn-success" onclick="resumeTimer()">恢复计时器</button>
+            <button class="btn btn-danger" onclick="endTimer()">停止计时器（上报事件）</button>
+            <button class="btn btn-danger" onclick="clearAllTimers()">清除所有计时器</button>
+        </div>
+
+        <!-- 日志输出区域 -->
+        <div class="log-container" id="logContainer">
+            <div class="log-item">
+                <div class="log-time">测试开始时间：<script>document.write(new Date().toLocaleString())</script></div>
+                <div class="log-content log-debug">点击上方按钮即可执行对应操作，结果会显示在此区域</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入GrowingIO SDK（请替换为你的实际SDK链接） -->
+    <script>
+        // 假设已在全局加载 SDK，window.gdp 已存在
+        // 若未加载，可添加：(实际项目中替换为你的初始化代码)
+        // (function(g,d,p){var h=d.createElement('script');h.type='text/javascript';h.async=true;
+        // h.src='https://assets.growingio.com/sdk/gdp-web.js';var s=d.getElementsByTagName('script')[0];s.parentNode.insertBefore(h,s);
+        // window.gdp||(window.gdp=function(){(gdp.q=gdp.q||[]).push(arguments);});
+        // gdp('init', { appId: '你的appId', trackPage: false });})(window,document);
+
+        let timerId = ''; // 存储计时器ID
+
+        // 日志输出函数
+        function log(content, type = 'info') {
+            const logContainer = document.getElementById('logContainer');
+            const time = new Date().toLocaleString();
+            const logTypes = {
+                success: 'log-success',
+                error: 'log-error',
+                debug: 'log-debug',
+                info: ''
+            };
+            const logHtml = `
+                <div class="log-item">
+                    <div class="log-time">${time}</div>
+                    <div class="log-content ${logTypes[type]}">${content}</div>
+                </div>
+            `;
+            logContainer.insertAdjacentHTML('afterbegin', logHtml);
+            // 滚动到顶部
+            logContainer.scrollTop = 0;
+        }
+
+        // 1. 切换调试模式
+        function toggleDebug(flag) {
+            gdp('setOption', 'debug', flag, () => {
+                log(`调试模式已${flag ? '开启' : '关闭'}`, flag ? 'success' : 'info');
+            });
+        }
+
+        // 2. 切换数据采集
+        function toggleDataCollect(flag) {
+            gdp('setOption', 'dataCollect', flag, () => {
+                const tip = flag ? '开启（已补发VISIT和当前PAGE事件）' : '关闭（SDK停止上报所有事件）';
+                log(`数据采集已${tip}`, flag ? 'success' : 'error');
+            });
+        }
+
+        // 3. 获取SDK配置
+        function getSDKConfig() {
+            gdp('getOption', '', (config) => {
+                log(`SDK当前配置：<br/><pre>${JSON.stringify(config, null, 2)}</pre>`, 'debug');
+            });
+        }
+
+        // 4. 获取增强型UA
+        function getUserAgent() {
+            gdp('getUserAgent', (ua) => {
+                log(`增强型UserAgent：${ua}`, 'debug');
+            });
+        }
+
+        // 5. 设置登录用户ID
+        function setUserId() {
+            const userId = `test_user_${Math.floor(Math.random() * 10000)}`;
+            gdp('setUserId', userId, 'customId', () => {
+                log(`登录用户ID设置成功：${userId}`, 'success');
+            });
+        }
+
+        // 6. 清除登录用户ID
+        function clearUserId() {
+            gdp('clearUserId', () => {
+                log('登录用户ID已清除', 'info');
+            });
+        }
+
+        // 7. 获取设备ID
+        function getDeviceId() {
+            gdp('getDeviceId', (deviceId) => {
+                log(`设备ID（匿名用户ID）：${deviceId}`, 'debug');
+            });
+        }
+
+        // 8. 设置用户属性
+        function setUserAttributes() {
+            const userAttr = {
+                username: '测试用户' + Math.floor(Math.random() * 100),
+                age: 20 + Math.floor(Math.random() * 30),
+                tags: ['web', 'test', 'button_mode'],
+                registerTime: new Date().toLocaleDateString()
+            };
+            gdp('setUserAttributes', userAttr, () => {
+                log(`用户属性设置成功：<br/><pre>${JSON.stringify(userAttr, null, 2)}</pre>`, 'success');
+            });
+        }
+
+        // 9. 触发基础埋点（无属性）
+        function trackBaseEvent() {
+            const eventName = 'button_click_base';
+            gdp('track', eventName, () => {
+                log(`基础埋点事件上报成功：${eventName}`, 'success');
+            });
+        }
+
+        // 10. 触发带属性埋点
+        function trackAttrEvent() {
+            const eventName = 'button_click_attr';
+            const attributes = {
+                buttonName: '带属性埋点按钮',
+                clickTime: new Date().toLocaleString(),
+                count: Math.floor(Math.random() * 100),
+                tags: ['test', 'attr_event']
+            };
+            gdp('track', eventName, attributes, () => {
+                log(`带属性埋点事件上报成功：${eventName}<br/>属性：<pre>${JSON.stringify(attributes, null, 2)}</pre>`, 'success');
+            });
+        }
+
+        // 11. 设置全局通用属性
+        function setGeneralProps() {
+            const generalProps = {
+                platform: 'web',
+                testEnv: true,
+                dynamicValue: () => Math.random().toFixed(2)
+            };
+            gdp('setGeneralProps', generalProps, () => {
+                log(`全局通用属性设置成功：<br/><pre>${JSON.stringify(generalProps, null, 2)}</pre>`, 'success');
+                log('后续所有埋点都会自动携带以上属性', 'debug');
+            });
+        }
+
+        // 12. 清空全局通用属性
+        function clearGeneralProps() {
+            gdp('clearGeneralProps', [], () => {
+                log('所有全局通用属性已清空', 'info');
+            });
+        }
+
+        // 13. 启动计时器
+        function startTimer() {
+            gdp('trackTimerStart', 'test_duration_event', (id) => {
+                timerId = id;
+                log(`计时器启动成功，ID：${timerId}`, 'success');
+            });
+        }
+
+        // 14. 暂停计时器
+        function pauseTimer() {
+            if (!timerId) {
+                log('请先启动计时器！', 'error');
+                return;
+            }
+            gdp('trackTimerPause', timerId, () => {
+                log(`计时器已暂停（ID：${timerId}）`, 'info');
+            });
+        }
+
+        // 15. 恢复计时器
+        function resumeTimer() {
+            if (!timerId) {
+                log('请先启动计时器！', 'error');
+                return;
+            }
+            gdp('trackTimerResume', timerId, () => {
+                log(`计时器已恢复（ID：${timerId}）`, 'success');
+            });
+        }
+
+        // 16. 停止计时器（上报事件）
+        function endTimer() {
+            if (!timerId) {
+                log('请先启动计时器！', 'error');
+                return;
+            }
+            const attributes = { testKey: 'duration_test' };
+            gdp('trackTimerEnd', timerId, attributes, () => {
+                log(`计时器已停止（ID：${timerId}），事件已上报<br/>额外属性：<pre>${JSON.stringify(attributes, null, 2)}</pre>`, 'success');
+                log('事件包含自动计算的 event_duration（秒，精确到毫秒）', 'debug');
+                timerId = ''; // 重置计时器ID
+            });
+        }
+
+        // 17. 清除所有计时器
+        function clearAllTimers() {
+            gdp('clearTrackTimer', () => {
+                log('所有计时器已清除（不会上报事件）', 'info');
+                timerId = '';
+            });
+        }
+    </script>
+</body>
+</html>
