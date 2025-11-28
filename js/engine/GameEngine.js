@@ -18,6 +18,7 @@ class GameEngine {
     // 引擎组件
     this.assetManager = new AssetManager();
     this.inputManager = new InputManager();
+    this.audioManager = new AudioManager();
     // this.sceneManager = new SceneManager(); // 延迟初始化
 
     // 游戏系统管理器
@@ -401,8 +402,7 @@ class GameEngine {
     this.levelManager.initEnemyManager(this.enemyManager);
     this.levelManager.setGameState(this.getGameState());
 
-    // 初始化音频管理器
-    this.audioManager.init(this.assetManager);
+
   }
 
   /**
