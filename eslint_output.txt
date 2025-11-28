@@ -1,0 +1,281 @@
+
+> diamond-frenzy-web@1.0.0 lint:fix /home/ubuntu/DiamondFrenzy-Web
+> eslint js/ --ext .js --fix
+
+
+/home/ubuntu/DiamondFrenzy-Web/js/engine/AssetManager.js
+  110:7   warning  Unexpected console statement  no-console
+  125:7   warning  Unexpected console statement  no-console
+  163:9   warning  Unexpected console statement  no-console
+  206:9   warning  Unexpected console statement  no-console
+  258:31  warning  Unexpected console statement  no-console
+  292:31  warning  Unexpected console statement  no-console
+  345:27  warning  No magic number: 20           no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/engine/AudioManager.js
+   57:7   warning  Unexpected console statement   no-console
+   71:9   warning  Unexpected console statement   no-console
+  129:7   warning  Unexpected console statement   no-console
+  135:19  error    'assetManager' is not defined  no-undef
+  137:7   warning  Unexpected console statement   no-console
+  156:7   warning  Unexpected console statement   no-console
+  190:43  warning  Unexpected console statement   no-console
+  203:7   warning  Unexpected console statement   no-console
+  209:19  error    'assetManager' is not defined  no-undef
+  211:7   warning  Unexpected console statement   no-console
+  245:7   warning  Unexpected console statement   no-console
+  270:80  warning  No magic number: 200           no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/engine/GameEngine.js
+   73:7   warning  Unexpected console statement             no-console
+   77:5   warning  Unexpected console statement             no-console
+  119:7   warning  Unexpected console statement             no-console
+  121:7   warning  Unexpected console statement             no-console
+  131:7   warning  Unexpected console statement             no-console
+  136:7   warning  Unexpected console statement             no-console
+  140:5   warning  Unexpected console statement             no-console
+  158:5   warning  Unexpected console statement             no-console
+  182:5   warning  Unexpected console statement             no-console
+  202:5   warning  Unexpected console statement             no-console
+  233:43  warning  No magic number: 120                     no-magic-numbers
+  378:5   warning  Unexpected console statement             no-console
+  386:5   warning  Unexpected console statement             no-console
+  422:5   warning  Unexpected console statement             no-console
+  533:3   error    Duplicate name '_getMemoryUsage'         no-dupe-class-members
+  565:47  warning  No magic number: 20                      no-magic-numbers
+  566:72  warning  No magic number: 40                      no-magic-numbers
+  571:64  warning  No magic number: 80                      no-magic-numbers
+  613:3   error    Duplicate name '_updateFPS'              no-dupe-class-members
+  647:3   error    Duplicate name '_renderDebugInfo'        no-dupe-class-members
+  650:47  warning  No magic number: 20                      no-magic-numbers
+  651:72  warning  No magic number: 40                      no-magic-numbers
+  656:64  warning  No magic number: 80                      no-magic-numbers
+  690:3   error    Duplicate name '_updateFPS'              no-dupe-class-members
+  705:3   error    Duplicate name '_renderDebugInfo'        no-dupe-class-members
+  751:3   error    Duplicate name '_handleResize'           no-dupe-class-members
+  759:3   error    Duplicate name '_registerScenes'         no-dupe-class-members
+  774:3   error    Duplicate name '_initGameSystems'        no-dupe-class-members
+  775:5   warning  Unexpected console statement             no-console
+  784:5   warning  Unexpected console statement             no-console
+  792:3   error    Duplicate name '_updateLoadingProgress'  no-dupe-class-members
+  809:3   error    Duplicate name '_onAssetsLoaded'         no-dupe-class-members
+  810:5   warning  Unexpected console statement             no-console
+  830:3   error    Duplicate name '_getMemoryUsage'         no-dupe-class-members
+  845:29  error    'Scene' is not defined                   no-undef
+  852:5   warning  Unexpected console statement             no-console
+  869:5   warning  Unexpected console statement             no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/engine/InputManager.js
+  282:5  warning  Unexpected console statement  no-console
+  294:5  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/engine/SceneManager.js
+   33:7   warning  Unexpected console statement  no-console
+   54:7   warning  Unexpected console statement  no-console
+   60:7   warning  Unexpected console statement  no-console
+  104:7   warning  Unexpected console statement  no-console
+  121:7   warning  Unexpected console statement  no-console
+  195:24  warning  No magic number: 0.5          no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/Diamond.js
+   68:44  warning  No magic number: 0.7          no-magic-numbers
+   74:5   warning  Unexpected console statement  no-console
+  130:48  warning  No magic number: 0.02         no-magic-numbers
+  135:38  warning  No magic number: 0.3          no-magic-numbers
+  167:49  warning  No magic number: 20           no-magic-numbers
+  168:50  warning  No magic number: 20           no-magic-numbers
+  174:43  warning  No magic number: 0.5          no-magic-numbers
+  175:43  warning  No magic number: 0.5          no-magic-numbers
+  219:72  warning  No magic number: 0.5          no-magic-numbers
+  253:33  warning  No magic number: 0.3          no-magic-numbers
+  253:55  warning  No magic number: 0.2          no-magic-numbers
+  255:33  warning  No magic number: 0.3          no-magic-numbers
+  255:55  warning  No magic number: 0.2          no-magic-numbers
+  354:39  warning  No magic number: 0.5          no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/Entity.js
+   66:47  warning  No magic number: 36           no-magic-numbers
+  371:11  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/Item.js
+  147:47  warning  No magic number: 0.6          no-magic-numbers
+  194:48  warning  No magic number: 0.5          no-magic-numbers
+  200:7   warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/Obstacle.js
+  245:45  warning  No magic number: 0.6  no-magic-numbers
+  272:47  warning  No magic number: 0.7  no-magic-numbers
+  294:42  warning  No magic number: 0.5  no-magic-numbers
+  315:46  warning  No magic number: 0.4  no-magic-numbers
+  435:27  warning  No magic number: 0.5  no-magic-numbers
+  472:29  warning  No magic number: 0.7  no-magic-numbers
+  550:23  warning  No magic number: 0.5  no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/Player.js
+  168:48  warning  No magic number: 0.5          no-magic-numbers
+  181:57  warning  No magic number: 1.5          no-magic-numbers
+  197:49  warning  No magic number: 0.7          no-magic-numbers
+  258:51  warning  No magic number: 0.6          no-magic-numbers
+  331:24  warning  No magic number: 5000         no-magic-numbers
+  346:28  warning  No magic number: 3000         no-magic-numbers
+  363:5   warning  Unexpected console statement  no-console
+  454:36  warning  No magic number: 0.1          no-magic-numbers
+  576:20  warning  No magic number: 14           no-magic-numbers
+  578:20  warning  No magic number: 14           no-magic-numbers
+  579:20  warning  No magic number: 22           no-magic-numbers
+  583:38  warning  No magic number: 14           no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/enemies/Enemy.js
+  199:5   warning  Unexpected console statement  no-console
+  243:5   warning  Unexpected console statement  no-console
+  260:5   warning  Unexpected console statement  no-console
+  286:5   warning  Unexpected console statement  no-console
+  299:79  warning  No magic number: 0.5          no-magic-numbers
+  313:27  warning  No magic number: 20           no-magic-numbers
+  314:27  warning  No magic number: 14           no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/enemies/PoisonSpider.js
+  134:40  warning  No magic number: 0.5  no-magic-numbers
+  135:40  warning  No magic number: 0.5  no-magic-numbers
+  147:71  warning  No magic number: 1.2  no-magic-numbers
+  166:56  warning  No magic number: 0.7  no-magic-numbers
+  167:56  warning  No magic number: 0.7  no-magic-numbers
+  190:40  warning  No magic number: 0.5  no-magic-numbers
+  191:40  warning  No magic number: 0.5  no-magic-numbers
+  276:31  warning  No magic number: 1.5  no-magic-numbers
+  323:49  warning  No magic number: 1.2  no-magic-numbers
+  379:29  warning  No magic number: 2.5  no-magic-numbers
+  399:47  warning  No magic number: 0.5  no-magic-numbers
+  484:24  warning  No magic number: -60  no-magic-numbers
+  484:29  warning  No magic number: -30  no-magic-numbers
+  484:42  warning  No magic number: 120  no-magic-numbers
+  484:47  warning  No magic number: 150  no-magic-numbers
+  484:52  warning  No magic number: 210  no-magic-numbers
+  484:57  warning  No magic number: 240  no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/enemies/RedSnake.js
+  255:53  warning  No magic number: 80    no-magic-numbers
+  373:31  warning  No magic number: 0.15  no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/enemies/SaxKnight.js
+  136:40  warning  No magic number: 0.5   no-magic-numbers
+  137:40  warning  No magic number: 0.5   no-magic-numbers
+  152:71  warning  No magic number: 1.3   no-magic-numbers
+  271:28  warning  No magic number: 0.5   no-magic-numbers
+  273:70  warning  No magic number: 20    no-magic-numbers
+  287:54  warning  No magic number: 1.2   no-magic-numbers
+  306:19  warning  No magic number: 40    no-magic-numbers
+  329:82  warning  No magic number: 20    no-magic-numbers
+  362:41  warning  No magic number: 0.01  no-magic-numbers
+  487:46  warning  No magic number: 20    no-magic-numbers
+  500:52  warning  No magic number: 20    no-magic-numbers
+  502:56  warning  No magic number: 20    no-magic-numbers
+  502:60  warning  No magic number: 20    no-magic-numbers
+  516:42  warning  No magic number: 28    no-magic-numbers
+  564:64  warning  No magic number: 20    no-magic-numbers
+  567:63  warning  No magic number: 20    no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/enemies/ShaolinMonk.js
+  130:42  warning  No magic number: 0.5  no-magic-numbers
+  131:42  warning  No magic number: 0.5  no-magic-numbers
+  141:71  warning  No magic number: 1.2  no-magic-numbers
+  162:39  warning  No magic number: 0.7  no-magic-numbers
+  163:56  warning  No magic number: 0.5  no-magic-numbers
+  164:56  warning  No magic number: 0.5  no-magic-numbers
+  198:20  warning  No magic number: 20   no-magic-numbers
+  312:25  warning  No magic number: 1.5  no-magic-numbers
+  340:38  warning  No magic number: 70   no-magic-numbers
+  388:27  warning  No magic number: 18   no-magic-numbers
+  392:39  warning  No magic number: 14   no-magic-numbers
+  392:43  warning  No magic number: 20   no-magic-numbers
+  392:47  warning  No magic number: 14   no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/enemies/SnowApe.js
+  105:40  warning  No magic number: 0.5  no-magic-numbers
+  105:60  warning  No magic number: 0.5  no-magic-numbers
+  106:40  warning  No magic number: 0.5  no-magic-numbers
+  106:60  warning  No magic number: 0.5  no-magic-numbers
+  115:71  warning  No magic number: 1.5  no-magic-numbers
+  223:34  warning  No magic number: 40   no-magic-numbers
+  224:38  warning  No magic number: 80   no-magic-numbers
+  233:29  warning  No magic number: 1.5  no-magic-numbers
+  260:27  warning  No magic number: 20   no-magic-numbers
+  264:40  warning  No magic number: 20   no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/entities/items/Compass.js
+  185:8  warning  No magic number: 5000  no-magic-numbers
+
+/home/ubuntu/DiamondFrenzy-Web/js/main.js
+   11:3  warning  Unexpected console statement  no-console
+   23:5  warning  Unexpected console statement  no-console
+   25:5  warning  Unexpected console statement  no-console
+  134:5  warning  Unexpected console statement  no-console
+  176:5  warning  Unexpected console statement  no-console
+  223:3  warning  Unexpected console statement  no-console
+  264:5  warning  Unexpected console statement  no-console
+  290:5  warning  Unexpected console statement  no-console
+  356:6  warning  No magic number: 3000         no-magic-numbers
+  363:3  warning  Unexpected console statement  no-console
+  371:3  warning  Unexpected console statement  no-console
+  398:3  warning  Unexpected console statement  no-console
+  405:3  warning  Unexpected console statement  no-console
+  412:3  warning  Unexpected console statement  no-console
+  419:3  warning  Unexpected console statement  no-console
+  429:3  warning  Unexpected console statement  no-console
+  447:3  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/scenes/GameScene.js
+  14:5  warning  Unexpected console statement  no-console
+  38:5  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/scenes/HelpScene.js
+  14:5  warning  Unexpected console statement  no-console
+  46:5  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/scenes/LevelSelectScene.js
+  14:5  warning  Unexpected console statement  no-console
+  46:5  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/scenes/MainMenuScene.js
+  14:5  warning  Unexpected console statement  no-console
+  50:5  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/scenes/SettingsScene.js
+  14:5  warning  Unexpected console statement  no-console
+  46:5  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/systems/EnemyManager.js
+   78:9  warning  Unexpected console statement  no-console
+   90:7  warning  Unexpected console statement  no-console
+   93:7  warning  Unexpected console statement  no-console
+  316:5  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/systems/LevelManager.js
+  217:7  warning  Unexpected console statement  no-console
+  221:5  warning  Unexpected console statement  no-console
+  248:7  warning  Unexpected console statement  no-console
+  251:7  warning  Unexpected console statement  no-console
+  354:7  warning  Unexpected console statement  no-console
+  386:7  warning  Unexpected console statement  no-console
+  559:5  warning  Unexpected console statement  no-console
+  575:5  warning  Unexpected console statement  no-console
+  585:5  warning  Unexpected console statement  no-console
+
+/home/ubuntu/DiamondFrenzy-Web/js/utils/StorageUtils.js
+   41:7  warning  Unexpected console statement  no-console
+   72:7  warning  Unexpected console statement  no-console
+   93:7  warning  Unexpected console statement  no-console
+  117:7  warning  Unexpected console statement  no-console
+  137:7  warning  Unexpected console statement  no-console
+  156:7  warning  Unexpected console statement  no-console
+  186:7  warning  Unexpected console statement  no-console
+  224:7  warning  Unexpected console statement  no-console
+  262:7  warning  Unexpected console statement  no-console
+  288:7  warning  Unexpected console statement  no-console
+  357:7  warning  Unexpected console statement  no-console
+  390:7  warning  Unexpected console statement  no-console
+  412:7  warning  Unexpected console statement  no-console
+
+✖ 221 problems (14 errors, 207 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.

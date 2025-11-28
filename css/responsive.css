@@ -1,0 +1,698 @@
+/* 钻石狂潮 - 响应式样式 */
+
+/* 大屏幕优化 */
+@media (min-width: 1200px) {
+  .menu-container {
+    max-width: 600px;
+  }
+
+  .game-title {
+    font-size: 4rem;
+  }
+
+  .game-subtitle {
+    font-size: 1.8rem;
+  }
+
+  .menu-btn {
+    font-size: 1.3rem;
+    padding: 1.2rem 2.5rem;
+  }
+
+  #game-canvas {
+    width: 1000px;
+    height: 750px;
+  }
+
+  .hud-top,
+  .hud-bottom {
+    font-size: 1.1rem;
+  }
+}
+
+/* 中等屏幕适配 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .menu-container {
+    max-width: 500px;
+    padding: 2.5rem;
+  }
+
+  .game-title {
+    font-size: 3rem;
+  }
+
+  .worlds-container {
+    gap: 1.5rem;
+  }
+
+  .world {
+    min-width: 180px;
+  }
+
+  #game-canvas {
+    width: 90vw;
+    height: 67.5vw; /* 保持4:3比例 */
+    max-height: 70vh;
+  }
+}
+
+/* 平板横屏适配 */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .menu-container {
+    padding: 2rem;
+  }
+
+  .hud-top {
+    top: 5px;
+    padding: 8px 15px;
+  }
+
+  .hud-bottom {
+    bottom: 5px;
+    padding: 10px 15px;
+  }
+
+  .mobile-controls {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .dpad {
+    width: 100px;
+    height: 100px;
+  }
+
+  .dpad-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .action-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* 平板竖屏适配 */
+@media (max-width: 768px) and (orientation: portrait) {
+  .menu-container {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+
+  .game-title {
+    font-size: 2.5rem;
+  }
+
+  .game-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .worlds-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .world {
+    max-width: 300px;
+    width: 100%;
+    padding: 1.2rem;
+  }
+
+  #game-canvas {
+    width: 95vw;
+    height: auto;
+    max-height: 50vh;
+  }
+
+  .hud-top {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .hud-bottom {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .inventory-slots {
+    gap: 3px;
+  }
+
+  .inventory-slot {
+    width: 35px;
+    height: 35px;
+  }
+
+  .inventory-slot .item-icon {
+    font-size: 1.2rem;
+  }
+
+  .mobile-controls {
+    display: block;
+  }
+
+  .game-controls {
+    display: none;
+  }
+}
+
+/* 手机横屏适配 */
+@media (max-width: 767px) and (orientation: landscape) {
+  .menu-container {
+    padding: 1.5rem;
+    margin: 0.5rem;
+  }
+
+  .game-title {
+    font-size: 2.2rem;
+  }
+
+  .game-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .menu-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    min-width: 150px;
+  }
+
+  .worlds-container {
+    gap: 1rem;
+  }
+
+  .world {
+    min-width: 150px;
+    padding: 1rem;
+  }
+
+  .settings-container,
+  .help-container {
+    padding: 1.5rem;
+    margin: 0.5rem;
+  }
+
+  #game-canvas {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .hud-top {
+    top: 5px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+
+  .hud-bottom {
+    bottom: 5px;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .hud-item {
+    gap: 5px;
+  }
+
+  .hud-label {
+    font-size: 0.7rem;
+  }
+
+  .hud-value {
+    font-size: 0.9rem;
+  }
+
+  .health-bar {
+    width: 40px;
+    height: 8px;
+  }
+
+  .energy-bar {
+    width: 35px;
+    height: 6px;
+  }
+
+  .player-avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .player-sprite {
+    width: 20px;
+    height: 20px;
+  }
+
+  .inventory-slot {
+    width: 30px;
+    height: 30px;
+  }
+
+  .inventory-slot .item-icon {
+    font-size: 1rem;
+  }
+
+  .mobile-controls {
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .dpad {
+    width: 80px;
+    height: 80px;
+  }
+
+  .dpad-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    margin-left: 10px;
+    gap: 8px;
+  }
+
+  .action-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+/* 手机竖屏适配 */
+@media (max-width: 480px) and (orientation: portrait) {
+  .menu-container {
+    padding: 1.5rem 1rem;
+    margin: 0.5rem;
+  }
+
+  .game-title {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+
+  .game-subtitle {
+    font-size: 1rem;
+  }
+
+  .menu-buttons {
+    gap: 0.8rem;
+  }
+
+  .menu-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+
+  .worlds-container {
+    gap: 0.8rem;
+  }
+
+  .world {
+    padding: 1rem;
+  }
+
+  .world h3 {
+    font-size: 1.2rem;
+  }
+
+  .world p {
+    font-size: 0.9rem;
+  }
+
+  .world-info span {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .settings-container,
+  .help-container {
+    padding: 1.5rem 1rem;
+    margin: 0.5rem;
+    max-height: 85vh;
+  }
+
+  .setting-group {
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+  }
+
+  .setting-group label {
+    min-width: auto;
+  }
+
+  .help-content h3 {
+    font-size: 1.1rem;
+    margin: 1.2rem 0 0.8rem 0;
+  }
+
+  .control-item,
+  .enemy-item,
+  .item-item {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  #game-canvas {
+    width: 98vw;
+    height: auto;
+    max-height: 45vh;
+  }
+
+  .hud-top {
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .hud-bottom {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 10px;
+    align-items: center;
+  }
+
+  .hud-item {
+    gap: 4px;
+  }
+
+  .hud-label {
+    font-size: 0.7rem;
+  }
+
+  .hud-value {
+    font-size: 0.9rem;
+    min-width: 30px;
+  }
+
+  .health-bar {
+    width: 35px;
+    height: 6px;
+  }
+
+  .energy-bar {
+    width: 30px;
+    height: 5px;
+  }
+
+  .player-avatar {
+    width: 25px;
+    height: 25px;
+  }
+
+  .player-sprite {
+    width: 18px;
+    height: 18px;
+  }
+
+  .player-sprite::before,
+  .player-sprite::after {
+    width: 4px;
+    height: 4px;
+    top: 6px;
+  }
+
+  .player-sprite::before {
+    left: 6px;
+  }
+
+  .player-sprite::after {
+    right: 6px;
+  }
+
+  .inventory-slots {
+    gap: 2px;
+  }
+
+  .inventory-slot {
+    width: 28px;
+    height: 28px;
+  }
+
+  .inventory-slot .item-icon {
+    font-size: 0.9rem;
+  }
+
+  .inventory-slot .item-count {
+    font-size: 0.6rem;
+    padding: 0px 3px;
+    min-width: 12px;
+  }
+
+  .mobile-controls {
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .dpad {
+    width: 70px;
+    height: 70px;
+  }
+
+  .dpad-btn {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
+
+  .action-buttons {
+    margin-left: 8px;
+    gap: 6px;
+  }
+
+  .action-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .pause-content,
+  .complete-content,
+  .game-over-content {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+
+  .level-stats {
+    gap: 0.8rem;
+  }
+
+  .stat-item {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .stat-value {
+    font-size: 1rem;
+  }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 320px) {
+  .menu-container {
+    padding: 1rem;
+    margin: 0.3rem;
+  }
+
+  .game-title {
+    font-size: 1.8rem;
+  }
+
+  .game-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .menu-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    min-width: 160px;
+  }
+
+  .world {
+    padding: 0.8rem;
+  }
+
+  .world h3 {
+    font-size: 1.1rem;
+  }
+
+  .settings-container,
+  .help-container {
+    padding: 1rem;
+    margin: 0.3rem;
+  }
+
+  .help-content {
+    font-size: 0.9rem;
+  }
+
+  .control-item,
+  .enemy-item,
+  .item-item {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .key {
+    padding: 0.1rem 0.3rem;
+    font-size: 0.8rem;
+  }
+
+  #game-canvas {
+    width: 100vw;
+    height: auto;
+    max-height: 40vh;
+  }
+
+  .hud-top {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  .hud-bottom {
+    padding: 6px 8px;
+  }
+
+  .hud-label {
+    font-size: 0.6rem;
+  }
+
+  .hud-value {
+    font-size: 0.8rem;
+  }
+
+  .health-bar {
+    width: 30px;
+    height: 5px;
+  }
+
+  .energy-bar {
+    width: 25px;
+    height: 4px;
+  }
+
+  .player-avatar {
+    width: 22px;
+    height: 22px;
+  }
+
+  .player-sprite {
+    width: 16px;
+    height: 16px;
+  }
+
+  .inventory-slot {
+    width: 25px;
+    height: 25px;
+  }
+
+  .inventory-slot .item-icon {
+    font-size: 0.8rem;
+  }
+
+  .dpad {
+    width: 60px;
+    height: 60px;
+  }
+
+  .dpad-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+  }
+
+  .action-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+}
+
+/* 高DPI屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #game-canvas {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  .menu-btn,
+  .control-btn {
+    border-width: 1px;
+  }
+
+  .hud-top,
+  .hud-bottom {
+    border-width: 1px;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  .menu-btn:hover,
+  .control-btn:hover,
+  .world:hover,
+  .inventory-slot:hover {
+    transform: none;
+  }
+
+  .menu-btn:active,
+  .control-btn:active,
+  .world:active,
+  .inventory-slot:active {
+    transform: scale(0.95);
+  }
+
+  .dpad-btn:active,
+  .action-btn:active {
+    transform: scale(0.9);
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .screen:not(.active) {
+    display: none !important;
+  }
+
+  .hud,
+  .mobile-controls,
+  .overlay {
+    display: none !important;
+  }
+
+  #game-canvas {
+    border: 1px solid #000;
+    background: #fff;
+  }
+}

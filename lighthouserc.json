@@ -1,0 +1,29 @@
+ci:
+  collect:
+    url:
+      - http://localhost:8080/
+      - http://localhost:8080/index.html
+    startServerCommand: npx http-server -p 8080
+    startServerReadyPattern: "Available on"
+    startServerReadyTimeout: 10000
+    numberOfRuns: 3
+  assert:
+    assertions:
+      categories:performance:
+        - error
+        - warn
+      categories:accessibility:
+        - error
+        - warn
+      categories:best-practices:
+        - error
+        - warn
+      categories:seo:
+        - error
+        - warn
+      "first-contentful-paint": ["warn", {"maxNumericValue": 2000}]
+      "largest-contentful-paint": ["warn", {"maxNumericValue": 4000}]
+      "cumulative-layout-shift": ["warn", {"maxNumericValue": 0.1}]
+      "total-blocking-time": ["warn", {"maxNumericValue": 300}]
+upload:
+  target: temporary-public-storage
