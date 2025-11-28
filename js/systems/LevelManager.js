@@ -249,6 +249,7 @@ class LevelManager {
       return true;
     } catch (error) {
       console.error('关卡加载失败:', error);
+      console.error(error.stack);
       return false;
     }
   }
