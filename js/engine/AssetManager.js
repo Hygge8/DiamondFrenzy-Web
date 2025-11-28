@@ -2,7 +2,7 @@
  * 资源管理器
  * 负责加载和管理游戏中的所有资源（图片、音频、字体等）
  */
-class AssetManager {
+export default class AssetManager {
   constructor() {
     this.images = new Map();
     this.audio = new Map();
@@ -18,69 +18,69 @@ class AssetManager {
     this.resourcePaths = {
       images: {
         // 玩家和角色精灵
-        player: 'assets/images/sprites/player.png',
-        playerWalk: 'assets/images/sprites/player_walk.png',
-        playerIdle: 'assets/images/sprites/player_idle.png',
+        player: 'images/sprites/player.png',
+        playerWalk: 'images/sprites/player_walk.png',
+        playerIdle: 'images/sprites/player_idle.png',
 
         // 敌人精灵
-        snowApe: 'assets/images/enemies/snow_ape.png',
-        shaolinMonk: 'assets/images/enemies/shaolin_monk.png',
-        redSnake: 'assets/images/enemies/red_snake.png',
-        poisonSpider: 'assets/images/enemies/poison_spider.png',
-        saxKnight: 'assets/images/enemies/sax_knight.png',
+        snowApe: 'images/enemies/snow_ape.png',
+        shaolinMonk: 'images/enemies/shaolin_monk.png',
+        redSnake: 'images/enemies/red_snake.png',
+        poisonSpider: 'images/enemies/poison_spider.png',
+        saxKnight: 'images/enemies/sax_knight.png',
 
         // 道具精灵
-        compass: 'assets/images/items/compass.png',
-        hammer: 'assets/images/items/hammer.png',
-        grappleHook: 'assets/images/items/grapple_hook.png',
-        iceRay: 'assets/images/items/ice_ray.png',
-        dynamite: 'assets/images/items/dynamite.png',
-        shield: 'assets/images/items/shield.png',
-        speedBoots: 'assets/images/items/speed_boots.png',
-        gemBag: 'assets/images/items/gem_bag.png',
+        compass: 'images/items/compass.png',
+        hammer: 'images/items/hammer.png',
+        grappleHook: 'images/items/grapple_hook.png',
+        iceRay: 'images/items/ice_ray.png',
+        dynamite: 'images/items/dynamite.png',
+        shield: 'images/items/shield.png',
+        speedBoots: 'images/items/speed_boots.png',
+        gemBag: 'images/items/gem_bag.png',
 
         // 游戏对象
-        diamond: 'assets/images/sprites/diamond.png',
-        key: 'assets/images/sprites/key.png',
-        exit: 'assets/images/sprites/exit.png',
+        diamond: 'images/sprites/diamond.png',
+        key: 'images/sprites/key.png',
+        exit: 'images/sprites/exit.png',
 
         // 障碍物
-        rock: 'assets/images/tiles/rock.png',
-        ice: 'assets/images/tiles/ice.png',
-        fire: 'assets/images/tiles/fire.png',
-        web: 'assets/images/tiles/web.png',
+        rock: 'images/tiles/rock.png',
+        ice: 'images/tiles/ice.png',
+        fire: 'images/tiles/fire.png',
+        web: 'images/tiles/web.png',
 
         // UI元素
-        heart: 'assets/images/ui/heart.png',
-        energyBar: 'assets/images/ui/energy_bar.png',
-        inventorySlot: 'assets/images/ui/inventory_slot.png',
+        heart: 'images/ui/heart.png',
+        energyBar: 'images/ui/energy_bar.png',
+        inventorySlot: 'images/ui/inventory_slot.png',
 
         // 背景
-        angkorWatBg: 'assets/images/backgrounds/angkor_wat.jpg',
-        bavariaBg: 'assets/images/backgrounds/bavaria.jpg',
-        tibetBg: 'assets/images/backgrounds/tibet.jpg',
+        angkorWatBg: 'images/backgrounds/angkor_wat.jpg',
+        bavariaBg: 'images/backgrounds/bavaria.jpg',
+        tibetBg: 'images/backgrounds/tibet.jpg',
 
         // 瓦片地图
-        tileset: 'assets/images/tiles/tileset.png',
+        tileset: 'images/tiles/tileset.png',
       },
       audio: {
         // 背景音乐
-        mainTheme: 'assets/audio/music/main_theme.mp3',
-        angkorWatMusic: 'assets/audio/music/angkor_wat.mp3',
-        bavariaMusic: 'assets/audio/music/bavaria.mp3',
-        tibetMusic: 'assets/audio/music/tibet.mp3',
+        mainTheme: 'audio/music/main_theme.mp3',
+        angkorWatMusic: 'audio/music/angkor_wat.mp3',
+        bavariaMusic: 'audio/music/bavaria.mp3',
+        tibetMusic: 'audio/music/tibet.mp3',
 
         // 音效
-        collectDiamond: 'assets/audio/sfx/collect_diamond.wav',
-        useItem: 'assets/audio/sfx/use_item.wav',
-        enemyHit: 'assets/audio/sfx/enemy_hit.wav',
-        playerHurt: 'assets/audio/sfx/player_hurt.wav',
-        levelComplete: 'assets/audio/sfx/level_complete.wav',
-        gameOver: 'assets/audio/sfx/game_over.wav',
-        buttonClick: 'assets/audio/sfx/button_click.wav',
-        walk: 'assets/audio/sfx/walk.wav',
-        doorOpen: 'assets/audio/sfx/door_open.wav',
-        explosion: 'assets/audio/sfx/explosion.wav',
+        collectDiamond: 'audio/sfx/collect_diamond.wav',
+        useItem: 'audio/sfx/use_item.wav',
+        enemyHit: 'audio/sfx/enemy_hit.wav',
+        playerHurt: 'audio/sfx/player_hurt.wav',
+        levelComplete: 'audio/sfx/level_complete.wav',
+        gameOver: 'audio/sfx/game_over.wav',
+        buttonClick: 'audio/sfx/button_click.wav',
+        walk: 'audio/sfx/walk.wav',
+        doorOpen: 'audio/sfx/door_open.wav',
+        explosion: 'audio/sfx/explosion.wav',
       },
     };
   }

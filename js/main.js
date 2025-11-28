@@ -6,6 +6,8 @@
 // 全局游戏引擎实例
 let gameEngine = null;
 
+import GameEngine from './engine/GameEngine.js';
+
 // 页面加载完成后初始化游戏
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('钻石狂潮游戏启动中...');
@@ -13,9 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     // 初始化游戏引擎
     await initializeGame();
-
-    // 设置UI事件监听
-    setupUIEvents();
 
     // 启动游戏
     gameEngine.start();
@@ -26,6 +25,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     showErrorMessage('游戏启动失败，请刷新页面重试。');
   }
 });
+
+// 设置UI事件监听 (无论游戏是否成功初始化，都应该设置UI事件)
+setupUIEvents();
 
 /**
  * 初始化游戏
