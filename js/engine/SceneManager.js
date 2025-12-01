@@ -176,6 +176,7 @@ class SceneManager {
    * @private
    */
   async _fadeTransition(newScene, duration) {
+    console.log(	'_fadeTransition: 开始	');
     return new Promise(resolve => {
       const canvas = document.getElementById('game-canvas');
       if (!canvas) {
@@ -211,6 +212,7 @@ class SceneManager {
         if (progress < 1) {
           requestAnimationFrame(fadeStep);
         } else {
+          console.log(	'_fadeTransition: 完成	');
           resolve();
         }
       };
@@ -264,6 +266,7 @@ class SceneManager {
         if (progress < 1) {
           requestAnimationFrame(slideStep);
         } else {
+          console.log(	'_fadeTransition: 完成	');
           resolve();
         }
       };
