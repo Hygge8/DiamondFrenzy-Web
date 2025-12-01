@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 设置UI事件监听
   setupUIEvents();
+  setupSettingsEvents(); // <-- 确保在 DOMContentLoaded 内部调用
 
   try {
     // 初始化游戏引擎
@@ -77,7 +78,6 @@ function setupUIEvents() {
 
   // 设置界面
   document.getElementById('back-to-menu-settings').addEventListener('click', showMainMenu);
-  setupSettingsEvents();
 
   // 帮助界面
   document.getElementById('back-to-menu-help').addEventListener('click', showMainMenu);
@@ -115,28 +115,34 @@ function setupSettingsEvents() {
   const sfxVolumeValue = document.getElementById('sfx-volume-value');
 
   // 音乐音量
-  musicVolume.addEventListener('input', e => {
-    const value = e.target.value;
-    musicVolumeValue.textContent = value + '%';
-    if (gameEngine && gameEngine.audioManager) {
-      gameEngine.audioManager.setMusicVolume(value / 100);
-    }
-  });
+  if (musicVolume) {
+    musicVolume.addEventListener('input', e => {
+      const value = e.target.value;
+      musicVolumeValue.textContent = value + '%';
+      if (gameEngine && gameEngine.audioManager) {
+        gameEngine.audioManager.setMusicVolume(value / 100);
+      }
+    });
+  }
 
   // 音效音量
-  sfxVolume.addEventListener('input', e => {
-    const value = e.target.value;
-    sfxVolumeValue.textContent = value + '%';
-    if (gameEngine && gameEngine.audioManager) {
-      gameEngine.audioManager.setSFXVolume(value / 100);
-    }
-  });
+  if (sfxVolume) {
+    sfxVolume.addEventListener('input', e => {
+      const value = e.target.value;
+      sfxVolumeValue.textContent = value + '%';
+      if (gameEngine && gameEngine.audioManager) {
+        gameEngine.audioManager.setSFXVolume(value / 100);
+      }
+    });
+  }
 
   // 难度设置
-  difficulty.addEventListener('change', e => {
-    // 这里可以保存难度设置到本地存储
-    console.log('难度设置为:', e.target.value);
-  });
+  if (difficulty) {
+    difficulty.addEventListener('change', e => {
+      // 这里可以保存难度设置到本地存储
+      console.log('难度设置为:', e.target.value);
+    });
+  }
 }
 
 /**
