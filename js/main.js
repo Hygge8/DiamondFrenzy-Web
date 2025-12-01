@@ -12,6 +12,9 @@ import GameEngine from './engine/GameEngine.js';
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('钻石狂潮游戏启动中...');
 
+  // 设置UI事件监听
+  setupUIEvents();
+
   try {
     // 初始化游戏引擎
     await initializeGame();
@@ -24,9 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('游戏启动失败:', error);
     showErrorMessage('游戏启动失败，请刷新页面重试。');
   }
-
-  // 设置UI事件监听
-  setupUIEvents();
 });
 
 
