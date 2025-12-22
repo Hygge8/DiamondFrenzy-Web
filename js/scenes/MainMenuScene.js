@@ -1,6 +1,8 @@
 /**
  * 主菜单场景
  */
+const Scene = require('../engine/Scene');
+
 class MainMenuScene extends Scene {
   constructor(gameEngine) {
     super();
@@ -51,3 +53,5 @@ class MainMenuScene extends Scene {
     console.log('MainMenuScene: 销毁');
   }
 }
+
+module.exports = MainMenuScene;

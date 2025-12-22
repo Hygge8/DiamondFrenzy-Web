@@ -475,3 +475,5 @@ class AudioManager {
     };
   }
 }
+
+module.exports = AudioManager;

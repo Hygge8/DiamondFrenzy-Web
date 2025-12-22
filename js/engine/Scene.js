@@ -51,3 +51,5 @@ class Scene {
     // 响应式布局处理
   }
 }
+
+module.exports = Scene;

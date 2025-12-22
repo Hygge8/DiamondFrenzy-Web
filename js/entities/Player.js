@@ -2,6 +2,9 @@
  * 玩家类
  * 游戏中的玩家角色
  */
+const Entity = require('./Entity');
+const MathUtils = require('../utils/MathUtils');
+
 class Player extends Entity {
   constructor(x, y) {
     super(x, y, 32, 32);
@@ -651,3 +654,5 @@ class Player extends Entity {
     };
   }
 }
+
+module.exports = Player;

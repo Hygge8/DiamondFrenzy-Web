@@ -371,3 +371,5 @@ class EnemyManager {
     return { ...this.enemyConfigs };
   }
 }
+
+module.exports = EnemyManager;

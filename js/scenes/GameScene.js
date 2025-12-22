@@ -1,6 +1,8 @@
 /**
  * 游戏场景
  */
+const Scene = require('../engine/Scene');
+
 class GameScene extends Scene {
   constructor(gameEngine) {
     super();
@@ -43,3 +45,5 @@ class GameScene extends Scene {
     console.log('GameScene: 销毁');
   }
 }
+
+module.exports = GameScene;

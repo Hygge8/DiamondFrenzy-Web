@@ -539,3 +539,5 @@ class Entity {
     ctx.fillText(`${this.type}:${this.name}`, 5, 15);
   }
 }
+
+module.exports = Entity;

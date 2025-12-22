@@ -1,6 +1,8 @@
 /**
  * 设置场景
  */
+const Scene = require('../engine/Scene');
+
 class SettingsScene extends Scene {
   constructor(gameEngine) {
     super();
@@ -47,3 +49,5 @@ class SettingsScene extends Scene {
     console.log('SettingsScene: 销毁');
   }
 }
+
+module.exports = SettingsScene;

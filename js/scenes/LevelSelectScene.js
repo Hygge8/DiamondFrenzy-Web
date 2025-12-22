@@ -1,6 +1,8 @@
 /**
  * 关卡选择场景
  */
+const Scene = require('../engine/Scene');
+
 class LevelSelectScene extends Scene {
   constructor(gameEngine) {
     super();
@@ -47,3 +49,5 @@ class LevelSelectScene extends Scene {
     console.log('LevelSelectScene: 销毁');
   }
 }
+
+module.exports = LevelSelectScene;

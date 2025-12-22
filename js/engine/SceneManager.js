@@ -458,3 +458,5 @@ class Scene {
     this.isActive = true;
   }
 }
+
+module.exports = SceneManager;

@@ -2,6 +2,9 @@
  * 道具基类
  * 游戏中的各种道具
  */
+const Entity = require('./Entity');
+const MathUtils = require('../utils/MathUtils');
+
 class Item extends Entity {
   constructor(x, y, type, name) {
     super(x, y, 24, 24);
@@ -432,3 +435,5 @@ class Item extends Entity {
     return cloned;
   }
 }
+
+module.exports = Item;

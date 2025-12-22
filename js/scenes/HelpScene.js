@@ -1,6 +1,8 @@
 /**
  * 帮助场景
  */
+const Scene = require('../engine/Scene');
+
 class HelpScene extends Scene {
   constructor(gameEngine) {
     super();
@@ -47,3 +49,5 @@ class HelpScene extends Scene {
     console.log('HelpScene: 销毁');
   }
 }
+
+module.exports = HelpScene;

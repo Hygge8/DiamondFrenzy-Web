@@ -2,6 +2,11 @@
  * 关卡管理器
  * 负责管理游戏中的关卡加载、切换和进度
  */
+const Player = require('../entities/Player');
+const Diamond = require('../entities/Diamond');
+const Obstacle = require('../entities/Obstacle');
+const Item = require('../entities/Item');
+
 class LevelManager {
   constructor() {
     this.currentLevel = null;
@@ -335,14 +340,11 @@ class LevelManager {
 
     // 创建道具
     this.currentLevel.items.forEach(itemData => {
-      const item = this._createItem(itemData);
-      if (item) {
-        item.init();
-        this.items.push(item);
-        this.entities.push(item);
-      }
+      const item = new Item(itemData.x, itemData.y, itemData.type);
+      item.init();
+      this.items.push(item);
+      this.entities.push(item);
     });
-  }
 
   /**
    * 创建敌人
@@ -755,3 +757,5 @@ class LevelManager {
     }));
   }
 }
+
+module.exports = LevelManager;

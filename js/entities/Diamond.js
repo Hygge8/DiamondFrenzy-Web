@@ -2,6 +2,9 @@
  * 钻石类
  * 游戏中的收集物品
  */
+const Entity = require('./Entity');
+const MathUtils = require('../utils/MathUtils');
+
 class Diamond extends Entity {
   constructor(x, y, value = 10) {
     super(x, y, 24, 24);
@@ -372,3 +375,5 @@ class Particle extends Entity {
     ctx.restore();
   }
 }
+
+module.exports = Diamond;

@@ -2,6 +2,8 @@
  * 障碍物类
  * 游戏中的各种障碍物和机关
  */
+const Entity = require('./Entity');
+
 class Obstacle extends Entity {
   constructor(x, y, width, height, type = 'rock') {
     super(x, y, width, height);
@@ -676,3 +678,5 @@ class Obstacle extends Entity {
     };
   }
 }
+
+module.exports = Obstacle;

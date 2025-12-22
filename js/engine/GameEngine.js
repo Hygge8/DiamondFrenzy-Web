@@ -2,6 +2,21 @@
  * 游戏引擎
  * 整个游戏的核心引擎，负责游戏循环、资源管理、场景切换等
  */
+// 模块导入（在浏览器环境中，这些类应该通过 <script> 标签全局可用）
+// const AssetManager = require('./AssetManager');
+// const InputManager = require('./InputManager');
+// const AudioManager = require('./AudioManager');
+// const SceneManager = require('./SceneManager');
+// const LevelManager = require('../systems/LevelManager');
+// const EnemyManager = require('../systems/EnemyManager');
+
+// 场景类
+// const MainMenuScene = require('../scenes/MainMenuScene');
+// const GameScene = require('../scenes/GameScene');
+// const LevelSelectScene = require('../scenes/LevelSelectScene');
+// const SettingsScene = require('../scenes/SettingsScene');
+// const HelpScene = require('../scenes/HelpScene');
+
 class GameEngine {
   constructor(canvasId) {
     // 画布和上下文
@@ -19,7 +34,7 @@ class GameEngine {
     this.assetManager = new AssetManager();
     this.inputManager = new InputManager();
     this.audioManager = new AudioManager();
-    // this.sceneManager = new SceneManager(); // 延迟初始化
+    this.sceneManager = new SceneManager(); // 立即初始化
 
     // 游戏系统管理器
     this.levelManager = new LevelManager();
@@ -392,11 +407,10 @@ class GameEngine {
    */
   async _initGameSystems() {
     // 初始化场景管理器
-    this.sceneManager = new SceneManager();
     this.sceneManager.setSceneChangeCallback(this._onSceneChange.bind(this));
 
-    // 初始化敌人管理器
-    this.enemyManager.init(this.assetManager);
+    // 初始化音频管理器
+    this.audioManager.init(this.assetManager);
 
     // 初始化关卡管理器
     this.levelManager.initEnemyManager(this.enemyManager);
@@ -624,3 +638,5 @@ class GameEngine {
 }
 
 
+
+// module.exports = GameEngine;

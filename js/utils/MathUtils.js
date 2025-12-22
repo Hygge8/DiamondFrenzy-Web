@@ -246,3 +246,5 @@ class MathUtils {
     return { x: v.x * scalar, y: v.y * scalar };
   }
 }
+
+module.exports = MathUtils;

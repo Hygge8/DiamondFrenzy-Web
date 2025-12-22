@@ -2,7 +2,10 @@
  * 敌人基类
  * 游戏中的所有敌人的基类
  */
-export default class Enemy {
+const Entity = require('../Entity');
+const MathUtils = require('../../utils/MathUtils');
+
+class Enemy extends Entity {
   constructor(x, y) {
     // 基础属性
     this.x = x;
@@ -374,3 +377,5 @@ export default class Enemy {
     };
   }
 }
+
+module.exports = Enemy;
