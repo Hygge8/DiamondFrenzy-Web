@@ -427,9 +427,6 @@ class GameEngine {
     // 初始化场景管理器
     this.sceneManager.setSceneChangeCallback(this._onSceneChange.bind(this));
 
-    // 【新增】初始化音频管理器
-    this.audioManager.init(this.assetManager);
-
     // 初始化音频管理器
     this.audioManager.init(this.assetManager);
 
