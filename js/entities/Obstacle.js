@@ -2,7 +2,7 @@
  * 障碍物类
  * 游戏中的各种障碍物和机关
  */
-const Entity = require('./Entity');
+const Entity = window.Entity;
 
 class Obstacle extends Entity {
   constructor(x, y, width, height, type = 'rock') {

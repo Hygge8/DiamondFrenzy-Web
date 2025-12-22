@@ -460,3 +460,5 @@ class Scene {
 }
 
 window.SceneManager = SceneManager;
+
+window.Scene = Scene;

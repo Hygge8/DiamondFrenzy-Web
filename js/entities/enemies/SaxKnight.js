@@ -3,9 +3,9 @@
  * 通过"引落头顶岩石—砸击"的循环打法被克制
  * 玩家在其攻击后闪避，待岩石坠落再以岩石为武器
  */
-import Enemy from './Enemy.js';
+const Enemy = window.Enemy;
 
-export default class SaxKnight extends Enemy {
+class SaxKnight extends Enemy {
   constructor(x, y) {
     super(x, y);
 
@@ -596,3 +596,5 @@ export default class SaxKnight extends Enemy {
     };
   }
 }
+
+window.SaxKnight = SaxKnight;

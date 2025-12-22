@@ -1,7 +1,7 @@
 /**
  * 帮助场景
  */
-const Scene = require('../engine/Scene');
+const Scene = window.Scene;
 
 class HelpScene extends Scene {
   constructor(gameEngine) {

@@ -663,3 +663,5 @@ class InputManager {
 }
 
 window.InputManager = InputManager;
+
+window.InputManager = InputManager;

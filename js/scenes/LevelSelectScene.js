@@ -1,7 +1,7 @@
 /**
  * 关卡选择场景
  */
-const Scene = require('../engine/Scene');
+const Scene = window.Scene;
 
 class LevelSelectScene extends Scene {
   constructor(gameEngine) {

@@ -433,3 +433,5 @@ class StorageUtils {
     }
   }
 }
+
+window.StorageUtils = StorageUtils;

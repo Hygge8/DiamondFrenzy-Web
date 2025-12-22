@@ -759,3 +759,5 @@ class LevelManager {
 }
 
 window.LevelManager = LevelManager;
+
+window.LevelManager = LevelManager;

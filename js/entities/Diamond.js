@@ -2,8 +2,8 @@
  * 钻石类
  * 游戏中的收集物品
  */
-const Entity = require('./Entity');
-const MathUtils = require('../utils/MathUtils');
+const Entity = window.Entity;
+const MathUtils = window.MathUtils;
 
 class Diamond extends Entity {
   constructor(x, y, value = 10) {

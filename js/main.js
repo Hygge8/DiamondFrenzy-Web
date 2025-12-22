@@ -8,7 +8,7 @@ console.log('main.js script started');
 let gameEngine = null;
 
 // GameEngine 类现在通过 <script> 标签全局可用
-const GameEngine = window.GameEngine;
+
 
 // 页面加载完成后初始化游戏
 document.addEventListener('DOMContentLoaded', async () => {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function initializeGame() {
   // 创建游戏引擎
-  gameEngine = new GameEngine('game-canvas');
+  gameEngine = new window.GameEngine('game-canvas');
 
   // 设置引擎回调
   gameEngine.setInitCallback(onGameInit);
@@ -57,11 +57,16 @@ async function initializeGame() {
   // 设置关卡管理器回调
   // 注意：现在通过gameEngine.levelManager访问
 
-  // 初始化游戏引擎
-  await gameEngine.init({
-    loadAssets: true,
-    initialScene: 'mainMenu',
-  });
+    // 初始化游戏引擎
+    try {
+      await gameEngine.init({
+        loadAssets: true,
+        initialScene: 'mainMenu',
+      });
+    } catch (initError) {
+      console.error('GameEngine.init 失败:', initError);
+      throw initError; // 重新抛出错误，让外部捕获
+    }
 }
 
 /**
@@ -178,6 +183,11 @@ async function startGame() {
     console.log('startGame: 尝试切换到游戏场景...');
     await gameEngine.sceneManager.changeScene('game');
     console.log('startGame: 场景切换完成，开始显示游戏屏幕。');
+
+    // 确保游戏引擎已启动
+    if (!gameEngine.isRunning) {
+      gameEngine.start();
+    }
 
     // 隐藏所有屏幕，显示游戏屏幕
     hideAllScreens();

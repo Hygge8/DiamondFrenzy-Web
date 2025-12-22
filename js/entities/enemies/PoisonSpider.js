@@ -3,9 +3,9 @@
  * 可通过岩石砸击或冰冻后推压机关触发奖励
  * 与水下机关紧密相关，可被环境消灭
  */
-import Enemy from './Enemy.js';
+const Enemy = window.Enemy;
 
-export default class PoisonSpider extends Enemy {
+class PoisonSpider extends Enemy {
   constructor(x, y) {
     super(x, y);
 
@@ -569,3 +569,5 @@ export default class PoisonSpider extends Enemy {
     };
   }
 }
+
+window.PoisonSpider = PoisonSpider;
