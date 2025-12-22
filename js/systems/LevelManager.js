@@ -2,10 +2,10 @@
  * 关卡管理器
  * 负责管理游戏中的关卡加载、切换和进度
  */
-const Player = require('../entities/Player');
-const Diamond = require('../entities/Diamond');
-const Obstacle = require('../entities/Obstacle');
-const Item = require('../entities/Item');
+const Player = window.Player;
+const Diamond = window.Diamond;
+const Obstacle = window.Obstacle;
+const Item = window.Item;
 
 class LevelManager {
   constructor() {

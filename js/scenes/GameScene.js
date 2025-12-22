@@ -1,7 +1,7 @@
 /**
  * 游戏场景
  */
-const Scene = require('../engine/Scene');
+const Scene = window.Scene;
 
 class GameScene extends Scene {
   constructor(gameEngine) {

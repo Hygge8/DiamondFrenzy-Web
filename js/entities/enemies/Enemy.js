@@ -2,8 +2,8 @@
  * 敌人基类
  * 游戏中的所有敌人的基类
  */
-const Entity = require('../Entity');
-const MathUtils = require('../../utils/MathUtils');
+const Entity = window.Entity;
+const MathUtils = window.MathUtils;
 
 class Enemy extends Entity {
   constructor(x, y) {
