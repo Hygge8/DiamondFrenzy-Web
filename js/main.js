@@ -63,6 +63,10 @@ async function initializeGame() {
         loadAssets: true,
         initialScene: 'mainMenu',
       });
+
+      // 【新增】将 audioManager 暴露为全局变量，供 Player.js 等实体使用
+      window.audioManager = gameEngine.audioManager;
+
     } catch (initError) {
       console.error('GameEngine.init 失败:', initError);
       throw initError; // 重新抛出错误，让外部捕获
