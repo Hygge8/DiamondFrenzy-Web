@@ -400,6 +400,11 @@ class LevelManager {
 
     // 更新玩家
     if (this.player && this.player.isActive) {
+      // 【新增】必须先处理输入！
+      if (this.gameState && this.gameState.inputManager) {
+        this.player.handleInput(this.gameState.inputManager);
+      }
+      
       this.player.update(deltaTime);
     }
 
