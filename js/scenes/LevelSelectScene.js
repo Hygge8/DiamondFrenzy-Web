@@ -50,4 +50,4 @@ class LevelSelectScene extends Scene {
   }
 }
 
-module.exports = LevelSelectScene;
+window.LevelSelectScene = LevelSelectScene;

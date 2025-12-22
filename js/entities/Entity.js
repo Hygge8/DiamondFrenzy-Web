@@ -540,4 +540,4 @@ class Entity {
   }
 }
 
-module.exports = Entity;
+window.Entity = Entity;

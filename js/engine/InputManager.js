@@ -662,4 +662,4 @@ class InputManager {
   }
 }
 
-module.exports = InputManager;
+window.InputManager = InputManager;

@@ -459,4 +459,4 @@ class Scene {
   }
 }
 
-module.exports = SceneManager;
+window.SceneManager = SceneManager;

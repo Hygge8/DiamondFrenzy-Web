@@ -50,4 +50,4 @@ class HelpScene extends Scene {
   }
 }
 
-module.exports = HelpScene;
+window.HelpScene = HelpScene;

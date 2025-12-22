@@ -376,4 +376,4 @@ class Particle extends Entity {
   }
 }
 
-module.exports = Diamond;
+window.Diamond = Diamond;

@@ -436,4 +436,4 @@ class Item extends Entity {
   }
 }
 
-module.exports = Item;
+window.Item = Item;

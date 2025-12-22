@@ -2,11 +2,13 @@
  * 钻石狂潮游戏主入口
  * 游戏的主启动文件
  */
+console.log('main.js script started');
 
 // 全局游戏引擎实例
 let gameEngine = null;
 
-import GameEngine from './engine/GameEngine.js';
+// GameEngine 类现在通过 <script> 标签全局可用
+const GameEngine = window.GameEngine;
 
 // 页面加载完成后初始化游戏
 document.addEventListener('DOMContentLoaded', async () => {
@@ -25,8 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     console.log('游戏启动完成！');
   } catch (error) {
-    console.error('游戏启动失败:', error);
-    showErrorMessage('游戏启动失败，请刷新页面重试。');
+    console.error(\'游戏启动失败:\', error, error.stack);   showErrorMessage('游戏启动失败，请刷新页面重试。');
   }
 });
 

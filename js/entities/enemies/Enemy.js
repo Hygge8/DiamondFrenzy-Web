@@ -378,4 +378,4 @@ class Enemy extends Entity {
   }
 }
 
-module.exports = Enemy;
+window.Enemy = Enemy;

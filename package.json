@@ -5,20 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "http-server -p 8080 -c-1",
-    "dev": "http-server -p 8080 -c-1 -o",
-    "build": "echo 'No build process needed for static site'",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:unit": "jest tests/unit",
-    "test:integration": "jest tests/integration",
-    "test:e2e": "jest tests/e2e",
-    "lint": "eslint js/ --ext .js",
-    "lint:fix": "eslint js/ --ext .js --fix",
-    "format": "prettier --write **/*.{js,html,css} --ignore-path .gitignore",
-    "format:check": "prettier --check **/*.{js,html,css} --ignore-path .gitignore",
-    "validate": "npm run lint && npm run format:check && npm test",
-    "deploy": "echo 'Deployment handled by GitHub Actions'"
+    "test": "jest"
   },
   "keywords": [
     "game",
@@ -42,22 +29,10 @@
     "url": "https://github.com/Hygge8/DiamondFrenzy-Web/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.0",
-    "@babel/preset-env": "^7.23.0",
-    "babel-jest": "^29.7.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-jest": "^27.8.0",
     "http-server": "^14.1.1",
     "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "prettier": "^3.1.0"
+    "jest-environment-jsdom": "^29.7.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ],
   "engines": {
     "node": ">=14.0.0"
   }

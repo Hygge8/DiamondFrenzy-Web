@@ -372,4 +372,4 @@ class EnemyManager {
   }
 }
 
-module.exports = EnemyManager;
+window.EnemyManager = EnemyManager;

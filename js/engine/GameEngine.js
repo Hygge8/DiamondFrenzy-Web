@@ -3,6 +3,19 @@
  * 整个游戏的核心引擎，负责游戏循环、资源管理、场景切换等
  */
 // 模块导入（在浏览器环境中，这些类应该通过 <script> 标签全局可用）
+const AssetManager = window.AssetManager;
+const InputManager = window.InputManager;
+const AudioManager = window.AudioManager;
+const SceneManager = window.SceneManager;
+const LevelManager = window.LevelManager;
+const EnemyManager = window.EnemyManager;
+
+// 场景类
+const MainMenuScene = window.MainMenuScene;
+const GameScene = window.GameScene;
+const LevelSelectScene = window.LevelSelectScene;
+const SettingsScene = window.SettingsScene;
+const HelpScene = window.HelpScene;
 // const AssetManager = require('./AssetManager');
 // const InputManager = require('./InputManager');
 // const AudioManager = require('./AudioManager');
@@ -639,4 +652,4 @@ class GameEngine {
 
 
 
-// module.exports = GameEngine;
+window.GameEngine = GameEngine;

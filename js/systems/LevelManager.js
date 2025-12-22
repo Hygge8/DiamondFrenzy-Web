@@ -758,4 +758,4 @@ class LevelManager {
   }
 }
 
-module.exports = LevelManager;
+window.LevelManager = LevelManager;

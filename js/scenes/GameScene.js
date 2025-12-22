@@ -46,4 +46,4 @@ class GameScene extends Scene {
   }
 }
 
-module.exports = GameScene;
+window.GameScene = GameScene;

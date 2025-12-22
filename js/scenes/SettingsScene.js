@@ -50,4 +50,4 @@ class SettingsScene extends Scene {
   }
 }
 
-module.exports = SettingsScene;
+window.SettingsScene = SettingsScene;

@@ -132,7 +132,7 @@ class MathUtils {
    * @returns {boolean} 是否碰撞
    */
   static circleCollision(circle1, circle2) {
-    const distance = MathUtils.distance(circle1.x, circle1.y, circle2.x, circle2.y);
+    const distance = this.distance(circle1.x, circle1.y, circle2.x, circle2.y);
     return distance < circle1.radius + circle2.radius;
   }
 
@@ -211,7 +211,7 @@ class MathUtils {
    * @returns {Object} 归一化后的向量 {x, y}
    */
   static normalize(x, y) {
-    const length = MathUtils.vectorLength(x, y);
+    const length = this.vectorLength(x, y);
     if (length === 0) return { x: 0, y: 0 };
     return { x: x / length, y: y / length };
   }
@@ -247,4 +247,4 @@ class MathUtils {
   }
 }
 
-module.exports = MathUtils;
+window.MathUtils = MathUtils;

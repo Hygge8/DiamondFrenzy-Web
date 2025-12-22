@@ -679,4 +679,4 @@ class Obstacle extends Entity {
   }
 }
 
-module.exports = Obstacle;
+window.Obstacle = Obstacle;

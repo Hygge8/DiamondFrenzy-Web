@@ -476,4 +476,4 @@ class AudioManager {
   }
 }
 
-module.exports = AudioManager;
+window.AudioManager = AudioManager;

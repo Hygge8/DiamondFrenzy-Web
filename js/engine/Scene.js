@@ -52,4 +52,4 @@ class Scene {
   }
 }
 
-module.exports = Scene;
+window.Scene = Scene;

@@ -453,4 +453,4 @@ class AssetManager {
   }
 }
 
-module.exports = AssetManager;
+window.AssetManager = AssetManager;

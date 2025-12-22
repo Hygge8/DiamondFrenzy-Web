@@ -54,4 +54,4 @@ class MainMenuScene extends Scene {
   }
 }
 
-module.exports = MainMenuScene;
+window.MainMenuScene = MainMenuScene;

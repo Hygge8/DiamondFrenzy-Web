@@ -655,4 +655,4 @@ class Player extends Entity {
   }
 }
 
-module.exports = Player;
+window.Player = Player;
