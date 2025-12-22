@@ -16,14 +16,16 @@
 
 由于项目使用了 **JavaScript 类和模块**，为避免浏览器跨域限制（CORS），**必须**通过本地 Web 服务器运行，而不能直接双击 `index.html` 文件。
 
-### 步骤一：克隆项目
+### 方式一：使用 Node.js (推荐)
+
+#### 步骤一：克隆项目
 
 ```bash
 git clone https://github.com/Hygge8/DiamondFrenzy-Web.git
 cd DiamondFrenzy-Web
 ```
 
-### 步骤二：安装依赖
+#### 步骤二：安装依赖
 
 项目依赖 `http-server` 和 `jest` 进行本地服务和测试。
 
@@ -31,7 +33,7 @@ cd DiamondFrenzy-Web
 npm install
 ```
 
-### 步骤三：启动本地服务器
+#### 步骤三：启动本地服务器
 
 使用 `npm start` 脚本启动本地服务器。
 
@@ -41,7 +43,7 @@ npm start
 
 服务器启动后，在浏览器中访问显示的地址（通常是 `http://localhost:8080`）即可开始游戏。
 
-### 步骤四：运行测试
+#### 步骤四：运行测试
 
 项目包含单元测试，可以使用以下命令运行：
 
@@ -49,9 +51,38 @@ npm start
 npm test
 ```
 
-## 🎮 游戏简介与特色
+### 🐳 方式二：使用 Docker 部署 (推荐)
 
-钻石狂潮是一款经典的冒险解谜类游戏，玩家将扮演一名勇敢的探险家，在危机四伏的遗迹中探索、解谜、打怪，并收集钻石和宝藏。
+使用 Docker 可以将应用及其所有依赖项打包到一个标准化的单元中，实现快速、可靠和一致的部署。
+
+#### 第 1 步: 构建镜像
+
+在项目根目录下执行：
+
+```bash
+docker build -t diamond-frenzy-web .
+```
+
+#### 第 2 步: 运行容器
+
+将容器的 80 端口映射到本地的 8080 端口：
+
+```bash
+docker run -d -p 8080:80 --name diamond-frenzy diamond-frenzy-web
+```
+
+#### 第 3 步: 访问游戏
+
+在浏览器中访问 `http://localhost:8080` 即可开始游戏。
+
+#### 第 4 步: 停止和移除容器
+
+```bash
+docker stop diamond-frenzy
+docker rm diamond-frenzy
+```
+
+## 🎮 游戏简介与特色
 
 | 特色 | 描述 |
 | :--- | :--- |
