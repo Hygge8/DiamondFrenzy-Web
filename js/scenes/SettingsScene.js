@@ -1,7 +1,7 @@
 /**
  * 设置场景
  */
-const Scene = require('../engine/Scene');
+const Scene = window.Scene;
 
 class SettingsScene extends Scene {
   constructor(gameEngine) {

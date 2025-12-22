@@ -2,8 +2,8 @@
  * 道具基类
  * 游戏中的各种道具
  */
-const Entity = require('./Entity');
-const MathUtils = require('../utils/MathUtils');
+const Entity = window.Entity;
+const MathUtils = window.MathUtils;
 
 class Item extends Entity {
   constructor(x, y, type, name) {

@@ -1,7 +1,7 @@
 /**
  * 主菜单场景
  */
-const Scene = require('../engine/Scene');
+const Scene = window.Scene;
 
 class MainMenuScene extends Scene {
   constructor(gameEngine) {

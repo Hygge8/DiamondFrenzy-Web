@@ -3,9 +3,9 @@
  * 对所有工具与武器免疫，无法直接击杀
  * 必须借助环境陷阱，典型做法是推动岩石砸击或等待其进入特定路径后以坠落岩石消灭
  */
-import Enemy from './Enemy.js';
+const Enemy = window.Enemy;
 
-export default class RedSnake extends Enemy {
+class RedSnake extends Enemy {
   constructor(x, y) {
     super(x, y);
 
@@ -459,3 +459,5 @@ export default class RedSnake extends Enemy {
     };
   }
 }
+
+window.RedSnake = RedSnake;

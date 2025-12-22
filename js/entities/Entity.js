@@ -541,3 +541,5 @@ class Entity {
 }
 
 window.Entity = Entity;
+
+window.Entity = Entity;

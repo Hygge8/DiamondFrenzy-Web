@@ -167,12 +167,17 @@ class GameEngine {
 
     console.log('启动游戏引擎...');
 
-    this.isRunning = true;
-    this.isPaused = false;
-    this.lastTime = performance.now();
+    try {
+      this.isRunning = true;
+      this.isPaused = false;
+      this.lastTime = performance.now();
 
-    // 开始游戏循环
-    this._gameLoop();
+      // 开始游戏循环
+      this._gameLoop();
+    } catch (e) {
+      console.error('游戏引擎启动失败:', e);
+      this.isRunning = false;
+    }
   }
 
   /**
@@ -651,5 +656,7 @@ class GameEngine {
 }
 
 
+
+window.GameEngine = GameEngine;
 
 window.GameEngine = GameEngine;

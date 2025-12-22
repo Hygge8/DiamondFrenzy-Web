@@ -310,3 +310,5 @@ class StringUtils {
     return [...str].slice(start, end).join('');
   }
 }
+
+window.StringUtils = StringUtils;
