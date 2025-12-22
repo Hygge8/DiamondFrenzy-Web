@@ -540,30 +540,30 @@ class LevelManager {
    * @private
    */
   _completeLevel() {
+    if (thi  _failLevel() {
     if (this.isLevelCompleted) return;
 
     this.isLevelCompleted = true;
 
-    // 播放完成音效
-    if (audioManager) {
-      audioManager.playSFX('level_complete.wav', 0.8);
+    // 播放失败音效
+    if (this.gameState && this.gameState.audioManager) {
+      this.gameState.audioManager.playSFX('level_fail.wav', 0.8);
     }
 
-    // 触发完成回调
-    if (this.onLevelComplete) {
-      this.onLevelComplete({
+    // 触发回调
+    if (this.onLevelFail) {
+      this.onLevelFail({
         level: this.currentLevel,
-        score: this.player.score,
         time: this.levelElapsedTime,
+        score: this.player.score,
         diamonds: this.player.diamondsCollected,
       });
     }
 
-    console.log('关卡完成！');
-  }
-
-  /**
-   * 失败关卡
+    // 清理关卡
+    this._clearCurrentLevel();
+  }  this._clearCurrentLevel();
+  }关卡
    * @private
    */
   _failLevel() {
