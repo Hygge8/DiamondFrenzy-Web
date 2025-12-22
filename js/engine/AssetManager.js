@@ -18,7 +18,7 @@ class AssetManager {
     this.resourcePaths = {
       images: {
         // 玩家和角色精灵
-        pplayer: 'assets/images/sprites/player.png',.png',
+        player: 'assets/images/sprites/player.png',
         playerWalk: 'assets/images/sprites/player_walk.png',
         playerIdle: 'assets/images/sprites/player_idle.png',
 
