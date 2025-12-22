@@ -117,7 +117,18 @@ class AssetManager {
     this.totalResources = this._countTotalResources();
 
     try {
-      await Promise.all([this.loadImages(), this.loadAudio(), this.loadFonts()]);
+      // 收集所有加载 Promise
+      const loadPromises = [this.loadImages(), this.loadAudio(), this.loadFonts()];
+
+      // 使用 Promise.allSettled 确保所有资源都尝试加载，即使失败也不中断
+      const results = await Promise.allSettled(loadPromises);
+
+      // 检查是否有加载失败的资源
+      const rejected = results.filter(r => r.status === 'rejected');
+      if (rejected.length > 0) {
+        console.error('部分资源加载失败:', rejected);
+        // 即使部分失败，也继续执行，因为 loadImage/loadAudioClip 已经处理了失败（创建占位/空对象）
+      }
 
       this._notifyProgress(100);
       this._notifyComplete();
