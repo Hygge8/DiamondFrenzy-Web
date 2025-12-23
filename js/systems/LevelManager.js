@@ -545,39 +545,46 @@ class LevelManager {
    * @private
    */
   _completeLevel() {
-    if (thi  _failLevel() {
     if (this.isLevelCompleted) return;
 
     this.isLevelCompleted = true;
 
-    // 播放失败音效
-    if (this.gameState && this.gameState.audioManager) {
-      this.gameState.audioManager.playSFX('level_fail.wav', 0.8);
+    // 播放完成音效
+    if (window.audioManager) { // 也可以用 this.gameState.audioManager
+      window.audioManager.playSFX('level_complete.wav', 0.8);
     }
 
-    // 触发回调
-    if (this.onLevelFail) {
-      this.onLevelFail({
+    // 触发完成回调
+    if (this.onLevelComplete) {
+      this.onLevelComplete({
         level: this.currentLevel,
-        time: this.levelElapsedTime,
         score: this.player.score,
+        time: this.levelElapsedTime,
         diamonds: this.player.diamondsCollected,
       });
     }
 
-    // 清理关卡
-    this._clearCurrentLevel();
-  }  this._clearCurrentLevel();
-  }关卡
+    console.log('关卡完成！');
+  }
+
+  /**
+   * 失败关卡
    * @private
    */
   _failLevel() {
+    if (this.isLevelCompleted) return; // 防止重复触发
+
     // 触发失败回调
     if (this.onLevelFail) {
       this.onLevelFail({
         level: this.currentLevel,
         reason: 'time_limit',
       });
+    }
+    
+    // 播放失败音效
+    if (window.audioManager) {
+        window.audioManager.playSFX('game_over.wav', 0.8);
     }
 
     console.log('关卡失败：时间用完');
