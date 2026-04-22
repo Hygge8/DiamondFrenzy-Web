@@ -7,12 +7,7 @@ module.exports = {
 
   // 测试覆盖率配置
   collectCoverage: true,
-  collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*.test.js',
-    '!src/**/*.spec.js',
-    '!src/**/node_modules/**',
-  ],
+  collectCoverageFrom: ['js/**/*.js', '!js/**/*.test.js', '!js/**/*.spec.js', '!js/**/node_modules/**'],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
   coverageThreshold: {
@@ -25,21 +20,22 @@ module.exports = {
   },
 
   // 模块路径映射
-  moduleNameMapping: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/js/$1',
     '^@tests/(.*)$': '<rootDir>/tests/$1',
   },
 
   // 忽略的文件
   testPathIgnorePatterns: ['/node_modules/', '/dist/', '/build/'],
 
-  // 转换配置
-  transform: {
-    '^.+\\.js$': 'babel-jest',
-  },
-
   // 设置文件
   setupFilesAfterEnv: ['<rootDir>/tests/test-config.js'],
+
+  // 禁用默认 Babel 转换（当前环境缺少 preset 依赖）
+  transform: {},
+
+  // 使用 V8 覆盖率，避免走 Babel 插桩
+  coverageProvider: 'v8',
 
   // 模拟文件
   moduleFileExtensions: ['js', 'json', 'html'],
