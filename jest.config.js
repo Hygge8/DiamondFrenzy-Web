@@ -8,10 +8,10 @@ module.exports = {
   // 测试覆盖率配置
   collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*.test.js',
-    '!src/**/*.spec.js',
-    '!src/**/node_modules/**',
+    'js/**/*.js',
+    '!js/**/*.test.js',
+    '!js/**/*.spec.js',
+    '!js/**/node_modules/**',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
@@ -25,8 +25,8 @@ module.exports = {
   },
 
   // 模块路径映射
-  moduleNameMapping: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/js/$1',
     '^@tests/(.*)$': '<rootDir>/tests/$1',
   },
 
