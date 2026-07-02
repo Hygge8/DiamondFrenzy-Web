@@ -1,11 +1,12 @@
+(function () {
 /**
  * 关卡管理器
  * 负责管理游戏中的关卡加载、切换和进度
  */
-const Player = window.Player;
-const Diamond = window.Diamond;
-const Obstacle = window.Obstacle;
-const Item = window.Item;
+var Player = window.Player;
+var Diamond = window.Diamond;
+var Obstacle = window.Obstacle;
+var Item = window.Item;
 
 class LevelManager {
   constructor() {
@@ -345,6 +346,7 @@ class LevelManager {
       this.items.push(item);
       this.entities.push(item);
     });
+  }
 
   /**
    * 创建敌人
@@ -628,6 +630,72 @@ class LevelManager {
    * 清理当前关卡
    * @private
    */
+  /**
+   * Return simple object groups used by enemy AI. Systems that are not built yet
+   * intentionally return an empty list so optional behavior does not break play.
+   */
+  getObjectsByType(type) {
+    if (!type) return [];
+
+    if (type === 'diamond') {
+      return this.diamonds.filter(diamond => !diamond.isCollected && !diamond.isDead);
+    }
+
+    if (type === 'enemy') {
+      return this.enemies.filter(enemy => enemy.isActive && !enemy.isDead);
+    }
+
+    if (type === 'item') {
+      return this.items.filter(item => item.isActive && !item.isDead);
+    }
+
+    const supportedObstacleTypes = new Set([
+      'door',
+      'fire',
+      'ice',
+      'pressure_plate',
+      'spikes',
+      'switch',
+      'web',
+    ]);
+
+    if (supportedObstacleTypes.has(type)) {
+      return this.obstacles.filter(
+        obstacle => obstacle.isActive && !obstacle.isDead && obstacle.obstacleType === type
+      );
+    }
+
+    return [];
+  }
+
+  getGrappleTargets(player, range) {
+    return [...this.items, ...this.diamonds].filter(target => {
+      return target.isActive && !target.isDead && player.getDistance(target) <= range;
+    });
+  }
+
+  getEnemiesInRange(area) {
+    return this.enemies.filter(enemy => {
+      return enemy.isActive && !enemy.isDead && MathUtils.rectCollision(enemy.getBounds(), area);
+    });
+  }
+
+  getObstaclesInRange(area) {
+    return this.obstacles.filter(obstacle => {
+      return obstacle.isActive && !obstacle.isDead && MathUtils.rectCollision(obstacle.getBounds(), area);
+    });
+  }
+
+  addReward(reward) {
+    if (!reward) return null;
+
+    const item = new Item(reward.x, reward.y, reward.type || 'gem_bag');
+    item.init();
+    this.items.push(item);
+    this.entities.push(item);
+    return item;
+  }
+
   _clearCurrentLevel() {
     // 清理所有实体
     this.entities = [];
@@ -773,3 +841,4 @@ class LevelManager {
 window.LevelManager = LevelManager;
 
 window.LevelManager = LevelManager;
+})();

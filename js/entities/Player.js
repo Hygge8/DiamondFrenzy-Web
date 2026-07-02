@@ -1,9 +1,10 @@
+(function () {
 /**
  * 玩家类
  * 游戏中的玩家角色
  */
-const Entity = window.Entity;
-const MathUtils = window.MathUtils;
+var Entity = window.Entity;
+var MathUtils = window.MathUtils;
 
 class Player extends Entity {
   constructor(x, y) {
@@ -656,3 +657,4 @@ class Player extends Entity {
 }
 
 window.Player = Player;
+})();

@@ -1,3 +1,4 @@
+(function () {
 /**
  * 音频管理器
  * 负责管理游戏中的所有音频播放，包括背景音乐和音效
@@ -141,6 +142,11 @@ class AudioManager {
 
     await this.resumeContext();
 
+    if (!this.assetManager) {
+      console.warn(`音频资源管理器未就绪: ${audioName}`);
+      return;
+    }
+
     const audio = this.assetManager.getAudio(audioName);
     if (!audio) {
       console.warn(`音频未找到: ${audioName}`);
@@ -215,6 +221,11 @@ class AudioManager {
 
     await this.resumeContext();
 
+    if (!this.assetManager) {
+      console.warn(`音频资源管理器未就绪: ${audioName}`);
+      return;
+    }
+
     const audio = this.assetManager.getAudio(audioName);
     if (!audio) {
       console.warn(`音效未找到: ${audioName}`);
@@ -254,6 +265,10 @@ class AudioManager {
       console.warn(`音效播放失败: ${audioName}`, error);
       this.activeSFX.delete(audioClone);
     }
+  }
+
+  playSound(audioName, volume = null) {
+    return this.playSFX(audioName, volume);
   }
 
   /**
@@ -477,3 +492,4 @@ class AudioManager {
 }
 
 window.AudioManager = AudioManager;
+})();

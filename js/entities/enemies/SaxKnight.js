@@ -1,9 +1,10 @@
+(function () {
 /**
  * 萨克斯骑士类 - 巴伐利亚地牢世界的Boss敌人
  * 通过"引落头顶岩石—砸击"的循环打法被克制
  * 玩家在其攻击后闪避，待岩石坠落再以岩石为武器
  */
-const Enemy = window.Enemy;
+var Enemy = window.Enemy;
 
 class SaxKnight extends Enemy {
   constructor(x, y) {
@@ -598,3 +599,4 @@ class SaxKnight extends Enemy {
 }
 
 window.SaxKnight = SaxKnight;
+})();

@@ -1,3 +1,4 @@
+(function () {
 /**
  * 资源管理器
  * 负责加载和管理游戏中的所有资源（图片、音频、字体等）
@@ -465,3 +466,4 @@ class AssetManager {
 }
 
 window.AssetManager = AssetManager;
+})();

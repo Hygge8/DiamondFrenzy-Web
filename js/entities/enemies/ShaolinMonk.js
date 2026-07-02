@@ -1,10 +1,11 @@
+(function () {
 /**
  * 少林弟子类 - 西藏雪洞世界的远程攻击敌人
  * 以四向飞标投射为主要攻击方式
  * 可通过快速移动让两名弟子互相投掷飞标，或击落其头顶岩石实现击杀
  * 可被冰冻后推送至特定机关
  */
-const Enemy = window.Enemy;
+var Enemy = window.Enemy;
 
 class ShaolinMonk extends Enemy {
   constructor(x, y) {
@@ -493,3 +494,4 @@ class ShaolinMonk extends Enemy {
 }
 
 window.ShaolinMonk = ShaolinMonk;
+})();

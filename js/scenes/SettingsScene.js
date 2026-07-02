@@ -1,7 +1,8 @@
+(function () {
 /**
  * 设置场景
  */
-const Scene = window.Scene;
+var Scene = window.Scene;
 
 class SettingsScene extends Scene {
   constructor(gameEngine) {
@@ -51,3 +52,4 @@ class SettingsScene extends Scene {
 }
 
 window.SettingsScene = SettingsScene;
+})();

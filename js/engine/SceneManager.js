@@ -1,3 +1,4 @@
+(function () {
 /**
  * 场景管理器
  * 负责管理游戏中的不同场景（菜单、游戏、设置等）
@@ -462,3 +463,4 @@ class Scene {
 window.SceneManager = SceneManager;
 
 window.Scene = Scene;
+})();

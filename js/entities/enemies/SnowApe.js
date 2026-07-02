@@ -1,9 +1,10 @@
+(function () {
 /**
  * 雪猿类 - 西藏雪洞世界的追踪型敌人
  * 具追踪AI，会从冰块中释放并主动跟随玩家位置
  * 可被冰锥下落、瓦缸浮起、风力托举岩石、岩石坠落、与少林弟子互相伤害等手段克制
  */
-const Enemy = window.Enemy;
+var Enemy = window.Enemy;
 
 class SnowApe extends Enemy {
   constructor(x, y) {
@@ -325,3 +326,4 @@ class SnowApe extends Enemy {
 }
 
 window.SnowApe = SnowApe;
+})();

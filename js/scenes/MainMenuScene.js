@@ -1,7 +1,8 @@
+(function () {
 /**
  * 主菜单场景
  */
-const Scene = window.Scene;
+var Scene = window.Scene;
 
 class MainMenuScene extends Scene {
   constructor(gameEngine) {
@@ -55,3 +56,4 @@ class MainMenuScene extends Scene {
 }
 
 window.MainMenuScene = MainMenuScene;
+})();

@@ -1,3 +1,4 @@
+(function () {
 /**
  * 指南针道具
  */
@@ -187,3 +188,4 @@ class GemBag extends Item {
     return true;
   }
 }
+})();

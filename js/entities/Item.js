@@ -1,15 +1,17 @@
+(function () {
 /**
  * 道具基类
  * 游戏中的各种道具
  */
-const Entity = window.Entity;
-const MathUtils = window.MathUtils;
+var Entity = window.Entity;
+var MathUtils = window.MathUtils;
 
 class Item extends Entity {
   constructor(x, y, type, name) {
     super(x, y, 24, 24);
 
-    this.type = 'item';
+    this.entityType = 'item';
+    this.type = type;
     this.itemType = type;
     this.name = name;
 
@@ -437,3 +439,4 @@ class Item extends Entity {
 }
 
 window.Item = Item;
+})();

@@ -1,3 +1,4 @@
+(function () {
 /**
  * 字符串工具类
  * 提供字符串处理的常用函数
@@ -312,3 +313,4 @@ class StringUtils {
 }
 
 window.StringUtils = StringUtils;
+})();

@@ -1,7 +1,8 @@
+(function () {
 /**
  * 游戏场景
  */
-const Scene = window.Scene;
+var Scene = window.Scene;
 
 class GameScene extends Scene {
   constructor(gameEngine) {
@@ -47,3 +48,4 @@ class GameScene extends Scene {
 }
 
 window.GameScene = GameScene;
+})();

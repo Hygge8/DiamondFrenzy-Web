@@ -1,3 +1,4 @@
+(function () {
 /**
  * 场景基类
  * 所有游戏场景都应该继承自这个类
@@ -53,3 +54,4 @@ class Scene {
 }
 
 window.Scene = Scene;
+})();

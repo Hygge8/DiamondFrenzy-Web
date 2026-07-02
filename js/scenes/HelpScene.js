@@ -1,7 +1,8 @@
+(function () {
 /**
  * 帮助场景
  */
-const Scene = window.Scene;
+var Scene = window.Scene;
 
 class HelpScene extends Scene {
   constructor(gameEngine) {
@@ -51,3 +52,4 @@ class HelpScene extends Scene {
 }
 
 window.HelpScene = HelpScene;
+})();

@@ -1,8 +1,9 @@
+(function () {
 /**
  * 障碍物类
  * 游戏中的各种障碍物和机关
  */
-const Entity = window.Entity;
+var Entity = window.Entity;
 
 class Obstacle extends Entity {
   constructor(x, y, width, height, type = 'rock') {
@@ -643,6 +644,10 @@ class Obstacle extends Entity {
    * @private
    */
   _updateAnimation(deltaTime) {
+    if (!this.isAnimating || !this.animationFrames || this.animationFrames.length === 0) {
+      return;
+    }
+
     this.animationTimer += deltaTime;
 
     if (this.animationTimer >= this.animationSpeed) {
@@ -680,3 +685,4 @@ class Obstacle extends Entity {
 }
 
 window.Obstacle = Obstacle;
+})();

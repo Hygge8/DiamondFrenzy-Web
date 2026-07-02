@@ -1,21 +1,22 @@
+(function () {
 /**
  * 游戏引擎
  * 整个游戏的核心引擎，负责游戏循环、资源管理、场景切换等
  */
 // 模块导入（在浏览器环境中，这些类应该通过 <script> 标签全局可用）
-const AssetManager = window.AssetManager;
-const InputManager = window.InputManager;
-const AudioManager = window.AudioManager;
-const SceneManager = window.SceneManager;
-const LevelManager = window.LevelManager;
-const EnemyManager = window.EnemyManager;
+var AssetManager = window.AssetManager;
+var InputManager = window.InputManager;
+var AudioManager = window.AudioManager;
+var SceneManager = window.SceneManager;
+var LevelManager = window.LevelManager;
+var EnemyManager = window.EnemyManager;
 
 // 场景类
-const MainMenuScene = window.MainMenuScene;
-const GameScene = window.GameScene;
-const LevelSelectScene = window.LevelSelectScene;
-const SettingsScene = window.SettingsScene;
-const HelpScene = window.HelpScene;
+var MainMenuScene = window.MainMenuScene;
+var GameScene = window.GameScene;
+var LevelSelectScene = window.LevelSelectScene;
+var SettingsScene = window.SettingsScene;
+var HelpScene = window.HelpScene;
 // const AssetManager = require('./AssetManager');
 // const InputManager = require('./InputManager');
 // const AudioManager = require('./AudioManager');
@@ -361,6 +362,9 @@ class GameEngine {
       fps: this.fps,
       frameCount: this.frameCount,
       deltaTime: this.deltaTime,
+      debugMode: this.debugMode,
+      player: this.levelManager?.player || null,
+      level: this.levelManager || null,
       levelManager: this.levelManager,
       enemyManager: this.enemyManager,
       audioManager: this.audioManager,
@@ -601,6 +605,10 @@ class GameEngine {
     // 更新场景管理器
     this.sceneManager.update(this.deltaTime);
 
+    const gameState = this.getGameState();
+    this.levelManager.setGameState(gameState);
+    this.enemyManager.setGameState(gameState);
+
     // 更新关卡管理器
     this.levelManager.update(this.deltaTime);
 
@@ -638,6 +646,49 @@ class GameEngine {
     }
   }
 
+  _onSceneChange(previousScene, currentScene) {
+    console.log('Scene changed:', previousScene?.name || 'none', '->', currentScene?.name || 'none');
+  }
+
+  _updateFPS() {
+    this.frameCount++;
+    const now = performance.now();
+
+    if (!this.fpsUpdateTime) {
+      this.fpsUpdateTime = now;
+      return;
+    }
+
+    const elapsed = now - this.fpsUpdateTime;
+    if (elapsed >= 1000) {
+      this.fps = Math.round((this.frameCount * 1000) / elapsed);
+      this.frameCount = 0;
+      this.fpsUpdateTime = now;
+    }
+  }
+
+  _renderDebugInfo() {
+    this.ctx.save();
+    this.ctx.fillStyle = '#ffffff';
+    this.ctx.font = '12px monospace';
+    this.ctx.textAlign = 'left';
+    this.ctx.fillText(`FPS: ${this.fps}`, 10, 16);
+    this.ctx.fillText(`Scene: ${this.sceneManager.getCurrentScene()?.name || 'none'}`, 10, 32);
+    this.ctx.restore();
+  }
+
+  _getMemoryUsage() {
+    if (performance.memory) {
+      return {
+        usedJSHeapSize: performance.memory.usedJSHeapSize,
+        totalJSHeapSize: performance.memory.totalJSHeapSize,
+        jsHeapSizeLimit: performance.memory.jsHeapSizeLimit,
+      };
+    }
+
+    return null;
+  }
+
 
 
 
@@ -660,3 +711,4 @@ class GameEngine {
 window.GameEngine = GameEngine;
 
 window.GameEngine = GameEngine;
+})();

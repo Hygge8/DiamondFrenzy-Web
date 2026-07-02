@@ -1,7 +1,8 @@
+(function () {
 /**
  * 关卡选择场景
  */
-const Scene = window.Scene;
+var Scene = window.Scene;
 
 class LevelSelectScene extends Scene {
   constructor(gameEngine) {
@@ -51,3 +52,4 @@ class LevelSelectScene extends Scene {
 }
 
 window.LevelSelectScene = LevelSelectScene;
+})();

@@ -1,3 +1,4 @@
+(function () {
 /**
  * 基础实体类
  * 所有游戏实体的基类
@@ -543,3 +544,4 @@ class Entity {
 window.Entity = Entity;
 
 window.Entity = Entity;
+})();

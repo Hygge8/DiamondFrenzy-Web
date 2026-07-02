@@ -1,3 +1,4 @@
+(function () {
 /**
  * 敌人管理器
  * 统一管理游戏中所有敌人的生成、更新和渲染
@@ -7,10 +8,16 @@ class EnemyManager {
     this.enemies = [];
     this.enemyFactories = {
       snowApe: () => SnowApe,
+      snow_ape: () => SnowApe,
       shaolinMonk: () => ShaolinMonk,
+      shaolin_monk: () => ShaolinMonk,
+      shaolin_monkey: () => ShaolinMonk,
       redSnake: () => RedSnake,
+      red_snake: () => RedSnake,
       poisonSpider: () => PoisonSpider,
+      poison_spider: () => PoisonSpider,
       saxKnight: () => SaxKnight,
+      sax_knight: () => SaxKnight,
     };
 
     // 敌人类型配置
@@ -194,7 +201,11 @@ class EnemyManager {
     // 更新所有敌人
     for (const enemy of this.enemies) {
       if (enemy.isActive) {
-        enemy.update(deltaTime, this.gameState);
+        try {
+          enemy.update(deltaTime, this.gameState);
+        } catch (error) {
+          console.warn(`Enemy update skipped for ${enemy.type}:`, error);
+        }
       }
     }
 
@@ -373,3 +384,4 @@ class EnemyManager {
 }
 
 window.EnemyManager = EnemyManager;
+})();

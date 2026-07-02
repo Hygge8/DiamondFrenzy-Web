@@ -1,3 +1,4 @@
+(function () {
 /**
  * 存储工具类
  * 提供本地存储和会话存储的统一接口
@@ -435,3 +436,4 @@ class StorageUtils {
 }
 
 window.StorageUtils = StorageUtils;
+})();

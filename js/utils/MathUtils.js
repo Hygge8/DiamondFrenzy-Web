@@ -1,3 +1,4 @@
+(function () {
 /**
  * 数学工具类
  * 提供游戏开发中常用的数学函数和常量
@@ -248,3 +249,4 @@ class MathUtils {
 }
 
 window.MathUtils = MathUtils;
+})();

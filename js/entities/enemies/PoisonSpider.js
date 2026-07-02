@@ -1,9 +1,10 @@
+(function () {
 /**
  * 毒蜘蛛类 - 巴伐利亚地牢世界的环境互动敌人
  * 可通过岩石砸击或冰冻后推压机关触发奖励
  * 与水下机关紧密相关，可被环境消灭
  */
-const Enemy = window.Enemy;
+var Enemy = window.Enemy;
 
 class PoisonSpider extends Enemy {
   constructor(x, y) {
@@ -571,3 +572,4 @@ class PoisonSpider extends Enemy {
 }
 
 window.PoisonSpider = PoisonSpider;
+})();

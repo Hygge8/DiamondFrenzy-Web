@@ -1,12 +1,15 @@
+(function () {
 /**
  * 敌人基类
  * 游戏中的所有敌人的基类
  */
-const Entity = window.Entity;
-const MathUtils = window.MathUtils;
+var Entity = window.Entity;
+var MathUtils = window.MathUtils;
 
 class Enemy extends Entity {
   constructor(x, y) {
+    super(x, y, 32, 32);
+
     // 基础属性
     this.x = x;
     this.y = y;
@@ -58,7 +61,11 @@ class Enemy extends Entity {
    * 检查是否死亡
    */
   get isDead() {
-    return this.health <= 0;
+    return this._isDead || this.health <= 0;
+  }
+
+  set isDead(value) {
+    this._isDead = value;
   }
 
   /**
@@ -68,11 +75,19 @@ class Enemy extends Entity {
     return this.active && !this.isDead;
   }
 
+  set isActive(value) {
+    this.active = value;
+  }
+
   /**
    * 检查是否可见
    */
   get isVisible() {
     return this.visible;
+  }
+
+  set isVisible(value) {
+    this.visible = value;
   }
 
   /**
@@ -84,7 +99,7 @@ class Enemy extends Entity {
     if (!this.active || this.isDead) return;
 
     // 设置游戏状态引用
-    if (gameState && !this.gameState) {
+    if (gameState) {
       this.setGameState(gameState);
     }
 
@@ -192,6 +207,7 @@ class Enemy extends Entity {
    */
   die() {
     this.active = false;
+    this._isDead = true;
     this.state = 'dead';
 
     // 播放死亡音效
@@ -379,3 +395,4 @@ class Enemy extends Entity {
 }
 
 window.Enemy = Enemy;
+})();

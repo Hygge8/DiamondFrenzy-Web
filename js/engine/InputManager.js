@@ -1,3 +1,4 @@
+(function () {
 /**
  * 输入管理器
  * 负责处理游戏中的所有输入（键盘、鼠标、触控）
@@ -665,3 +666,4 @@ class InputManager {
 window.InputManager = InputManager;
 
 window.InputManager = InputManager;
+})();
