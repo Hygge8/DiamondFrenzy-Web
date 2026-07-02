@@ -12,7 +12,7 @@
     <div id="main-menu" class="screen active">
       <div class="menu-container">
         <h1 class="game-title">钻石狂潮</h1>
-        <h2 class="game-subtitle">Diamond Frenzy</h2>
+        <h2 class="game-subtitle">Diamond Rush Inspired Puzzle</h2>
         <div class="menu-buttons">
           <button id="start-game" class="menu-btn primary">开始游戏</button>
           <button id="level-select" class="menu-btn">关卡选择</button>
@@ -20,8 +20,8 @@
           <button id="help" class="menu-btn">帮助</button>
         </div>
         <div class="game-info">
-          <p>经典冒险解谜小游戏</p>
-          <p>探索三大世界，收集钻石，躲开敌人，到达出口。</p>
+          <p>格子冒险解谜：挖土、收集钻石、避开落石和敌人。</p>
+          <p>收齐当前关卡所有钻石后，出口才会开启。</p>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
             <p>Angkor Wat</p>
             <div class="world-info">
               <span>2 个关卡</span>
-              <span>入门世界</span>
+              <span>遗迹入门</span>
             </div>
           </div>
           <div class="world locked" data-world="bavaria">
@@ -88,23 +88,24 @@
       <div class="help-container">
         <h2>游戏帮助</h2>
         <div class="help-content">
-          <h3>游戏目标</h3>
-          <p>控制角色在迷宫中移动，收集钻石，避开障碍和敌人，抵达出口。</p>
+          <h3>目标</h3>
+          <p>控制探险家在遗迹格子地图中移动，挖开泥土，收集全部钻石，然后抵达出口。</p>
 
-          <h3>操作说明</h3>
+          <h3>操作</h3>
           <div class="controls-info">
-            <div class="control-item"><span class="key">WASD</span> 或 <span class="key">方向键</span> - 移动</div>
-            <div class="control-item"><span class="key">空格</span> - 跳跃/使用道具</div>
-            <div class="control-item"><span class="key">数字键 1-8</span> - 选择道具</div>
-            <div class="control-item"><span class="key">ESC</span> - 暂停游戏</div>
+            <div class="control-item"><span class="key">WASD</span> 或 <span class="key">方向键</span> - 按格移动</div>
+            <div class="control-item"><span class="key">Space</span> - 使用当前道具</div>
+            <div class="control-item"><span class="key">1</span> - 选择第一个背包格</div>
+            <div class="control-item"><span class="key">Esc</span> - 暂停游戏</div>
           </div>
 
-          <h3>道具系统</h3>
+          <h3>机关</h3>
           <div class="items-info">
-            <div class="item-item"><strong>指南针</strong> - 提示出口方向</div>
-            <div class="item-item"><strong>锤子</strong> - 破坏岩石、冰块和蛛网</div>
-            <div class="item-item"><strong>钩爪</strong> - 抓取远处目标</div>
-            <div class="item-item"><strong>冰冻射线</strong> - 冻结敌人</div>
+            <div class="item-item"><strong>泥土</strong> - 走进去会自动挖开，并增加少量分数。</div>
+            <div class="item-item"><strong>钻石</strong> - 全部收齐后出口开启。</div>
+            <div class="item-item"><strong>巨石</strong> - 可以横向推动；下方空了会掉落并造成伤害。</div>
+            <div class="item-item"><strong>锤子</strong> - 拿到后可敲碎面前的泥土或巨石。</div>
+            <div class="item-item"><strong>蛇</strong> - 在走廊中巡逻，碰到会受伤并回到起点。</div>
           </div>
         </div>
         <button id="back-to-menu-help" class="menu-btn">返回</button>
@@ -213,7 +214,7 @@
     <div id="loading-screen" class="screen">
       <div class="loading-content">
         <div class="loading-spinner"></div>
-        <p>正在加载游戏资源...</p>
+        <p>正在加载游戏...</p>
         <div class="loading-progress">
           <div class="progress-bar">
             <div class="progress-fill" id="loading-progress"></div>

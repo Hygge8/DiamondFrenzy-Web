@@ -1,7 +1,7 @@
 {
   "name": "diamond-frenzy-web",
   "version": "1.0.0",
-  "description": "A web-based adventure puzzle game inspired by the classic mobile game Diamond Frenzy",
+  "description": "A browser-playable adventure puzzle game inspired by the classic mobile game Diamond Rush",
   "main": "index.html",
   "scripts": {
     "start": "http-server -p 8080 -c-1",

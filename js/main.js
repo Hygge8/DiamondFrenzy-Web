@@ -67,12 +67,12 @@ function setupUIEvents() {
 
 function bindClick(id, handler) {
   const element = document.getElementById(id);
-  if (element) {
-    element.addEventListener('click', event => {
-      event.preventDefault();
-      handler();
-    });
-  }
+  if (!element) return;
+
+  element.addEventListener('click', event => {
+    event.preventDefault();
+    handler();
+  });
 }
 
 function setupSettingsEvents() {
@@ -109,7 +109,7 @@ function setupWorldSelection() {
   document.querySelectorAll('.world').forEach(world => {
     world.addEventListener('click', () => {
       if (world.classList.contains('locked')) {
-        showMessage('该世界尚未解锁。');
+        showMessage('该世界暂未解锁。');
         return;
       }
 
@@ -126,6 +126,7 @@ async function startGame() {
   if (!gameEngine) return;
 
   hideAllScreens();
+  hideAllOverlays();
   showScreen('loading-screen');
 
   try {
@@ -168,8 +169,10 @@ async function showHelp() {
 }
 
 async function showMainMenu() {
-  if (gameEngine?.sceneManager) {
+  if (gameEngine?.sceneManager?.goToMainMenu) {
     await gameEngine.sceneManager.goToMainMenu();
+  } else {
+    await changeSceneIfReady('mainMenu');
   }
 
   hideAllScreens();
@@ -186,6 +189,7 @@ async function changeSceneIfReady(sceneName) {
 
 function selectWorld(worldName) {
   console.log('Selected world:', worldName);
+  showMessage('当前版本先开放吴哥窟第一关。');
 }
 
 function togglePause() {
@@ -215,6 +219,7 @@ async function restartLevel() {
   try {
     await gameEngine.levelManager.loadLevel(gameEngine.levelManager.currentLevelIndex);
     hideAllScreens();
+    hideAllOverlays();
     showScreen('game-screen');
   } catch (error) {
     console.error('Failed to restart level:', error);
@@ -229,7 +234,7 @@ async function nextLevel() {
   const nextIndex = gameEngine.levelManager.currentLevelIndex + 1;
 
   if (nextIndex >= gameEngine.levelManager.levels.length) {
-    showMessage('恭喜，所有关卡都已完成。');
+    showMessage('所有关卡已完成。');
     await showLevelSelect();
     return;
   }
@@ -241,6 +246,7 @@ async function nextLevel() {
   try {
     await gameEngine.levelManager.loadLevel(nextIndex);
     hideAllScreens();
+    hideAllOverlays();
     showScreen('game-screen');
   } catch (error) {
     console.error('Failed to load next level:', error);
@@ -294,7 +300,7 @@ function showMessage(message) {
 
 function showErrorMessage(message) {
   console.error(message);
-  showMessage(`错误: ${message}`);
+  showMessage(`错误：${message}`);
 }
 
 function onGameInit() {

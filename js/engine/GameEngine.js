@@ -600,8 +600,6 @@ class GameEngine {
    */
   _update() {
     // 更新输入管理器
-    this.inputManager.update();
-
     // 更新场景管理器
     this.sceneManager.update(this.deltaTime);
 
@@ -616,6 +614,9 @@ class GameEngine {
     if (this.onUpdate) {
       this.onUpdate(this.deltaTime);
     }
+
+    // Store edge-triggered input state after gameplay systems have read it.
+    this.inputManager.update();
   }
 
 

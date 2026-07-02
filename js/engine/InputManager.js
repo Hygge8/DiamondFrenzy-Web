@@ -7,6 +7,8 @@ class InputManager {
   constructor() {
     this.keys = new Map();
     this.previousKeys = new Map();
+    this.pressedKeys = new Set();
+    this.releasedKeys = new Set();
     this.mouse = {
       x: 0,
       y: 0,
@@ -91,6 +93,9 @@ class InputManager {
     if (!this.isEnabled || this.isPaused) return;
 
     const key = e.code;
+    if (this.keys.get(key) !== true) {
+      this.pressedKeys.add(key);
+    }
     this.keys.set(key, true);
 
     // 调用回调函数
@@ -112,6 +117,9 @@ class InputManager {
     if (!this.isEnabled) return;
 
     const key = e.code;
+    if (this.keys.get(key) === true) {
+      this.releasedKeys.add(key);
+    }
     this.keys.set(key, false);
 
     // 调用回调函数
@@ -315,7 +323,7 @@ class InputManager {
    * @returns {boolean} 是否刚被按下
    */
   isKeyPressed(key) {
-    return this.keys.get(key) === true && this.previousKeys.get(key) !== true;
+    return this.pressedKeys.has(key) || (this.keys.get(key) === true && this.previousKeys.get(key) !== true);
   }
 
   /**
@@ -324,7 +332,7 @@ class InputManager {
    * @returns {boolean} 是否刚被释放
    */
   isKeyReleased(key) {
-    return this.keys.get(key) !== true && this.previousKeys.get(key) === true;
+    return this.releasedKeys.has(key) || (this.keys.get(key) !== true && this.previousKeys.get(key) === true);
   }
 
   /**
@@ -517,6 +525,9 @@ class InputManager {
     this.keys.forEach((value, key) => {
       this.previousKeys.set(key, value);
     });
+
+    this.pressedKeys.clear();
+    this.releasedKeys.clear();
   }
 
   /**
@@ -545,6 +556,8 @@ class InputManager {
   _clearAllKeys() {
     this.keys.clear();
     this.previousKeys.clear();
+    this.pressedKeys.clear();
+    this.releasedKeys.clear();
     this.mouse.leftButton = false;
     this.mouse.rightButton = false;
     this.mouse.middleButton = false;

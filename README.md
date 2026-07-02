@@ -1,46 +1,58 @@
 # Diamond Frenzy Web
 
-一个基于 HTML5 Canvas 和原生 JavaScript 的网页小游戏原型，灵感来自经典冒险解谜玩法。项目当前可以通过本地 HTTP 服务直接运行，并包含 Jest 自动化测试覆盖核心启动链。
+Diamond Frenzy Web is a browser-playable, Diamond Rush-inspired adventure puzzle game built with HTML5 Canvas and plain JavaScript.
 
-## 本地运行
+This project is not an official Gameloft release and does not include original Diamond Rush assets, audio, maps, or branding files. The implementation focuses on the classic mobile gameplay structure: tile-by-tile movement, digging dirt, collecting diamonds, avoiding falling boulders and enemies, collecting tools, and unlocking the exit after all diamonds are collected.
 
-项目使用传统 `<script>` 方式加载浏览器全局脚本。请通过本地 Web 服务访问，不要直接双击 `index.html`。
+## Run Locally
+
+Use a local HTTP server. Do not open `index.html` directly from the file system.
 
 ```bash
 npm install
 npm start
 ```
 
-启动后访问：
+Then open:
 
 ```text
 http://127.0.0.1:8080
 ```
 
-## 测试
+## Controls
+
+- Move: `WASD` or arrow keys
+- Use selected tool: `Space`
+- Select first inventory slot: `1`
+- Pause: `Esc`
+
+## Gameplay
+
+- Move one grid cell at a time.
+- Dirt is dug automatically when the player moves into it.
+- Diamonds add score and count toward the exit requirement.
+- The exit remains locked until all diamonds in the current level are collected.
+- Boulders can block paths, be pushed horizontally, fall when unsupported, and damage the player.
+- The hammer can break adjacent dirt or boulders after it is collected.
+- Snake enemies patrol corridors and damage the player on contact.
+
+## Tests
 
 ```bash
 npm test
 ```
 
-当前测试覆盖：
+Current automated coverage checks:
 
-- `GameEngine` 初始化、启动和停止
-- `Player` 初始化、受伤、钻石收集
-- `Enemy` 基类初始化和死亡状态
-- 首个关卡加载以及玩家、钻石、障碍物、道具、敌人创建
+- `GameEngine` initialization, start, and stop behavior
+- `Player` health and diamond collection behavior
+- `Enemy` base class behavior
+- First level grid loading, dirt digging, diamond collection, and locked-exit rules
 
-## 操作
+## Tech Stack
 
-- 移动：`WASD` 或方向键
-- 跳跃/使用道具：`Space`
-- 选择道具：数字键 `1-8`
-- 暂停：`Esc`
-
-## 技术说明
-
-- 前端：HTML5 Canvas、CSS、原生 JavaScript
-- 测试：Jest + jsdom
-- 本地服务：http-server
-
-当前仓库不依赖外部图片和音频资源即可启动。游戏实体会使用 Canvas 几何图形作为兜底渲染；缺失音频资源会安全跳过。
+- HTML5 Canvas
+- CSS
+- Plain JavaScript loaded through browser globals
+- Jest + jsdom
+- `http-server` for local development
