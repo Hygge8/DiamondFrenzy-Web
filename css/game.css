@@ -252,10 +252,12 @@
 /* 移动端虚拟按钮 */
 .mobile-controls {
   display: none;
+  align-items: center;
   position: absolute;
   bottom: 20px;
   right: 20px;
   z-index: 20;
+  pointer-events: auto;
 }
 
 .dpad {
@@ -485,7 +487,7 @@
   }
 
   .mobile-controls {
-    display: block;
+    display: flex;
   }
 
   .game-controls {

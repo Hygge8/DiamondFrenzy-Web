@@ -61,4 +61,49 @@ describe('Game integration', () => {
 
     engine.destroy();
   });
+
+  test('loads a selected world level by index', async () => {
+    const { GameEngine } = loadGameScripts();
+
+    document.body.innerHTML = '<canvas id="gameCanvas"></canvas>';
+    const canvas = document.getElementById('gameCanvas');
+    canvas.getBoundingClientRect = jest.fn(() => ({ width: 800, height: 600 }));
+
+    const engine = new GameEngine('gameCanvas');
+    await engine.init({ loadAssets: false, initialScene: 'mainMenu' });
+
+    await engine.levelManager.loadLevel(2);
+
+    expect(engine.levelManager.currentLevelIndex).toBe(2);
+    expect(engine.levelManager.currentLevel.world).toBe('bavaria');
+    expect(engine.levelManager.player.totalDiamonds).toBe(engine.levelManager.currentLevel.targetDiamonds);
+
+    engine.destroy();
+  });
+
+  test('uses the hammer to break an adjacent boulder', async () => {
+    const { GameEngine } = loadGameScripts();
+
+    document.body.innerHTML = '<canvas id="gameCanvas"></canvas>';
+    const canvas = document.getElementById('gameCanvas');
+    canvas.getBoundingClientRect = jest.fn(() => ({ width: 800, height: 600 }));
+
+    const engine = new GameEngine('gameCanvas');
+    await engine.init({ loadAssets: false, initialScene: 'mainMenu' });
+    await engine.levelManager.loadLevel(0);
+
+    const level = engine.levelManager;
+    level._setPlayerGridPosition(4, 1);
+    level.player.facingDirection = 'right';
+    level.player.inventory = [{ type: 'hammer', itemType: 'hammer', name: 'Hammer', quantity: 1 }];
+    level.player.selectedItemIndex = 0;
+
+    expect(level._getTile(5, 1)).toBe('R');
+    expect(level.useSelectedTool()).toBe(true);
+    expect(level._getTile(5, 1)).toBe(' ');
+    expect(level.obstacles.find(obstacle => obstacle.col === 5 && obstacle.row === 1).isDead).toBe(true);
+    expect(level.player.score).toBe(25);
+
+    engine.destroy();
+  });
 });

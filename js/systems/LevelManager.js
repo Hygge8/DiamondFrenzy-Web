@@ -405,9 +405,7 @@ class LevelManager {
     }
 
     if (this._isInputActive(input, 'Space')) {
-      if (this._useSelectedTool()) {
-        this.moveCooldown = 160;
-      }
+      this.useSelectedTool();
       return;
     }
 
@@ -491,6 +489,14 @@ class LevelManager {
     this._syncObjectPixel(boulder);
     this._setMessage('Boulder pushed.');
     return true;
+  }
+
+  useSelectedTool() {
+    const used = this._useSelectedTool();
+    if (used) {
+      this.moveCooldown = 160;
+    }
+    return used;
   }
 
   _useSelectedTool() {

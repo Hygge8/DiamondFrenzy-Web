@@ -1,15 +1,18 @@
 (function () {
 let gameEngine = null;
 let initializationPromise = null;
+let selectedWorldFilter = 'all';
 
 document.addEventListener('DOMContentLoaded', async () => {
   setupUIEvents();
   setupSettingsEvents();
+  setupMobileControls();
 
   try {
     initializationPromise = initializeGame();
     await initializationPromise;
     gameEngine.start();
+    renderLevelCards();
     console.log('Diamond Frenzy started.');
   } catch (error) {
     console.error('Failed to start Diamond Frenzy:', error);
@@ -40,7 +43,7 @@ async function initializeGame() {
 }
 
 function setupUIEvents() {
-  bindClick('start-game', startGame);
+  bindClick('start-game', () => startGame(0));
   bindClick('level-select', showLevelSelect);
   bindClick('settings', showSettings);
   bindClick('help', showHelp);
@@ -108,17 +111,33 @@ function setupSettingsEvents() {
 function setupWorldSelection() {
   document.querySelectorAll('.world').forEach(world => {
     world.addEventListener('click', () => {
-      if (world.classList.contains('locked')) {
-        showMessage('该世界暂未解锁。');
-        return;
-      }
-
-      selectWorld(world.dataset.world);
+      selectedWorldFilter = world.dataset.world || 'all';
+      document.querySelectorAll('.world').forEach(item => item.classList.remove('selected'));
+      world.classList.add('selected');
+      renderLevelCards();
     });
   });
 }
 
-async function startGame() {
+function setupMobileControls() {
+  document.querySelectorAll('[data-move]').forEach(button => {
+    button.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      const [dx, dy] = button.dataset.move.split(',').map(Number);
+      moveBy(dx, dy);
+    });
+  });
+
+  const actionButton = document.getElementById('mobile-action');
+  if (actionButton) {
+    actionButton.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      useSelectedTool();
+    });
+  }
+}
+
+async function startGame(levelIndex = 0) {
   if (initializationPromise) {
     await initializationPromise;
   }
@@ -130,7 +149,11 @@ async function startGame() {
   showScreen('loading-screen');
 
   try {
-    await gameEngine.sceneManager.changeScene('game', null, { type: 'none' });
+    await gameEngine.sceneManager.changeScene('game', { levelIndex }, { type: 'none' });
+
+    if (gameEngine.levelManager.currentLevelIndex !== levelIndex) {
+      await gameEngine.levelManager.loadLevel(levelIndex);
+    }
 
     if (!gameEngine.isRunning) {
       gameEngine.start();
@@ -139,6 +162,7 @@ async function startGame() {
     hideAllScreens();
     hideAllOverlays();
     showScreen('game-screen');
+    updateGameUI();
     gameEngine.audioManager?.playMusic('mainTheme', true);
   } catch (error) {
     console.error('Failed to start game:', error);
@@ -152,6 +176,7 @@ async function showLevelSelect() {
   hideAllScreens();
   hideAllOverlays();
   showScreen('level-select-screen');
+  renderLevelCards();
 }
 
 async function showSettings() {
@@ -187,9 +212,57 @@ async function changeSceneIfReady(sceneName) {
   }
 }
 
-function selectWorld(worldName) {
-  console.log('Selected world:', worldName);
-  showMessage('当前版本先开放吴哥窟第一关。');
+function renderLevelCards() {
+  const list = document.getElementById('level-list');
+  if (!list || !gameEngine?.levelManager) return;
+
+  const levels = gameEngine.levelManager
+    .getAvailableLevels()
+    .filter(level => selectedWorldFilter === 'all' || level.world === selectedWorldFilter);
+
+  list.innerHTML = '';
+
+  levels.forEach(level => {
+    const button = document.createElement('button');
+    button.className = 'level-card';
+    button.type = 'button';
+    button.dataset.levelIndex = String(level.index);
+
+    const timeLimitSeconds = Math.floor((level.timeLimit || 0) / 1000);
+    const minutes = Math.floor(timeLimitSeconds / 60);
+    const seconds = String(timeLimitSeconds % 60).padStart(2, '0');
+
+    button.innerHTML = `
+      <span class="level-card-title">${level.index + 1}. ${level.name}</span>
+      <span class="level-card-meta">${getWorldName(level.world)} · ${level.targetDiamonds} 钻石 · ${minutes}:${seconds}</span>
+    `;
+
+    button.addEventListener('click', () => startGame(level.index));
+    list.appendChild(button);
+  });
+}
+
+function getWorldName(world) {
+  const names = {
+    angkor_wat: '吴哥窟',
+    bavaria: '巴伐利亚',
+    tibet: '西藏雪洞',
+  };
+  return names[world] || world;
+}
+
+function moveBy(dx, dy) {
+  if (!gameEngine?.levelManager || gameEngine.isPaused) return;
+  if (gameEngine.levelManager.movePlayer(dx, dy)) {
+    updateGameUI();
+  }
+}
+
+function useSelectedTool() {
+  if (!gameEngine?.levelManager || gameEngine.isPaused) return;
+  if (gameEngine.levelManager.useSelectedTool()) {
+    updateGameUI();
+  }
 }
 
 function togglePause() {
@@ -221,6 +294,7 @@ async function restartLevel() {
     hideAllScreens();
     hideAllOverlays();
     showScreen('game-screen');
+    updateGameUI();
   } catch (error) {
     console.error('Failed to restart level:', error);
     showErrorMessage('重新开始关卡失败。');
@@ -248,6 +322,7 @@ async function nextLevel() {
     hideAllScreens();
     hideAllOverlays();
     showScreen('game-screen');
+    updateGameUI();
   } catch (error) {
     console.error('Failed to load next level:', error);
     showErrorMessage('加载下一关失败。');

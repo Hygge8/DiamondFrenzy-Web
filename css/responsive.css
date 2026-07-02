@@ -154,7 +154,7 @@
   }
 
   .mobile-controls {
-    display: block;
+    display: flex;
   }
 
   .game-controls {

@@ -30,31 +30,40 @@
       <div class="level-select-container">
         <h2>选择关卡</h2>
         <div class="worlds-container">
-          <div class="world" data-world="angkor-wat">
+          <button class="world" data-world="all">
+            <h3>全部</h3>
+            <p>All Levels</p>
+            <div class="world-info">
+              <span>4 个关卡</span>
+              <span>完整列表</span>
+            </div>
+          </button>
+          <button class="world" data-world="angkor_wat">
             <h3>吴哥窟</h3>
             <p>Angkor Wat</p>
             <div class="world-info">
               <span>2 个关卡</span>
               <span>遗迹入门</span>
             </div>
-          </div>
-          <div class="world locked" data-world="bavaria">
+          </button>
+          <button class="world" data-world="bavaria">
             <h3>巴伐利亚</h3>
             <p>Bavaria</p>
             <div class="world-info">
               <span>1 个关卡</span>
-              <span>暂未解锁</span>
+              <span>地牢机关</span>
             </div>
-          </div>
-          <div class="world locked" data-world="tibet">
+          </button>
+          <button class="world" data-world="tibet">
             <h3>西藏雪洞</h3>
             <p>Tibet</p>
             <div class="world-info">
               <span>1 个关卡</span>
-              <span>暂未解锁</span>
+              <span>雪洞路线</span>
             </div>
-          </div>
+          </button>
         </div>
+        <div id="level-list" class="level-list" aria-live="polite"></div>
         <button id="back-to-menu" class="menu-btn">返回</button>
       </div>
     </div>
@@ -160,6 +169,18 @@
             <button id="pause-btn" class="control-btn">暂停</button>
             <button id="restart-btn" class="control-btn">重开</button>
           </div>
+        </div>
+      </div>
+
+      <div id="mobile-controls" class="mobile-controls" aria-label="移动端控制">
+        <div class="dpad">
+          <button class="dpad-btn up" data-move="0,-1" aria-label="上">↑</button>
+          <button class="dpad-btn left" data-move="-1,0" aria-label="左">←</button>
+          <button class="dpad-btn right" data-move="1,0" aria-label="右">→</button>
+          <button class="dpad-btn down" data-move="0,1" aria-label="下">↓</button>
+        </div>
+        <div class="action-buttons">
+          <button id="mobile-action" class="action-btn" aria-label="使用道具">H</button>
         </div>
       </div>
     </div>

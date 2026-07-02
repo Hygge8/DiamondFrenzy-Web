@@ -25,6 +25,7 @@ http://127.0.0.1:8080
 - Use selected tool: `Space`
 - Select first inventory slot: `1`
 - Pause: `Esc`
+- On touch screens, use the on-screen directional pad and hammer action button.
 
 ## Gameplay
 
@@ -35,6 +36,7 @@ http://127.0.0.1:8080
 - Boulders can block paths, be pushed horizontally, fall when unsupported, and damage the player.
 - The hammer can break adjacent dirt or boulders after it is collected.
 - Snake enemies patrol corridors and damage the player on contact.
+- The level select screen can launch any available Angkor Wat, Bavaria, or Tibet level.
 
 ## Tests
 
@@ -47,7 +49,7 @@ Current automated coverage checks:
 - `GameEngine` initialization, start, and stop behavior
 - `Player` health and diamond collection behavior
 - `Enemy` base class behavior
-- First level grid loading, dirt digging, diamond collection, and locked-exit rules
+- Grid level loading, selected-level loading, dirt digging, diamond collection, hammer use, and locked-exit rules
 
 ## Tech Stack
 
