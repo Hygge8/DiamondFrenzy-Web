@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupUIEvents();
   setupSettingsEvents();
   setupMobileControls();
+  setupCanvasFocus();
 
   try {
     initializationPromise = initializeGame();
@@ -137,6 +138,24 @@ function setupMobileControls() {
   }
 }
 
+function setupCanvasFocus() {
+  const canvas = document.getElementById('game-canvas');
+  if (!canvas) return;
+
+  canvas.addEventListener('pointerdown', () => focusGameCanvas());
+}
+
+function focusGameCanvas() {
+  const canvas = document.getElementById('game-canvas');
+  if (!canvas || typeof canvas.focus !== 'function') return;
+
+  try {
+    canvas.focus({ preventScroll: true });
+  } catch (error) {
+    canvas.focus();
+  }
+}
+
 async function startGame(levelIndex = 0) {
   if (initializationPromise) {
     await initializationPromise;
@@ -162,6 +181,7 @@ async function startGame(levelIndex = 0) {
     hideAllScreens();
     hideAllOverlays();
     showScreen('game-screen');
+    focusGameCanvas();
     updateGameUI();
     gameEngine.audioManager?.playMusic('mainTheme', true);
   } catch (error) {
@@ -294,6 +314,7 @@ async function restartLevel() {
     hideAllScreens();
     hideAllOverlays();
     showScreen('game-screen');
+    focusGameCanvas();
     updateGameUI();
   } catch (error) {
     console.error('Failed to restart level:', error);
@@ -322,6 +343,7 @@ async function nextLevel() {
     hideAllScreens();
     hideAllOverlays();
     showScreen('game-screen');
+    focusGameCanvas();
     updateGameUI();
   } catch (error) {
     console.error('Failed to load next level:', error);

@@ -47,21 +47,66 @@ class InputManager {
     this._startGamepadMonitoring();
   }
 
+  _normalizeKeyCode(e) {
+    if (e.code) return e.code;
+
+    const keyMap = {
+      ArrowUp: 'ArrowUp',
+      Up: 'ArrowUp',
+      ArrowDown: 'ArrowDown',
+      Down: 'ArrowDown',
+      ArrowLeft: 'ArrowLeft',
+      Left: 'ArrowLeft',
+      ArrowRight: 'ArrowRight',
+      Right: 'ArrowRight',
+      Spacebar: 'Space',
+      ' ': 'Space',
+      Enter: 'Enter',
+      Escape: 'Escape',
+      Esc: 'Escape',
+    };
+
+    if (keyMap[e.key]) return keyMap[e.key];
+
+    if (/^[a-z]$/i.test(e.key)) {
+      return `Key${e.key.toUpperCase()}`;
+    }
+
+    if (/^[0-9]$/.test(e.key)) {
+      return `Digit${e.key}`;
+    }
+
+    return e.key || '';
+  }
+
+  _shouldHandleKeyboardEvent(e, code) {
+    if (!this._isGameKey(code)) return false;
+
+    const target = e.target;
+    if (this._isEditableTarget(target)) return false;
+
+    return this._isGameScreenActive();
+  }
+
+  _isGameScreenActive() {
+    const gameScreen = document.getElementById('game-screen');
+    return !gameScreen || gameScreen.classList.contains('active');
+  }
+
+  _isEditableTarget(target) {
+    if (!target || target === document || target === window) return false;
+    if (!target.closest) return false;
+    return Boolean(target.closest('input, textarea, select, [contenteditable="true"]'));
+  }
+
   /**
    * 绑定事件监听器
    * @private
    */
   _bindEvents() {
     // 键盘事件
-    document.addEventListener('keydown', e => this._onKeyDown(e));
-    document.addEventListener('keyup', e => this._onKeyUp(e));
-
-    // 防止默认行为
-    document.addEventListener('keydown', e => {
-      if (this._isGameKey(e.code)) {
-        e.preventDefault();
-      }
-    });
+    window.addEventListener('keydown', e => this._onKeyDown(e), { capture: true });
+    window.addEventListener('keyup', e => this._onKeyUp(e), { capture: true });
 
     // 鼠标事件
     document.addEventListener('mousedown', e => this._onMouseDown(e));
@@ -90,9 +135,15 @@ class InputManager {
    * @private
    */
   _onKeyDown(e) {
-    if (!this.isEnabled || this.isPaused) return;
+    const key = this._normalizeKeyCode(e);
+    const shouldHandle = this._shouldHandleKeyboardEvent(e, key);
 
-    const key = e.code;
+    if (shouldHandle) {
+      e.preventDefault();
+    }
+
+    if (!this.isEnabled || this.isPaused || !shouldHandle) return;
+
     if (this.keys.get(key) !== true) {
       this.pressedKeys.add(key);
     }
@@ -114,9 +165,16 @@ class InputManager {
    * @private
    */
   _onKeyUp(e) {
-    if (!this.isEnabled) return;
+    const key = this._normalizeKeyCode(e);
+    const wasDown = this.keys.get(key) === true;
+    const shouldHandle = this._shouldHandleKeyboardEvent(e, key) || wasDown;
 
-    const key = e.code;
+    if (shouldHandle) {
+      e.preventDefault();
+    }
+
+    if (!this.isEnabled || !shouldHandle) return;
+
     if (this.keys.get(key) === true) {
       this.releasedKeys.add(key);
     }
@@ -675,8 +733,6 @@ class InputManager {
     };
   }
 }
-
-window.InputManager = InputManager;
 
 window.InputManager = InputManager;
 })();
