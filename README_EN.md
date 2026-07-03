@@ -27,6 +27,12 @@ Rules:
 - Snakes patrol corridors. Touching a snake damages the player and returns the player to the start.
 - If health reaches zero, the level fails and can be restarted.
 
+Progress:
+
+- Completed levels, best score, best time, last played level, and highest unlocked level are saved in browser `localStorage`.
+- Progress remains after refresh or browser restart on the same browser profile.
+- Progress can be lost if the user clears site data, uses private browsing, changes browser/device, or resets storage.
+
 Controls:
 
 - Move: `WASD` or arrow keys

@@ -15,6 +15,7 @@ All notable changes to Diamond Frenzy Web are documented here.
 - Docker Compose deployment with Nginx static hosting.
 - `.env.example` with configurable `WEB_PORT`.
 - Bilingual README, standalone English README, and standalone disclaimer.
+- Browser `localStorage` progress saving for completed levels, best scores, best times, and last played level.
 - Clean deployment guides for Docker Desktop, Windows PowerShell, local Node server, and GitHub Pages.
 - `start.sh` and `start.ps1` helper scripts for Docker startup.
 - Level selection for available Angkor Wat, Bavaria, and Tibet levels.

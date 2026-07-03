@@ -2,6 +2,7 @@
 let gameEngine = null;
 let initializationPromise = null;
 let selectedWorldFilter = 'all';
+const PROGRESS_STORAGE_KEY = 'progress';
 
 document.addEventListener('DOMContentLoaded', async () => {
   setupUIEvents();
@@ -178,6 +179,7 @@ async function startGame(levelIndex = 0) {
       gameEngine.start();
     }
 
+    saveLastLevel(levelIndex);
     hideAllScreens();
     hideAllOverlays();
     showScreen('game-screen');
@@ -236,6 +238,7 @@ function renderLevelCards() {
   const list = document.getElementById('level-list');
   if (!list || !gameEngine?.levelManager) return;
 
+  const progress = getProgress();
   const levels = gameEngine.levelManager
     .getAvailableLevels()
     .filter(level => selectedWorldFilter === 'all' || level.world === selectedWorldFilter);
@@ -247,14 +250,22 @@ function renderLevelCards() {
     button.className = 'level-card';
     button.type = 'button';
     button.dataset.levelIndex = String(level.index);
+    const levelProgress = progress.completedLevels[String(level.index)];
+    if (levelProgress) {
+      button.classList.add('completed');
+    }
 
     const timeLimitSeconds = Math.floor((level.timeLimit || 0) / 1000);
     const minutes = Math.floor(timeLimitSeconds / 60);
     const seconds = String(timeLimitSeconds % 60).padStart(2, '0');
+    const statusText = levelProgress
+      ? `Completed | Best ${levelProgress.bestScore} | ${formatTime(levelProgress.bestTime)}`
+      : 'Not completed';
 
     button.innerHTML = `
       <span class="level-card-title">${level.index + 1}. ${level.name}</span>
       <span class="level-card-meta">${getWorldName(level.world)} · ${level.targetDiamonds} 钻石 · ${minutes}:${seconds}</span>
+      <span class="level-card-status">${statusText}</span>
     `;
 
     button.addEventListener('click', () => startGame(level.index));
@@ -269,6 +280,88 @@ function getWorldName(world) {
     tibet: '西藏雪洞',
   };
   return names[world] || world;
+}
+
+function createDefaultProgress() {
+  return {
+    version: 1,
+    lastLevelIndex: 0,
+    highestUnlockedLevel: 0,
+    completedLevels: {},
+    updatedAt: null,
+  };
+}
+
+function getProgress() {
+  let saved = window.StorageUtils?.get(PROGRESS_STORAGE_KEY, null);
+
+  if (!saved) {
+    try {
+      const raw = window.localStorage?.getItem(`diamond-frenzy-${PROGRESS_STORAGE_KEY}`);
+      saved = raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      console.warn('Unable to read progress:', error);
+    }
+  }
+
+  return {
+    ...createDefaultProgress(),
+    ...(saved || {}),
+    completedLevels: saved?.completedLevels || {},
+  };
+}
+
+function saveProgress(progress) {
+  const nextProgress = {
+    ...progress,
+    updatedAt: new Date().toISOString(),
+  };
+
+  if (window.StorageUtils?.set(PROGRESS_STORAGE_KEY, nextProgress)) {
+    return nextProgress;
+  }
+
+  try {
+    window.localStorage?.setItem(`diamond-frenzy-${PROGRESS_STORAGE_KEY}`, JSON.stringify(nextProgress));
+  } catch (error) {
+    console.warn('Unable to save progress:', error);
+  }
+
+  return nextProgress;
+}
+
+function saveLastLevel(levelIndex) {
+  const progress = getProgress();
+  progress.lastLevelIndex = levelIndex;
+  saveProgress(progress);
+}
+
+function saveLevelProgress(data) {
+  const levelIndex = gameEngine?.levelManager?.currentLevelIndex ?? 0;
+  const progress = getProgress();
+  const key = String(levelIndex);
+  const previous = progress.completedLevels[key] || {};
+  const score = data.score ?? 0;
+  const time = data.time ?? 0;
+
+  progress.lastLevelIndex = levelIndex;
+  progress.highestUnlockedLevel = Math.max(progress.highestUnlockedLevel || 0, levelIndex + 1);
+  progress.completedLevels[key] = {
+    completed: true,
+    bestScore: Math.max(previous.bestScore || 0, score),
+    bestTime: previous.bestTime ? Math.min(previous.bestTime, time) : time,
+    diamonds: Math.max(previous.diamonds || 0, data.diamonds ?? 0),
+    completedAt: new Date().toISOString(),
+  };
+
+  saveProgress(progress);
+}
+
+function formatTime(milliseconds = 0) {
+  const seconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
 }
 
 function moveBy(dx, dy) {
@@ -424,6 +517,8 @@ function onGameShutdown() {
 }
 
 function onLevelComplete(data) {
+  saveLevelProgress(data);
+  renderLevelCards();
   updateLevelCompleteUI(data);
   showOverlay('level-complete');
   gameEngine?.audioManager?.playSFX('level_complete.wav', 0.8);
@@ -527,10 +622,7 @@ function updateLevelCompleteUI(data) {
 
   const finalTime = document.getElementById('final-time');
   if (finalTime) {
-    const seconds = Math.floor((data.time ?? 0) / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    finalTime.textContent = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    finalTime.textContent = formatTime(data.time ?? 0);
   }
 }
 
@@ -544,5 +636,6 @@ window.diamondFrenzy = {
   startGame,
   showMainMenu,
   togglePause,
+  getProgress,
 };
 })();
