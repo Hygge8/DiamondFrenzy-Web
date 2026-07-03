@@ -1,53 +1,107 @@
-# 🚀 部署指南 - GitHub Pages
+# Deployment Guide / 部署指南
 
-本项目是一个纯静态网站，最推荐的部署方式是使用 **GitHub Pages**。
+## Recommended: Docker Compose / 推荐：Docker Compose
 
-## 步骤一：准备工作
+Docker Desktop is the recommended way to run Diamond Frenzy Web locally because it matches a production-style static Nginx deployment.
 
-1.  **克隆项目**：将项目克隆到本地。
-    ```bash
-    git clone https://github.com/Hygge8/DiamondFrenzy-Web.git
-    cd DiamondFrenzy-Web
-    ```
-2.  **推送至您的仓库**：如果您是在自己的仓库中进行部署，请确保代码已推送到 `main` 分支。
-    ```bash
-    git push origin main
-    ```
+推荐使用 Docker Desktop 本地运行，因为它和生产环境中的 Nginx 静态站点部署方式一致。
 
-## 步骤二：启用 GitHub Pages
-
-1.  **进入设置**：在您的 GitHub 仓库页面，点击 **Settings**。
-2.  **导航到 Pages**：在左侧菜单中选择 **Pages**。
-3.  **配置部署源**：
-    *   将 **Source** 设置为 **Deploy from a branch**。
-    *   将 **Branch** 设置为 `main`，并选择 `/ (root)` 文件夹。
-4.  **保存**：点击 **Save**。
-
-## 步骤三：访问游戏
-
-等待 GitHub Pages 部署完成（通常需要 1-5 分钟）。部署成功后，您可以通过以下地址访问游戏：
-
-`https://<您的用户名>.github.io/DiamondFrenzy-Web/`
-
-## 📁 项目结构
-
-项目结构已简化，核心文件如下：
-
-```
-DiamondFrenzy-Web/
-├── index.html              # 游戏主页面
-├── README.md               # 项目说明
-├── css/                    # 样式文件
-├── js/                     # JavaScript 游戏逻辑代码
-├── assets/                 # 游戏资源 (图片、音频等)
-└── tests/                  # 单元测试文件
+```bash
+git clone https://github.com/Hygge8/DiamondFrenzy-Web.git
+cd DiamondFrenzy-Web
+cp .env.example .env
+docker compose up -d --build
 ```
 
-## ⚠️ 故障排除
+Shortcut:
 
-*   **404 错误**：请检查 `index.html` 是否位于仓库根目录，并确保 GitHub Pages 的部署源分支和文件夹设置正确。
-*   **游戏无法加载**：请使用浏览器开发者工具（F12）查看 **Console** 和 **Network** 标签页，检查是否有 JavaScript 错误或资源加载失败（404 错误）。
+```bash
+./start.sh
+```
 
----
+Open:
 
-**部署成功，开始您的钻石狂潮之旅！🎉**
+```text
+http://127.0.0.1:8080
+```
+
+Check status:
+
+```bash
+docker compose ps
+```
+
+Shortcut:
+
+```powershell
+.\start.ps1
+```
+
+View logs:
+
+```bash
+docker compose logs -f diamond-frenzy-web
+```
+
+Stop:
+
+```bash
+docker compose down
+```
+
+Change the host port in `.env`:
+
+```env
+WEB_PORT=8080
+```
+
+After changing `.env`, recreate the container:
+
+```bash
+docker compose up -d
+```
+
+## Windows PowerShell
+
+```powershell
+git clone https://github.com/Hygge8/DiamondFrenzy-Web.git
+cd DiamondFrenzy-Web
+Copy-Item .env.example .env
+docker compose up -d --build
+docker compose ps
+```
+
+## Local Node Server / 本地 Node 服务
+
+Use this only for development. Stop it before starting Docker if both use port `8080`.
+
+这只适合开发调试。如果 Docker 也使用 `8080` 端口，请先停止本地 Node 服务。
+
+```bash
+npm install
+npm start
+```
+
+## GitHub Pages
+
+This project is a static site and can also be served by GitHub Pages.
+
+1. Push the repository to GitHub.
+2. Open repository `Settings`.
+3. Go to `Pages`.
+4. Select `Deploy from a branch`.
+5. Select branch `main` and folder `/ (root)`.
+6. Save and wait for GitHub Pages to publish.
+
+Expected URL:
+
+```text
+https://<username>.github.io/DiamondFrenzy-Web/
+```
+
+## Troubleshooting / 故障排查
+
+- If `8080` is already used, stop the local server or change `WEB_PORT` in `.env`.
+- If Docker Desktop shows the container as stopped, run `docker compose logs diamond-frenzy-web`.
+- If the page loads but scripts fail, verify `index.html`, `css/`, and `js/` are copied into the image.
+- If the browser caches old files, refresh with cache disabled or recreate the container with `docker compose up -d --build`.

@@ -1,5 +1,7 @@
 # Diamond Frenzy Web / 钻石狂潮网页版
 
+[中文](README.md) | [English](README_EN.md) | [免责声明 / Disclaimer](DISCLAIMER.md)
+
 ## 中文说明
 
 Diamond Frenzy Web 是一个基于 HTML5 Canvas 和原生 JavaScript 制作的网页冒险解谜小游戏。项目玩法受到经典手机游戏 Diamond Rush 的启发，重点还原按格移动、挖土、收集钻石、躲避落石和敌人、使用工具、收齐钻石后开启出口等核心体验。
@@ -55,7 +57,20 @@ http://127.0.0.1:8080
 如果已经安装 Docker Desktop，可以使用 Docker Compose 构建并启动容器：
 
 ```bash
+cp .env.example .env
 docker compose up -d --build
+```
+
+也可以使用一键脚本：
+
+```bash
+./start.sh
+```
+
+Windows PowerShell：
+
+```powershell
+.\start.ps1
 ```
 
 启动后访问：
@@ -77,6 +92,12 @@ docker compose down
 ```
 
 如果本地 `npm start` 也在使用 `8080` 端口，请先关闭本地服务，再启动 Docker 容器。
+
+如果需要修改宿主机端口，请编辑 `.env`：
+
+```env
+WEB_PORT=8080
+```
 
 ### 测试
 
@@ -146,7 +167,20 @@ http://127.0.0.1:8080
 If Docker Desktop is installed, build and start the container with Docker Compose:
 
 ```bash
+cp .env.example .env
 docker compose up -d --build
+```
+
+You can also use the helper script:
+
+```bash
+./start.sh
+```
+
+Windows PowerShell:
+
+```powershell
+.\start.ps1
 ```
 
 Then open:
@@ -168,6 +202,12 @@ docker compose down
 ```
 
 If local `npm start` is already using port `8080`, stop the local server before starting the Docker container.
+
+To change the host port, edit `.env`:
+
+```env
+WEB_PORT=8080
+```
 
 ### Tests
 

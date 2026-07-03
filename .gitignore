@@ -900,4 +900,5 @@
 !/.dockerignore
 !/docker-compose.yml
 !/nginx.conf
+!/.env.example
 

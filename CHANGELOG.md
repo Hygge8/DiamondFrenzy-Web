@@ -1,94 +1,34 @@
-# 更新日志
+# Changelog / 更新日志
 
-本文档记录了钻石狂潮网页版的所有重要变更。
+All notable changes to Diamond Frenzy Web are documented here.
 
-格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
-版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
+## Unreleased
 
-## [未发布]
+- More levels and puzzle mechanics.
+- Improved sound effects and visual polish.
+- Better mobile layout tuning.
 
-### 计划中
-- 🎮 添加更多关卡和世界
-- 🎵 完善音效系统
-- 📱 优化移动端体验
-- 🏆 添加成就系统
-- 🌐 多语言支持
+## 2026-07-03
 
-## [1.0.1] - 2025-12-22
+### Added
 
-### 🐛 修复
-- 修复了浏览器环境下 JavaScript 模块加载失败的问题，将 CommonJS 导出替换为全局变量暴露，确保游戏可以启动。
-- 修复了 Jest 测试环境下模块导入失败的问题，通过临时修改兼容 CommonJS 导入。
-- 修复了 `AssetManager.js` 中资源路径错误的问题，增加了 `assets/` 前缀。
-- 修复了 `LevelManager.js` 中对 `Item` 类的错误引用。
+- Docker Compose deployment with Nginx static hosting.
+- `.env.example` with configurable `WEB_PORT`.
+- Bilingual README, standalone English README, and standalone disclaimer.
+- Clean deployment guides for Docker Desktop, Windows PowerShell, local Node server, and GitHub Pages.
+- `start.sh` and `start.ps1` helper scripts for Docker startup.
+- Level selection for available Angkor Wat, Bavaria, and Tibet levels.
+- Touch-screen directional pad and hammer action button.
 
-### ♻️ 重构
-- 简化了项目结构，删除了大量无关的测试文件、临时文件和冗余的文档。
-- 简化了 `package.json`，移除了冗余的脚本和依赖。
-- 完善了 `README.md`、`DEPLOY.md` 和 `CONTRIBUTING.md` 等核心文档，使其更简洁、准确。
+### Changed
 
-## [1.0.0] - 2025-10-30
+- Reworked gameplay toward Diamond Rush-style grid puzzle mechanics.
+- Replaced free-movement prototype behavior with tile movement, dirt digging, diamond collection, boulders, snakes, hammer use, and locked exits.
+- Updated tests to cover selected-level loading, hammer use, dirt digging, diamond collection, and exit rules.
+- Updated Docker/Nginx configuration to copy only runtime static files.
 
-### 计划中
-- 🎮 添加更多关卡和世界
-- 🎵 完善音效系统
-- 📱 优化移动端体验
-- 🏆 添加成就系统
-- 🌐 多语言支持
+### Verified
 
-## [1.0.0] - 2025-10-30
-
-### ✨ 新增
-- 🎮 完整的钻石狂潮网页版游戏
-- 🏛️ 三大主题世界：吴哥窟、巴伐利亚、西藏雪洞
-- 👾 5种敌人类型：雪猿、少林弟子、红蛇、毒蜘蛛、萨克斯骑士
-- 🛠️ 8种功能道具：指南针、锤子、抓钩、冰冻射线、炸药、护盾、速度靴、宝石袋
-- 🎨 经典像素艺术风格设计
-- 📱 响应式设计，支持桌面和移动设备
-- ⌨️ 键盘和触控操作支持
-- 🎵 音效和背景音乐系统
-- 💾 本地存储游戏进度
-- 🚀 GitHub Pages自动部署
-
-### 🏗️ 技术特性
-- ⚡ HTML5 Canvas高性能渲染
-- 🎯 60FPS流畅游戏体验
-- 📊 完整的游戏引擎架构
-- 🔧 组件化代码设计
-- 📚 详细的开发文档
-- ✅ 代码质量检查和格式化
-- 🔄 GitHub Actions自动化部署
-
-### 📁 项目结构
-- 📖 完整的项目文档
-- 🧪 单元测试框架
-- 🔍 代码审查流程
-- 📦 依赖管理
-- 🚀 部署工具链
-
----
-
-## 版本说明
-
-### 版本号格式
-版本号格式为 `主版本号.次版本号.修订号`：
-- 主版本号：不兼容的API修改
-- 次版本号：向下兼容的功能性新增
-- 修订号：向下兼容的问题修正
-
-### 变更类型
-- `✨ 新增` - 新功能
-- `🐛 修复` - 问题修复
-- `💥 破坏性变更` - 不兼容的变更
-- `📚 文档` - 文档更新
-- `🎨 样式` - 代码格式/样式改进
-- `♻️ 重构` - 代码重构
-- `⚡ 性能` - 性能优化
-- `✅ 测试` - 测试相关
-- `🔧 构建` - 构建过程或辅助工具
-- `🔄 部署` - 部署相关
-
----
-
-**维护者**: MiniMax Agent  
-**项目仓库**: https://github.com/Hygge8/DiamondFrenzy-Web
+- `npm test -- --runInBand` passes.
+- Docker container serves the app on `http://127.0.0.1:8080`.
+- Docker Compose container reports healthy.

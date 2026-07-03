@@ -9,6 +9,9 @@ docs
 
 *.log
 npm-debug.log*
+.env
+.env.*
+!.env.example
 
 Dockerfile
 docker-compose.yml
