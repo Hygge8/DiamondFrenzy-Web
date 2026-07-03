@@ -50,6 +50,34 @@ npm start
 http://127.0.0.1:8080
 ```
 
+### Docker 部署
+
+如果已经安装 Docker Desktop，可以使用 Docker Compose 构建并启动容器：
+
+```bash
+docker compose up -d --build
+```
+
+启动后访问：
+
+```text
+http://127.0.0.1:8080
+```
+
+查看容器状态：
+
+```bash
+docker compose ps
+```
+
+停止 Docker 部署：
+
+```bash
+docker compose down
+```
+
+如果本地 `npm start` 也在使用 `8080` 端口，请先关闭本地服务，再启动 Docker 容器。
+
 ### 测试
 
 ```bash
@@ -113,6 +141,34 @@ Then open:
 http://127.0.0.1:8080
 ```
 
+### Docker Deployment
+
+If Docker Desktop is installed, build and start the container with Docker Compose:
+
+```bash
+docker compose up -d --build
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8080
+```
+
+Check container status:
+
+```bash
+docker compose ps
+```
+
+Stop the Docker deployment:
+
+```bash
+docker compose down
+```
+
+If local `npm start` is already using port `8080`, stop the local server before starting the Docker container.
+
 ### Tests
 
 ```bash
@@ -133,3 +189,4 @@ Current automated coverage checks:
 - Plain JavaScript loaded through browser globals / 通过浏览器全局变量加载的原生 JavaScript
 - Jest + jsdom
 - `http-server` for local development / 用于本地开发的 `http-server`
+- Docker + Nginx for container deployment / 用于容器部署的 Docker + Nginx

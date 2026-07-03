@@ -1,18 +1,16 @@
-# 使用轻量级的 Nginx 镜像作为基础
-FROM nginx:alpine
+FROM nginx:1.27-alpine
 
-# 移除默认的 Nginx 配置文件
-RUN rm /etc/nginx/conf.d/default.conf
+LABEL org.opencontainers.image.title="Diamond Frenzy Web"
+LABEL org.opencontainers.image.description="Static HTML5 Canvas adventure puzzle game served by Nginx"
 
-# 将自定义的 Nginx 配置添加到容器中
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY index.html /usr/share/nginx/html/
+COPY css /usr/share/nginx/html/css
+COPY js /usr/share/nginx/html/js
 
-# 将项目文件复制到 Nginx 的默认静态文件目录
-# 注意：项目文件在 Dockerfile 所在的目录，即 DiamondFrenzy-Web/
-COPY . /usr/share/nginx/html
-
-# 暴露 80 端口
 EXPOSE 80
 
-# 启动 Nginx
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget -qO- http://127.0.0.1/ >/dev/null || exit 1
+
 CMD ["nginx", "-g", "daemon off;"]

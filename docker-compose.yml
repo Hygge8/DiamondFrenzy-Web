@@ -1,0 +1,10 @@
+services:
+  diamond-frenzy-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: diamond-frenzy-web:latest
+    container_name: diamond-frenzy-web
+    restart: unless-stopped
+    ports:
+      - "8080:80"

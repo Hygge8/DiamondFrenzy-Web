@@ -1,20 +1,24 @@
-# 忽略 Git 文件
 .git
 .gitignore
+.dockerignore
 
-# 忽略 Node.js 依赖
 node_modules
-
-# 忽略测试和构建相关文件
 coverage
+tests
+docs
+
+*.log
+npm-debug.log*
+
+Dockerfile
+docker-compose.yml
+deploy.sh
+CHANGELOG.md
+CONTRIBUTING.md
+DEPLOY.md
+QUICK_DEPLOY.md
+README.md
+babel.config.js
+jest.config.js
 package-lock.json
 package.json
-jest.config.js
-babel.config.js
-tests
-
-# 忽略部署脚本
-deploy.sh
-
-# 忽略文档文件
-docs

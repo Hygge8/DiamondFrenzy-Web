@@ -895,3 +895,9 @@
 # uploads/
 # downloads/
 
+# Keep root Docker deployment files versioned.
+!/Dockerfile
+!/.dockerignore
+!/docker-compose.yml
+!/nginx.conf
+
