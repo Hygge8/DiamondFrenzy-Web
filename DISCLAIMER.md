@@ -22,7 +22,7 @@ This project is an open-source browser game prototype intended only for learning
 The maintainers and contributors state:
 
 1. This project is not an official Gameloft product and is not authorized, sponsored, endorsed by, or affiliated with Gameloft.
-2. This project does not include, copy, or distribute original Diamond Rush assets, maps, audio, images, character art, level files, or branding files.
+2. This project does not include, copy, or distribute the original Diamond Rush JAR, source code, assets, maps, audio, images, character art, level files, or branding files.
 3. Diamond Rush, Gameloft, and related names, trademarks, and copyrighted materials belong to their respective owners.
 4. This project is intended for learning HTML5 Canvas, JavaScript game development, frontend engineering, and Docker static-site deployment. It should not be used commercially or represented as an official release.
 5. Users assume full responsibility for their use of this project. The maintainers and contributors are not liable for any direct, indirect, incidental, special, or consequential damages or losses resulting from its use.

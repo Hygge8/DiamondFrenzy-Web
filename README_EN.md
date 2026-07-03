@@ -7,7 +7,7 @@ Diamond Frenzy Web is a browser-playable adventure puzzle game built with HTML5 
 ## Disclaimer
 
 - This project is an unofficial browser game prototype. It is not an official Gameloft product.
-- This project does not include, copy, or distribute original Diamond Rush assets, maps, audio, images, character art, or branding files.
+- This project does not include, copy, or distribute the original Diamond Rush JAR, source code, assets, maps, audio, images, character art, or branding files.
 - Diamond Rush, Gameloft, and related names, trademarks, and copyrighted materials belong to their respective owners.
 - This project is intended only for learning, research, and personal entertainment. It should not be used commercially or represented as an official release.
 - For the complete bilingual disclaimer, see [DISCLAIMER.md](DISCLAIMER.md).

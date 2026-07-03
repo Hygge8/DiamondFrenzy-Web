@@ -7,7 +7,11 @@
   border: 2px solid #ffd700;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-  margin: 20px auto;
+  width: min(96vw, 1080px);
+  aspect-ratio: 4 / 3;
+  height: auto;
+  max-height: calc(100vh - 28px);
+  margin: 14px auto;
   touch-action: none;
 }
 

@@ -106,4 +106,29 @@ describe('Game integration', () => {
 
     engine.destroy();
   });
+
+  test('uses a larger world with a camera that follows the player', async () => {
+    const { GameEngine } = loadGameScripts();
+
+    document.body.innerHTML = '<canvas id="gameCanvas"></canvas>';
+    const canvas = document.getElementById('gameCanvas');
+    canvas.getBoundingClientRect = jest.fn(() => ({ width: 960, height: 720 }));
+
+    const engine = new GameEngine('gameCanvas');
+    await engine.init({ loadAssets: false, initialScene: 'mainMenu' });
+    await engine.levelManager.loadLevel(0);
+
+    const level = engine.levelManager;
+    expect(level.tileSize).toBe(64);
+    expect(level.currentLevel.width).toBeGreaterThan(canvas.width);
+    expect(level.currentLevel.height).toBeGreaterThan(canvas.height);
+
+    level._setPlayerGridPosition(18, 13);
+    level._updateCamera(canvas.width, canvas.height);
+
+    expect(level.camera.targetX).toBeGreaterThan(0);
+    expect(level.camera.targetY).toBeGreaterThan(0);
+
+    engine.destroy();
+  });
 });

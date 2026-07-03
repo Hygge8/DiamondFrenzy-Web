@@ -25,6 +25,7 @@ All notable changes to Diamond Frenzy Web are documented here.
 - Reworked gameplay toward Diamond Rush-style grid puzzle mechanics.
 - Replaced free-movement prototype behavior with tile movement, dirt digging, diamond collection, boulders, snakes, hammer use, and locked exits.
 - Fixed keyboard controls in normal browsers by capturing game keys globally, focusing the game canvas when a level starts, and disabling stale JS/CSS cache in Docker.
+- Changed level rendering to use a larger fixed-tile world with a smooth player-following camera instead of scaling the whole map into the viewport.
 - Updated tests to cover selected-level loading, hammer use, dirt digging, diamond collection, and exit rules.
 - Updated Docker/Nginx configuration to copy only runtime static files.
 

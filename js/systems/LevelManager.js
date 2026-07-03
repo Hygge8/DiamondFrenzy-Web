@@ -28,7 +28,7 @@ class LevelManager {
     this.onLevelFail = null;
 
     this.grid = [];
-    this.tileSize = 40;
+    this.tileSize = 64;
     this.gridCols = 20;
     this.gridRows = 15;
     this.playerGrid = { col: 1, row: 1 };
@@ -39,6 +39,14 @@ class LevelManager {
     this.enemyTimer = 0;
     this.message = '';
     this.messageTimer = 0;
+    this.camera = {
+      x: 0,
+      y: 0,
+      targetX: 0,
+      targetY: 0,
+      initialized: false,
+    };
+    this.cameraFollowStrength = 0.28;
 
     this._loadLevelData();
   }
@@ -167,9 +175,11 @@ class LevelManager {
   }
 
   _buildLevel(data) {
-    const width = 800;
-    const height = 600;
-    const grid = this._normalizeMap(data.map, 20);
+    const tileSize = data.tileSize || 64;
+    const normalizedWidth = Math.max(...data.map.map(row => row.length));
+    const grid = this._normalizeMap(data.map, normalizedWidth);
+    const width = grid[0].length * tileSize;
+    const height = grid.length * tileSize;
     const targetDiamonds = grid.reduce((total, row) => {
       return total + Array.from(row).filter(tile => tile === 'D').length;
     }, 0);
@@ -180,7 +190,7 @@ class LevelManager {
       height,
       grid,
       targetDiamonds,
-      tileSize: Math.floor(Math.min(width / grid[0].length, height / grid.length)),
+      tileSize,
     };
   }
 
@@ -226,6 +236,13 @@ class LevelManager {
       this.enemyTimer = 0;
       this.message = 'Collect every diamond, then reach the exit.';
       this.messageTimer = 2600;
+      this.camera = {
+        x: 0,
+        y: 0,
+        targetX: 0,
+        targetY: 0,
+        initialized: false,
+      };
 
       if (this.onLevelLoad) {
         this.onLevelLoad(this.currentLevel);
@@ -272,8 +289,9 @@ class LevelManager {
 
   _createPlayer() {
     const start = this.playerStartGrid;
-    const x = this._gridToPixelX(start.col, 32);
-    const y = this._gridToPixelY(start.row, 32);
+    const playerSize = Math.floor(this.tileSize * 0.66);
+    const x = this._gridToPixelX(start.col, playerSize);
+    const y = this._gridToPixelY(start.row, playerSize);
 
     if (Player) {
       this.player = new Player(x, y);
@@ -282,8 +300,8 @@ class LevelManager {
       this.player = this._makeFallbackPlayer(x, y);
     }
 
-    this.player.width = 32;
-    this.player.height = 32;
+    this.player.width = playerSize;
+    this.player.height = playerSize;
     this.player.gridCol = start.col;
     this.player.gridRow = start.row;
     this.player.totalDiamonds = this.currentLevel.targetDiamonds;
@@ -627,11 +645,13 @@ class LevelManager {
   render(ctx) {
     if (!this.isLevelLoaded) return;
 
-    ctx.save();
     const canvasWidth = ctx.canvas?.width || this.currentLevel.width;
     const canvasHeight = ctx.canvas?.height || this.currentLevel.height;
-    ctx.scale(canvasWidth / this.currentLevel.width, canvasHeight / this.currentLevel.height);
+    this._updateCamera(canvasWidth, canvasHeight);
 
+    ctx.save();
+    this._renderViewportBackdrop(ctx, canvasWidth, canvasHeight);
+    ctx.translate(-Math.round(this.camera.x), -Math.round(this.camera.y));
     this._renderBackground(ctx);
     this._renderGrid(ctx);
     this._renderDiamonds(ctx);
@@ -639,9 +659,36 @@ class LevelManager {
     this._renderBoulders(ctx);
     this._renderEnemies(ctx);
     this._renderPlayer(ctx);
-    this._renderStatusText(ctx);
 
     ctx.restore();
+    this._renderStatusText(ctx, canvasWidth, canvasHeight);
+  }
+
+  _updateCamera(viewportWidth, viewportHeight) {
+    if (!this.player || !this.currentLevel) return;
+
+    const playerCenterX = this.player.x + this.player.width / 2;
+    const playerCenterY = this.player.y + this.player.height / 2;
+    const maxX = Math.max(0, this.currentLevel.width - viewportWidth);
+    const maxY = Math.max(0, this.currentLevel.height - viewportHeight);
+
+    this.camera.targetX = this._clamp(playerCenterX - viewportWidth / 2, 0, maxX);
+    this.camera.targetY = this._clamp(playerCenterY - viewportHeight / 2, 0, maxY);
+
+    if (!this.camera.initialized) {
+      this.camera.x = this.camera.targetX;
+      this.camera.y = this.camera.targetY;
+      this.camera.initialized = true;
+      return;
+    }
+
+    this.camera.x += (this.camera.targetX - this.camera.x) * this.cameraFollowStrength;
+    this.camera.y += (this.camera.targetY - this.camera.y) * this.cameraFollowStrength;
+  }
+
+  _renderViewportBackdrop(ctx, viewportWidth, viewportHeight) {
+    ctx.fillStyle = '#15100c';
+    ctx.fillRect(0, 0, viewportWidth, viewportHeight);
   }
 
   _renderBackground(ctx) {
@@ -715,16 +762,17 @@ class LevelManager {
 
       const cx = diamond.x + this.tileSize / 2;
       const cy = diamond.y + this.tileSize / 2;
+      const radius = this.tileSize * 0.3;
       ctx.fillStyle = '#42d9ff';
       ctx.beginPath();
-      ctx.moveTo(cx, cy - 13);
-      ctx.lineTo(cx + 13, cy);
-      ctx.lineTo(cx, cy + 15);
-      ctx.lineTo(cx - 13, cy);
+      ctx.moveTo(cx, cy - radius);
+      ctx.lineTo(cx + radius, cy);
+      ctx.lineTo(cx, cy + radius * 1.1);
+      ctx.lineTo(cx - radius, cy);
       ctx.closePath();
       ctx.fill();
       ctx.fillStyle = '#e7fbff';
-      ctx.fillRect(cx - 3, cy - 8, 6, 5);
+      ctx.fillRect(cx - radius * 0.22, cy - radius * 0.65, radius * 0.44, radius * 0.34);
     });
   }
 
@@ -734,14 +782,15 @@ class LevelManager {
 
       const x = item.x;
       const y = item.y;
+      const inset = this.tileSize * 0.25;
       ctx.fillStyle = '#d9b35f';
-      ctx.fillRect(x + 9, y + 9, 22, 8);
+      ctx.fillRect(x + inset, y + inset, this.tileSize * 0.5, this.tileSize * 0.16);
       ctx.fillStyle = '#7a5130';
-      ctx.fillRect(x + 19, y + 13, 5, 20);
+      ctx.fillRect(x + this.tileSize * 0.47, y + this.tileSize * 0.36, this.tileSize * 0.1, this.tileSize * 0.42);
       ctx.fillStyle = '#ffffff';
-      ctx.font = '10px monospace';
+      ctx.font = `${Math.floor(this.tileSize * 0.26)}px monospace`;
       ctx.textAlign = 'center';
-      ctx.fillText('H', x + 20, y + 36);
+      ctx.fillText('H', x + this.tileSize / 2, y + this.tileSize * 0.88);
     });
   }
 
@@ -751,13 +800,14 @@ class LevelManager {
 
       const cx = boulder.x + this.tileSize / 2;
       const cy = boulder.y + this.tileSize / 2;
+      const radius = this.tileSize * 0.36;
       ctx.fillStyle = '#716c66';
       ctx.beginPath();
-      ctx.arc(cx, cy, 15, 0, Math.PI * 2);
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.18)';
       ctx.beginPath();
-      ctx.arc(cx - 5, cy - 5, 5, 0, Math.PI * 2);
+      ctx.arc(cx - radius * 0.35, cy - radius * 0.35, radius * 0.28, 0, Math.PI * 2);
       ctx.fill();
       ctx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
       ctx.stroke();
@@ -770,11 +820,13 @@ class LevelManager {
 
       const x = enemy.x;
       const y = enemy.y;
+      const bodyY = y + this.tileSize * 0.52;
+      const facingHeadX = enemy.direction > 0 ? x + this.tileSize * 0.66 : x + this.tileSize * 0.16;
       ctx.fillStyle = '#ba2737';
-      ctx.fillRect(x + 7, y + 18, 26, 8);
-      ctx.fillRect(x + (enemy.direction > 0 ? 25 : 6), y + 14, 8, 8);
+      ctx.fillRect(x + this.tileSize * 0.18, bodyY, this.tileSize * 0.62, this.tileSize * 0.16);
+      ctx.fillRect(facingHeadX, y + this.tileSize * 0.42, this.tileSize * 0.18, this.tileSize * 0.18);
       ctx.fillStyle = '#ffe9a6';
-      ctx.fillRect(x + (enemy.direction > 0 ? 30 : 8), y + 16, 2, 2);
+      ctx.fillRect(x + (enemy.direction > 0 ? this.tileSize * 0.78 : this.tileSize * 0.2), y + this.tileSize * 0.47, 3, 3);
     });
   }
 
@@ -788,35 +840,48 @@ class LevelManager {
 
     const x = this.player.x;
     const y = this.player.y;
+    const size = this.player.width || this.tileSize * 0.66;
+    const hatY = y + size * 0.1;
+    const faceY = y + size * 0.25;
+    const bodyY = y + size * 0.48;
+
     ctx.fillStyle = '#c99645';
-    ctx.fillRect(x + 7, y + 6, 18, 8);
+    ctx.fillRect(x + size * 0.18, hatY, size * 0.58, size * 0.2);
     ctx.fillStyle = '#8a5d2a';
-    ctx.fillRect(x + 5, y + 12, 22, 15);
+    ctx.fillRect(x + size * 0.12, bodyY, size * 0.7, size * 0.34);
     ctx.fillStyle = '#f0c18a';
-    ctx.fillRect(x + 10, y + 10, 12, 10);
+    ctx.fillRect(x + size * 0.26, faceY, size * 0.4, size * 0.3);
     ctx.fillStyle = '#263238';
-    ctx.fillRect(x + (this.player.facingDirection === 'left' ? 11 : 18), y + 14, 3, 3);
+    ctx.fillRect(
+      x + (this.player.facingDirection === 'left' ? size * 0.32 : size * 0.58),
+      y + size * 0.36,
+      size * 0.08,
+      size * 0.08
+    );
     ctx.fillStyle = '#29475f';
-    ctx.fillRect(x + 9, y + 24, 14, 6);
+    ctx.fillRect(x + size * 0.25, y + size * 0.8, size * 0.46, size * 0.14);
     ctx.restore();
   }
 
-  _renderStatusText(ctx) {
+  _renderStatusText(ctx, viewportWidth, viewportHeight) {
     ctx.save();
     ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
-    ctx.fillRect(8, 8, 300, 40);
+    ctx.fillRect(8, 8, 360, 44);
     ctx.fillStyle = '#ffffff';
-    ctx.font = '13px monospace';
+    ctx.font = '14px monospace';
     ctx.textAlign = 'left';
-    ctx.fillText(this.currentLevel.name, 18, 25);
-    ctx.fillText(`Diamonds ${this.player.diamondsCollected}/${this.player.totalDiamonds}`, 18, 42);
+    ctx.fillText(this.currentLevel.name, 18, 26);
+    ctx.fillText(`Diamonds ${this.player.diamondsCollected}/${this.player.totalDiamonds}`, 18, 44);
 
     if (this.message && this.messageTimer > 0) {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
-      ctx.fillRect(250, 552, 300, 32);
+      const messageWidth = Math.min(520, viewportWidth - 40);
+      const messageX = (viewportWidth - messageWidth) / 2;
+      const messageY = viewportHeight - 58;
+      ctx.fillRect(messageX, messageY, messageWidth, 34);
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
-      ctx.fillText(this.message, 400, 573);
+      ctx.fillText(this.message, viewportWidth / 2, messageY + 23);
     }
     ctx.restore();
   }
@@ -992,6 +1057,10 @@ class LevelManager {
     this.messageTimer = 1800;
   }
 
+  _clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
   showExitDirection() {
     if (!this.player || !this.currentLevel) return;
     this._setMessage(`Exit: column ${this.exitGrid.col}, row ${this.exitGrid.row}`);
@@ -1107,6 +1176,12 @@ class LevelManager {
         tileSize: this.tileSize,
         player: { ...this.playerGrid },
         exit: { ...this.exitGrid },
+        camera: {
+          x: Math.round(this.camera.x),
+          y: Math.round(this.camera.y),
+          targetX: Math.round(this.camera.targetX),
+          targetY: Math.round(this.camera.targetY),
+        },
       },
     };
   }
